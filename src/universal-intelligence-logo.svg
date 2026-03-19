@@ -1,0 +1,281 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <!-- Core gradient — indigo to cyan -->
+    <linearGradient id="core" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+
+    <!-- Outer glow gradient -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#22d3ee" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Neural pulse gradient -->
+    <linearGradient id="pulse1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#818cf8" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="pulse2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#34d399" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Emerald accent -->
+    <linearGradient id="emeraldLine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <!-- Central eye/iris gradient -->
+    <radialGradient id="iris" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0f4fc"/>
+      <stop offset="30%" stop-color="#818cf8"/>
+      <stop offset="70%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </radialGradient>
+
+    <!-- Inner core light -->
+    <radialGradient id="innerLight" cx="50%" cy="45%" r="35%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#c7d2fe" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Filters -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 1 — Ambient glow field
+       ═══════════════════════════════════════════════════════════ -->
+  <circle cx="300" cy="300" r="280" fill="url(#glow)"/>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 2 — Orbital rings (3 tilted ellipses = universal scope)
+       ═══════════════════════════════════════════════════════════ -->
+  <g opacity="0.35">
+    <!-- Orbit 1 — horizontal tilt -->
+    <ellipse cx="300" cy="300" rx="220" ry="80"
+             fill="none" stroke="url(#core)" stroke-width="1.2"
+             transform="rotate(-15, 300, 300)"/>
+    <!-- Orbit 2 — steep tilt -->
+    <ellipse cx="300" cy="300" rx="220" ry="80"
+             fill="none" stroke="url(#core)" stroke-width="1.2"
+             transform="rotate(55, 300, 300)"/>
+    <!-- Orbit 3 — opposite steep -->
+    <ellipse cx="300" cy="300" rx="220" ry="80"
+             fill="none" stroke="url(#core)" stroke-width="1.2"
+             transform="rotate(125, 300, 300)"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 3 — Neural constellation (outer nodes + connections)
+       ═══════════════════════════════════════════════════════════ -->
+  <g opacity="0.55">
+    <!-- 12 outer nodes arranged in a dodecagonal pattern -->
+    <!-- Top cluster -->
+    <line x1="300" y1="100" x2="300" y2="180" stroke="url(#pulse2)" stroke-width="1"/>
+    <line x1="300" y1="100" x2="220" y2="145" stroke="#818cf8" stroke-width="0.6" opacity="0.4"/>
+    <line x1="300" y1="100" x2="380" y2="145" stroke="#818cf8" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Right cluster -->
+    <line x1="500" y1="300" x2="420" y2="300" stroke="url(#pulse1)" stroke-width="1"/>
+    <line x1="500" y1="300" x2="455" y2="220" stroke="#22d3ee" stroke-width="0.6" opacity="0.4"/>
+    <line x1="500" y1="300" x2="455" y2="380" stroke="#22d3ee" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Bottom cluster -->
+    <line x1="300" y1="500" x2="300" y2="420" stroke="url(#pulse2)" stroke-width="1"/>
+    <line x1="300" y1="500" x2="380" y2="455" stroke="#34d399" stroke-width="0.6" opacity="0.4"/>
+    <line x1="300" y1="500" x2="220" y2="455" stroke="#34d399" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Left cluster -->
+    <line x1="100" y1="300" x2="180" y2="300" stroke="url(#pulse1)" stroke-width="1"/>
+    <line x1="100" y1="300" x2="145" y2="220" stroke="#818cf8" stroke-width="0.6" opacity="0.4"/>
+    <line x1="100" y1="300" x2="145" y2="380" stroke="#818cf8" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Diagonal connections -->
+    <line x1="170" y1="170" x2="230" y2="230" stroke="url(#emeraldLine)" stroke-width="0.8"/>
+    <line x1="430" y1="170" x2="370" y2="230" stroke="url(#emeraldLine)" stroke-width="0.8"/>
+    <line x1="170" y1="430" x2="230" y2="370" stroke="url(#emeraldLine)" stroke-width="0.8"/>
+    <line x1="430" y1="430" x2="370" y2="370" stroke="url(#emeraldLine)" stroke-width="0.8"/>
+
+    <!-- Cross connections through center region -->
+    <line x1="220" y1="145" x2="380" y2="455" stroke="#6366f1" stroke-width="0.4" opacity="0.2"/>
+    <line x1="380" y1="145" x2="220" y2="455" stroke="#6366f1" stroke-width="0.4" opacity="0.2"/>
+    <line x1="145" y1="220" x2="455" y2="380" stroke="#22d3ee" stroke-width="0.4" opacity="0.2"/>
+    <line x1="145" y1="380" x2="455" y2="220" stroke="#22d3ee" stroke-width="0.4" opacity="0.2"/>
+  </g>
+
+  <!-- Outer constellation nodes (glowing dots) -->
+  <g filter="url(#nodeGlow)">
+    <circle cx="300" cy="100" r="5" fill="#818cf8"/>
+    <circle cx="500" cy="300" r="5" fill="#22d3ee"/>
+    <circle cx="300" cy="500" r="5" fill="#34d399"/>
+    <circle cx="100" cy="300" r="5" fill="#818cf8"/>
+    <circle cx="170" cy="170" r="4" fill="#a78bfa"/>
+    <circle cx="430" cy="170" r="4" fill="#22d3ee"/>
+    <circle cx="170" cy="430" r="4" fill="#34d399"/>
+    <circle cx="430" cy="430" r="4" fill="#fbbf24"/>
+  </g>
+  <!-- Node cores (bright centers) -->
+  <g>
+    <circle cx="300" cy="100" r="2.5" fill="#c7d2fe"/>
+    <circle cx="500" cy="300" r="2.5" fill="#a5f3fc"/>
+    <circle cx="300" cy="500" r="2.5" fill="#a7f3d0"/>
+    <circle cx="100" cy="300" r="2.5" fill="#c7d2fe"/>
+    <circle cx="170" cy="170" r="2" fill="#ddd6fe"/>
+    <circle cx="430" cy="170" r="2" fill="#a5f3fc"/>
+    <circle cx="170" cy="430" r="2" fill="#a7f3d0"/>
+    <circle cx="430" cy="430" r="2" fill="#fde68a"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 4 — Inner neural ring (mid-layer nodes)
+       ═══════════════════════════════════════════════════════════ -->
+  <g opacity="0.6">
+    <!-- 8 mid-ring nodes at r=130 -->
+    <circle cx="300" cy="180" r="3.5" fill="#818cf8" filter="url(#nodeGlow)"/>
+    <circle cx="392" cy="208" r="3.5" fill="#6366f1" filter="url(#nodeGlow)"/>
+    <circle cx="420" cy="300" r="3.5" fill="#22d3ee" filter="url(#nodeGlow)"/>
+    <circle cx="392" cy="392" r="3.5" fill="#34d399" filter="url(#nodeGlow)"/>
+    <circle cx="300" cy="420" r="3.5" fill="#34d399" filter="url(#nodeGlow)"/>
+    <circle cx="208" cy="392" r="3.5" fill="#fbbf24" filter="url(#nodeGlow)"/>
+    <circle cx="180" cy="300" r="3.5" fill="#818cf8" filter="url(#nodeGlow)"/>
+    <circle cx="208" cy="208" r="3.5" fill="#a78bfa" filter="url(#nodeGlow)"/>
+
+    <!-- Mid-ring interconnections -->
+    <line x1="300" y1="180" x2="392" y2="208" stroke="#818cf8" stroke-width="0.7" opacity="0.5"/>
+    <line x1="392" y1="208" x2="420" y2="300" stroke="#6366f1" stroke-width="0.7" opacity="0.5"/>
+    <line x1="420" y1="300" x2="392" y2="392" stroke="#22d3ee" stroke-width="0.7" opacity="0.5"/>
+    <line x1="392" y1="392" x2="300" y2="420" stroke="#34d399" stroke-width="0.7" opacity="0.5"/>
+    <line x1="300" y1="420" x2="208" y2="392" stroke="#34d399" stroke-width="0.7" opacity="0.5"/>
+    <line x1="208" y1="392" x2="180" y2="300" stroke="#fbbf24" stroke-width="0.7" opacity="0.5"/>
+    <line x1="180" y1="300" x2="208" y2="208" stroke="#818cf8" stroke-width="0.7" opacity="0.5"/>
+    <line x1="208" y1="208" x2="300" y2="180" stroke="#a78bfa" stroke-width="0.7" opacity="0.5"/>
+
+    <!-- Cross connections in mid ring -->
+    <line x1="300" y1="180" x2="300" y2="420" stroke="#6366f1" stroke-width="0.4" opacity="0.2"/>
+    <line x1="180" y1="300" x2="420" y2="300" stroke="#22d3ee" stroke-width="0.4" opacity="0.2"/>
+    <line x1="208" y1="208" x2="392" y2="392" stroke="#a78bfa" stroke-width="0.4" opacity="0.2"/>
+    <line x1="392" y1="208" x2="208" y2="392" stroke="#34d399" stroke-width="0.4" opacity="0.2"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 5 — Central intelligence core
+       ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Outer halo ring -->
+  <circle cx="300" cy="300" r="88" fill="none" stroke="url(#core)" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Core background sphere -->
+  <circle cx="300" cy="300" r="72" fill="#0a0f1a" opacity="0.9"/>
+  <circle cx="300" cy="300" r="72" fill="url(#iris)" opacity="0.2"/>
+
+  <!-- Inner geometric pattern — the "mind" -->
+  <!-- Hexagonal awareness pattern -->
+  <g filter="url(#softGlow)" opacity="0.85">
+    <polygon points="300,240 352,270 352,330 300,360 248,330 248,270"
+             fill="none" stroke="url(#core)" stroke-width="1.8"/>
+    <polygon points="300,255 338,278 338,322 300,345 262,322 262,278"
+             fill="none" stroke="#818cf8" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- Central "eye of intelligence" — vesica piscis / lens shape -->
+  <g filter="url(#strongGlow)">
+    <!-- Upper arc -->
+    <path d="M 260,300 Q 300,260 340,300" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.8"/>
+    <!-- Lower arc -->
+    <path d="M 260,300 Q 300,340 340,300" fill="none" stroke="#22d3ee" stroke-width="2" opacity="0.8"/>
+  </g>
+
+  <!-- The iris — core point of awareness -->
+  <circle cx="300" cy="300" r="16" fill="url(#iris)" opacity="0.9" filter="url(#softGlow)"/>
+  <circle cx="300" cy="300" r="10" fill="url(#innerLight)"/>
+  <circle cx="300" cy="300" r="5" fill="#ffffff" opacity="0.95"/>
+  <!-- Specular highlight -->
+  <circle cx="296" cy="296" r="2.5" fill="#ffffff" opacity="0.7"/>
+
+  <!-- Radiating awareness lines from core -->
+  <g opacity="0.3">
+    <line x1="300" y1="228" x2="300" y2="250" stroke="#818cf8" stroke-width="1.2"/>
+    <line x1="300" y1="350" x2="300" y2="372" stroke="#22d3ee" stroke-width="1.2"/>
+    <line x1="228" y1="300" x2="250" y2="300" stroke="#818cf8" stroke-width="1.2"/>
+    <line x1="350" y1="300" x2="372" y2="300" stroke="#22d3ee" stroke-width="1.2"/>
+    <line x1="249" y1="249" x2="264" y2="264" stroke="#a78bfa" stroke-width="0.8"/>
+    <line x1="351" y1="249" x2="336" y2="264" stroke="#34d399" stroke-width="0.8"/>
+    <line x1="249" y1="351" x2="264" y2="336" stroke="#34d399" stroke-width="0.8"/>
+    <line x1="351" y1="351" x2="336" y2="336" stroke="#fbbf24" stroke-width="0.8"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 6 — Outer data particles (floating knowledge)
+       ═══════════════════════════════════════════════════════════ -->
+  <!-- Particle glow halos -->
+  <g opacity="0.25">
+    <circle cx="155" cy="140" r="8" fill="#818cf8"/>
+    <circle cx="460" cy="155" r="7" fill="#22d3ee"/>
+    <circle cx="480" cy="440" r="8" fill="#34d399"/>
+    <circle cx="130" cy="430" r="7" fill="#a78bfa"/>
+    <circle cx="380" cy="505" r="7" fill="#fbbf24"/>
+    <circle cx="220" cy="505" r="7" fill="#fb7185"/>
+    <circle cx="510" cy="230" r="6" fill="#22d3ee"/>
+    <circle cx="90" cy="220" r="6" fill="#818cf8"/>
+  </g>
+  <!-- Primary particles (bright, larger) -->
+  <g opacity="0.85">
+    <circle cx="155" cy="140" r="3" fill="#818cf8"/>
+    <circle cx="460" cy="155" r="2.5" fill="#22d3ee"/>
+    <circle cx="480" cy="440" r="3" fill="#34d399"/>
+    <circle cx="130" cy="430" r="2.5" fill="#a78bfa"/>
+    <circle cx="240" cy="90" r="2.2" fill="#fb7185"/>
+    <circle cx="380" cy="95" r="2.5" fill="#22d3ee"/>
+    <circle cx="510" cy="230" r="2.2" fill="#67e8f9"/>
+    <circle cx="510" cy="380" r="2.5" fill="#34d399"/>
+    <circle cx="380" cy="505" r="2.2" fill="#fbbf24"/>
+    <circle cx="220" cy="505" r="2.5" fill="#fb7185"/>
+    <circle cx="90" cy="380" r="2.2" fill="#818cf8"/>
+    <circle cx="90" cy="220" r="2.5" fill="#c7d2fe"/>
+  </g>
+  <!-- Secondary particles (medium) -->
+  <g opacity="0.7">
+    <circle cx="200" cy="115" r="1.8" fill="#fbbf24"/>
+    <circle cx="410" cy="115" r="1.8" fill="#a5f3fc"/>
+    <circle cx="520" cy="270" r="1.8" fill="#34d399"/>
+    <circle cx="490" cy="470" r="1.8" fill="#fbbf24"/>
+    <circle cx="120" cy="470" r="1.8" fill="#fb7185"/>
+    <circle cx="80" cy="260" r="1.8" fill="#a78bfa"/>
+  </g>
+  <!-- Bright cores on primary particles -->
+  <g opacity="0.95">
+    <circle cx="155" cy="140" r="1.2" fill="#e0e7ff"/>
+    <circle cx="460" cy="155" r="1" fill="#cffafe"/>
+    <circle cx="480" cy="440" r="1.2" fill="#d1fae5"/>
+    <circle cx="130" cy="430" r="1" fill="#ede9fe"/>
+    <circle cx="380" cy="505" r="1" fill="#fef3c7"/>
+    <circle cx="220" cy="505" r="1" fill="#ffe4e6"/>
+    <circle cx="510" cy="230" r="1" fill="#cffafe"/>
+    <circle cx="90" cy="220" r="1" fill="#e0e7ff"/>
+  </g>
+</svg>

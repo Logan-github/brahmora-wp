@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brahmora Technologies | Platform Reliability Engineering</title>
+<meta name="description" content="Cloud platforms became complex faster than operations evolved. Platform Reliability Engineering is the next discipline. AEGIS is the control plane that enables it.">
+<meta property="og:title" content="Brahmora Technologies | Platform Reliability Engineering">
+<meta property="og:description" content="PRE is the shift. AEGIS is the system enabling it. The operations control plane for modern cloud platforms.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#6366f1">
+<!-- Security Headers -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   BRAHMORA TECHNOLOGIES — Design System
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Reset ─────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#05080e;color:#c3cad8;line-height:1.7;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* ── Tokens ────────────────────────────────────────────────────── */
+:root{
+  --brand:#6366f1;--brand-light:#818cf8;--brand-dark:#4f46e5;
+  --brand-glow:rgba(99,102,241,.12);--brand-glow-strong:rgba(99,102,241,.22);
+  --cyan:#22d3ee;--cyan-glow:rgba(34,211,238,.12);
+  --emerald:#34d399;--emerald-glow:rgba(52,211,153,.12);
+  --amber:#fbbf24;--amber-glow:rgba(251,191,36,.12);
+  --rose:#fb7185;--rose-glow:rgba(251,113,133,.12);
+  --violet:#a78bfa;
+  --bg:#05080e;--surface:#0a0f1a;--surface-2:#0f1629;--surface-3:#151d30;--surface-4:#1a2540;
+  --glass:rgba(10,15,26,.72);
+  --border:rgba(255,255,255,.06);--border-light:rgba(255,255,255,.1);--border-brand:rgba(99,102,241,.25);
+  --text-1:#f0f4fc;--text-2:#94a3b8;--text-3:#64748b;--text-muted:#475569;
+  --max-w:1160px;--nav-h:68px;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;
+}
+
+/* ── Utilities ─────────────────────────────────────────────────── */
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.gradient-text{background:linear-gradient(135deg,var(--brand-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mono{font-family:'JetBrains Mono',monospace}
+.divider{height:1px;background:var(--border);margin:0}
+
+/* ═══════════════════════════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════════════════════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:all .35s}
+.nav-bg{background:var(--glass);backdrop-filter:blur(24px) saturate(1.6);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:52px;height:52px;flex-shrink:0}
+.logo-icon img{width:100%;height:100%}
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-company{font-size:17px;font-weight:800;color:var(--text-1);letter-spacing:-.02em}
+.logo-product{font-size:11px;font-weight:600;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase}
+.nav-menu{display:flex;align-items:center;gap:4px}
+.nav-link{padding:8px 16px;font-size:13px;font-weight:500;color:var(--text-2);border-radius:var(--r-sm);transition:all .2s}
+.nav-link:hover{color:var(--text-1);background:rgba(255,255,255,.04)}
+.nav-cta{margin-left:8px;padding:8px 20px;font-size:13px;font-weight:700;color:#fff;background:var(--brand);border-radius:var(--r-sm);transition:all .25s}
+.nav-cta:hover{background:var(--brand-light);box-shadow:0 4px 20px rgba(99,102,241,.3)}
+.nav-toggle{display:none;padding:8px;color:var(--text-2)}
+@media(max-width:768px){
+  .nav-menu{display:none;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:4px}
+  .nav-menu.open{display:flex}
+  .nav-toggle{display:flex}
+  .nav-cta{margin:8px 0 0;width:100%;text-align:center}
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════════════ */
+.hero{padding:200px 0 120px;position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;top:-300px;left:50%;transform:translateX(-50%);width:1100px;height:1100px;background:radial-gradient(ellipse,rgba(99,102,241,.07) 0%,rgba(34,211,238,.03) 40%,transparent 70%);pointer-events:none}
+.hero h1{font-size:clamp(2.6rem,6vw,4.5rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;color:var(--text-1);max-width:900px;margin:0 auto}
+.hero-sub{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--text-2);max-width:640px;margin:28px auto 0;line-height:1.75}
+.hero-sub strong{color:var(--text-1);font-weight:600}
+.hero-actions{display:flex;gap:12px;margin-top:44px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--r-md);font-size:14px;font-weight:700;transition:all .3s}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-light);transform:translateY(-1px);box-shadow:0 8px 30px rgba(99,102,241,.25)}
+.btn-secondary{background:transparent;color:var(--text-1);border:1px solid var(--border-light)}
+.btn-secondary:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.15)}
+.btn-ghost{background:transparent;color:var(--text-2);font-weight:600;font-size:13px}
+.btn-ghost:hover{color:var(--text-1)}
+.btn svg{width:16px;height:16px}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION SYSTEM
+   ═══════════════════════════════════════════════════════════════════ */
+.section{padding:120px 0}
+.section-alt{background:var(--surface)}
+.section-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:16px}
+.section-label::before{content:'';width:16px;height:2px;background:var(--brand);border-radius:1px}
+.section h2{font-size:clamp(1.8rem,3.8vw,2.8rem);font-weight:800;letter-spacing:-.03em;color:var(--text-1);line-height:1.12;max-width:700px}
+.section-sub{font-size:1.05rem;color:var(--text-2);max-width:600px;margin-top:16px;line-height:1.75}
+.section-header{margin-bottom:56px}
+.section-center{text-align:center;margin-left:auto;margin-right:auto}
+.section-center h2,.section-center .section-sub{margin-left:auto;margin-right:auto}
+
+/* Grid */
+.grid{display:grid;gap:20px}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-4{grid-template-columns:repeat(4,1fr)}
+.g-5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:900px){.g-3,.g-4,.g-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.g-2,.g-3,.g-4,.g-5{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CARDS & COMPONENTS
+   ═══════════════════════════════════════════════════════════════════ */
+.card{padding:32px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border);transition:all .35s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--border-light);transform:translateY(-3px);box-shadow:0 12px 48px rgba(0,0,0,.35)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .35s}
+.card:hover::before{opacity:1}
+.card-indigo::before{background:linear-gradient(90deg,var(--brand),var(--brand-light))}
+.card-cyan::before{background:linear-gradient(90deg,var(--cyan),#67e8f9)}
+.card-emerald::before{background:linear-gradient(90deg,var(--emerald),#6ee7b7)}
+.card-amber::before{background:linear-gradient(90deg,var(--amber),#fde68a)}
+.card h3{font-size:17px;font-weight:700;color:var(--text-1);margin-bottom:8px;letter-spacing:-.01em}
+.card p{font-size:14px;color:var(--text-2);line-height:1.65}
+.card-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}
+.ci-indigo{background:var(--brand-glow);border:1px solid rgba(99,102,241,.18)}
+.ci-cyan{background:var(--cyan-glow);border:1px solid rgba(34,211,238,.18)}
+.ci-emerald{background:var(--emerald-glow);border:1px solid rgba(52,211,153,.18)}
+.ci-amber{background:var(--amber-glow);border:1px solid rgba(251,191,36,.18)}
+.ci-rose{background:var(--rose-glow);border:1px solid rgba(251,113,133,.18)}
+.ci-violet{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.18)}
+
+/* Statement block */
+.statement{padding:48px;border-radius:var(--r-2xl);background:var(--surface-2);border:1px solid var(--border);position:relative;overflow:hidden}
+.statement::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--cyan),var(--emerald))}
+.statement-bold{font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:700;color:var(--text-1);line-height:1.5;letter-spacing:-.015em}
+
+/* Split layout */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+@media(max-width:768px){.split{grid-template-columns:1fr;gap:40px}}
+.split-text h2{max-width:none}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DISCIPLINE COMPARISON TABLE
+   ═══════════════════════════════════════════════════════════════════ */
+.disc-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border)}
+.disc-table th{padding:16px 20px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:left;background:var(--surface-2);color:var(--text-3);border-bottom:1px solid var(--border)}
+.disc-table td{padding:14px 20px;font-size:14px;color:var(--text-2);border-bottom:1px solid var(--border);background:var(--surface)}
+.disc-table tr:last-child td{border-bottom:none}
+.disc-table tr.highlight td{background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(34,211,238,.04));color:var(--text-1);font-weight:600}
+.disc-table .disc-name{font-weight:600;color:var(--text-1);white-space:nowrap}
+@media(max-width:600px){.disc-table{font-size:13px}.disc-table th,.disc-table td{padding:10px 12px}}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CAPABILITY SYSTEM (DOMAIN PILLARS)
+   ═══════════════════════════════════════════════════════════════════ */
+.pillar{padding:40px;border-radius:var(--r-2xl);background:var(--surface-2);border:1px solid var(--border);position:relative;overflow:hidden}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.pillar.p-indigo::before{background:linear-gradient(90deg,var(--brand),var(--brand-light))}
+.pillar.p-cyan::before{background:linear-gradient(90deg,var(--cyan),#67e8f9)}
+.pillar.p-emerald::before{background:linear-gradient(90deg,var(--emerald),#6ee7b7)}
+.pillar.p-amber::before{background:linear-gradient(90deg,var(--amber),#fde68a)}
+.pillar-num{font-size:56px;font-weight:900;line-height:1;color:rgba(255,255,255,.03);position:absolute;top:16px;right:20px}
+.pillar-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.pillar.p-indigo .pillar-label{color:var(--brand-light)}
+.pillar.p-cyan .pillar-label{color:var(--cyan)}
+.pillar.p-emerald .pillar-label{color:var(--emerald)}
+.pillar.p-amber .pillar-label{color:var(--amber)}
+.pillar h3{font-size:22px;font-weight:800;color:var(--text-1);letter-spacing:-.02em;margin-bottom:6px}
+.pillar>p{font-size:15px;color:var(--text-2);margin-bottom:20px;font-style:italic}
+.pillar-features{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pillar-features li{font-size:13px;color:var(--text-2);padding:6px 0 6px 20px;position:relative}
+.pillar-features li::before{content:'';position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%}
+.pillar.p-indigo .pillar-features li::before{background:var(--brand-light)}
+.pillar.p-cyan .pillar-features li::before{background:var(--cyan)}
+.pillar.p-emerald .pillar-features li::before{background:var(--emerald)}
+.pillar.p-amber .pillar-features li::before{background:var(--amber)}
+
+/* ═══════════════════════════════════════════════════════════════════
+   EVOLUTION TRACK
+   ═══════════════════════════════════════════════════════════════════ */
+.evo-track{display:flex;align-items:center;gap:0;margin-top:48px;flex-wrap:wrap;justify-content:center}
+.evo-item{padding:14px 28px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);font-size:14px;font-weight:600;color:var(--text-3);text-align:center;min-width:140px}
+.evo-item.active{background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(34,211,238,.1));border-color:var(--brand);color:var(--text-1);box-shadow:0 0 30px var(--brand-glow-strong)}
+.evo-arrow{font-size:20px;color:var(--text-3);padding:0 10px}
+@media(max-width:600px){.evo-track{flex-direction:column;gap:8px}.evo-arrow{transform:rotate(90deg);padding:4px 0}}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CONTROL PLANE DIAGRAM
+   ═══════════════════════════════════════════════════════════════════ */
+.cp-diagram{display:flex;flex-direction:column;gap:12px;margin-top:48px;max-width:700px;margin-left:auto;margin-right:auto}
+.cp-layer{display:flex;align-items:center;gap:16px;padding:18px 24px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface-2);transition:all .3s}
+.cp-layer:hover{border-color:var(--border-light);transform:translateX(4px)}
+.cp-layer.cp-aegis{background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(34,211,238,.06));border-color:var(--border-brand);box-shadow:0 0 40px var(--brand-glow)}
+.cp-layer-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-width:120px;flex-shrink:0}
+.cp-layer-desc{font-size:14px;color:var(--text-2)}
+.cp-connector{width:2px;height:12px;background:var(--border);margin:0 auto}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MATURITY MODEL
+   ═══════════════════════════════════════════════════════════════════ */
+.maturity-track{display:flex;gap:0;margin-top:48px;position:relative}
+.maturity-track::before{content:'';position:absolute;top:38px;left:0;right:0;height:2px;background:var(--border)}
+@media(max-width:768px){.maturity-track{flex-direction:column;gap:16px}.maturity-track::before{display:none}}
+.maturity-step{flex:1;position:relative;padding-top:60px;text-align:center}
+.maturity-dot{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:28px;height:28px;border-radius:50%;border:3px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--text-3);z-index:2;transition:all .3s}
+.maturity-step:hover .maturity-dot{border-color:var(--brand);color:var(--brand-light);box-shadow:0 0 20px var(--brand-glow)}
+.maturity-step.active .maturity-dot{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 0 24px var(--brand-glow)}
+.maturity-step h4{font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:6px}
+.maturity-step p{font-size:12px;color:var(--text-3);line-height:1.5;max-width:180px;margin:0 auto}
+.maturity-badge{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.badge-red{background:rgba(248,113,113,.12);color:var(--rose)}
+.badge-amber{background:rgba(251,191,36,.12);color:var(--amber)}
+.badge-cyan{background:rgba(34,211,238,.12);color:var(--cyan)}
+.badge-emerald{background:rgba(52,211,153,.12);color:var(--emerald)}
+.badge-indigo{background:rgba(99,102,241,.12);color:var(--brand-light)}
+
+/* ═══════════════════════════════════════════════════════════════════
+   OPERATING MODEL LOOP
+   ═══════════════════════════════════════════════════════════════════ */
+.loop-track{display:flex;align-items:center;justify-content:center;gap:0;margin-top:48px;flex-wrap:wrap}
+.loop-step{padding:16px 24px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);text-align:center;min-width:140px;transition:all .3s}
+.loop-step:hover{border-color:var(--border-light);transform:translateY(-2px)}
+.loop-step h4{font-size:14px;font-weight:700;color:var(--text-1)}
+.loop-step p{font-size:11px;color:var(--text-3);margin-top:2px}
+.loop-arrow{font-size:18px;color:var(--text-3);padding:0 6px}
+@media(max-width:600px){.loop-track{flex-direction:column;gap:8px}.loop-arrow{transform:rotate(90deg);padding:4px 0}}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PARTNER / CTA / FOOTER
+   ═══════════════════════════════════════════════════════════════════ */
+.partner-callout{position:relative;border-radius:var(--r-2xl);overflow:hidden;padding:64px;background:linear-gradient(135deg,rgba(99,102,241,.1) 0%,rgba(34,211,238,.06) 50%,rgba(52,211,153,.04) 100%);border:1px solid var(--border-brand)}
+.partner-callout::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--cyan),var(--emerald))}
+.partner-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+@media(max-width:768px){.partner-grid{grid-template-columns:1fr;gap:32px}}
+.partner-benefits{list-style:none;display:flex;flex-direction:column;gap:12px}
+.partner-benefits li{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-2);padding:12px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.partner-benefits .check{color:var(--emerald);font-size:16px;flex-shrink:0}
+
+.cta-section{padding:140px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(99,102,241,.08) 0%,transparent 60%);pointer-events:none}
+.cta-section h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;color:var(--text-1);letter-spacing:-.035em;max-width:700px;margin:0 auto 16px;line-height:1.1}
+.cta-section p{font-size:1.05rem;color:var(--text-2);max-width:520px;margin:0 auto 40px}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.footer{padding:80px 0 40px;border-top:1px solid var(--border)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{display:flex;flex-direction:column;gap:12px}
+.footer-brand-name{font-size:18px;font-weight:800;color:var(--text-1);letter-spacing:-.02em}
+.footer-brand-desc{font-size:13px;color:var(--text-3);max-width:280px;line-height:1.6}
+.footer-col h5{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px}
+.footer-col a{display:block;font-size:13px;color:var(--text-2);padding:4px 0;transition:color .2s}
+.footer-col a:hover{color:var(--text-1)}
+.footer-bottom{margin-top:56px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:12px;color:var(--text-muted)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal a{font-size:12px;color:var(--text-muted);transition:color .2s}
+.footer-legal a:hover{color:var(--text-2)}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-bg">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon"><img src="universal-intelligence-logo.svg" alt="Brahmora Technologies"></div>
+        <div class="logo-text">
+          <span class="logo-company">Brahmora</span>
+          <span class="logo-product">Technologies</span>
+        </div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="#shift" class="nav-link">The Shift</a>
+        <a href="#disciplines" class="nav-link">Why PRE</a>
+        <a href="#control-plane" class="nav-link">Control Plane</a>
+        <a href="#capability" class="nav-link">Capabilities</a>
+        <a href="#maturity" class="nav-link">Maturity</a>
+        <a href="#partner" class="nav-cta">Become Design Partner</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S1 — HERO: THE CATEGORY SHIFT (not a product pitch)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="reveal">
+      <h1>
+        The traditional way of operating<br>
+        cloud platforms <span class="gradient-text">no longer scales.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Platform teams manage more infrastructure, more risk, more cost, and more governance than ever before. But they still operate with disconnected tools and manual processes.<br><br>
+        <strong>Platform Reliability Engineering is the next evolution.</strong>
+      </p>
+
+      <div class="hero-actions">
+        <a href="#partner" class="btn btn-primary">
+          Become a Design Partner
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+        <a href="pre-framework.html" class="btn btn-secondary">Read the PRE Framework</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S2 — THE OPERATING MODEL SHIFT
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="shift">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">The Operating Model Shift</span>
+      <h2 style="max-width:740px">Cloud platforms became complex faster than <span class="gradient-text">operations evolved</span></h2>
+    </div>
+
+    <div class="reveal" style="max-width:700px;margin:0 auto;text-align:center">
+      <p style="font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:40px">
+        Every wave of infrastructure maturity produced a discipline to manage it.
+      </p>
+    </div>
+
+    <div class="evo-track reveal">
+      <div class="evo-item">
+        <div style="font-size:11px;color:var(--text-3);font-weight:600">2008</div>
+        DevOps
+      </div>
+      <div class="evo-arrow">&rarr;</div>
+      <div class="evo-item">
+        <div style="font-size:11px;color:var(--text-3);font-weight:600">2016</div>
+        SRE
+      </div>
+      <div class="evo-arrow">&rarr;</div>
+      <div class="evo-item">
+        <div style="font-size:11px;color:var(--text-3);font-weight:600">2022</div>
+        Platform Engineering
+      </div>
+      <div class="evo-arrow">&rarr;</div>
+      <div class="evo-item active">
+        <div style="font-size:11px;color:var(--brand-light);font-weight:600">Now</div>
+        PRE
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:56px;text-align:center;max-width:640px;margin-left:auto;margin-right:auto">
+      <div class="statement" style="text-align:center">
+        <p class="statement-bold">Platforms must now operate like products &mdash; with reliability, governance, cost control, and intelligence built in.</p>
+        <p style="font-size:14px;color:var(--text-3);margin-top:12px">This is what Platform Reliability Engineering defines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S3 — DEFINE PRE LIKE A STANDARD
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="pre-definition">
+  <div class="container">
+    <div class="split reveal">
+      <div class="split-text">
+        <span class="section-label">Discipline Definition</span>
+        <h2>What is Platform <span class="gradient-text">Reliability Engineering?</span></h2>
+        <p class="section-sub" style="max-width:none">
+          Platform Reliability Engineering is the discipline of ensuring infrastructure platforms remain:
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px">
+          <span style="padding:10px 16px;border-radius:var(--r-sm);background:var(--brand-glow);color:var(--brand-light);font-size:13px;font-weight:600;text-align:center">Reliable</span>
+          <span style="padding:10px 16px;border-radius:var(--r-sm);background:var(--cyan-glow);color:var(--cyan);font-size:13px;font-weight:600;text-align:center">Governed</span>
+          <span style="padding:10px 16px;border-radius:var(--r-sm);background:var(--emerald-glow);color:var(--emerald);font-size:13px;font-weight:600;text-align:center">Cost Efficient</span>
+          <span style="padding:10px 16px;border-radius:var(--r-sm);background:var(--amber-glow);color:var(--amber);font-size:13px;font-weight:600;text-align:center">Secure</span>
+          <span style="padding:10px 16px;border-radius:var(--r-sm);background:var(--rose-glow);color:var(--rose);font-size:13px;font-weight:600;text-align:center">Operable</span>
+          <span style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(167,139,250,.12);color:var(--violet);font-size:13px;font-weight:600;text-align:center">Continuously Improving</span>
+        </div>
+      </div>
+      <div>
+        <div class="statement">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:16px">PRE Standard Framework</p>
+          <p style="font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:20px">PRE brings together platform engineering, cloud operations, governance, and cost control into one operating model for modern cloud platforms.</p>
+          <p style="font-size:15px;color:var(--text-2);line-height:1.75">It treats platforms as products &mdash; with SLAs, roadmaps, maturity targets, and continuous improvement.</p>
+          <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
+            <a href="pre-framework.html" style="font-size:14px;font-weight:700;color:var(--brand-light);display:inline-flex;align-items:center;gap:6px;transition:color .2s">
+              Read the full PRE-100 Framework
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S4 — WHY EXISTING DISCIPLINES ARE NOT ENOUGH
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="disciplines">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Why PRE</span>
+      <h2>Existing disciplines solve parts of the problem.<br><span class="gradient-text">None own platform operations as a system.</span></h2>
+    </div>
+
+    <div class="reveal">
+      <table class="disc-table">
+        <thead>
+          <tr>
+            <th>Discipline</th>
+            <th>Primary Focus</th>
+            <th>What It Does Not Own</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="disc-name">SRE</td>
+            <td>Reliability of services</td>
+            <td>Cost, governance, platform-level operations</td>
+          </tr>
+          <tr>
+            <td class="disc-name">Platform Engineering</td>
+            <td>Developer experience</td>
+            <td>Operational governance, reliability coordination</td>
+          </tr>
+          <tr>
+            <td class="disc-name">FinOps</td>
+            <td>Cloud cost governance</td>
+            <td>Reliability, security, operational workflows</td>
+          </tr>
+          <tr>
+            <td class="disc-name">Cloud Security</td>
+            <td>Policy and access control</td>
+            <td>Cost, reliability, operational execution</td>
+          </tr>
+          <tr class="highlight">
+            <td class="disc-name" style="color:var(--brand-light)">PRE</td>
+            <td>Unifies all of the above at the platform operations layer</td>
+            <td>&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reveal" style="margin-top:40px;padding:24px 28px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border);max-width:740px">
+      <p style="font-size:15px;color:var(--text-2);line-height:1.7">
+        PRE does not replace these disciplines. It is the <strong style="color:var(--text-1)">operating model that connects them</strong> &mdash; ensuring reliability, governance, cost, and security decisions are made together at the platform layer.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S5 — AEGIS APPEARS (after category is established)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="aegis">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Introducing AEGIS</span>
+      <h2 style="max-width:700px">AEGIS operationalizes <span class="gradient-text">Platform Reliability Engineering</span></h2>
+      <p class="section-sub" style="max-width:580px">AEGIS is the control plane that turns PRE from concept into operational reality.</p>
+    </div>
+
+    <div class="reveal" style="text-align:center;max-width:500px;margin:0 auto 48px">
+      <div style="width:280px;height:280px;margin:0 auto;animation:float 6s ease-in-out infinite">
+        <img src="aegis-logo.svg" alt="AEGIS — Platform Reliability Engineering Control Plane" style="width:100%;height:100%;filter:drop-shadow(0 0 60px rgba(99,102,241,.18))">
+      </div>
+    </div>
+
+    <div class="reveal" style="max-width:680px;margin:0 auto">
+      <div class="statement" style="text-align:center">
+        <p class="statement-bold">
+          Every company that operates complex cloud platforms will eventually need a Platform Reliability Engineering function.
+        </p>
+        <p style="font-size:15px;color:var(--text-2);margin-top:12px">AEGIS is building the control plane that enables it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S6 — THE CONTROL PLANE STORY
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="control-plane">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Architecture</span>
+      <h2>Modern infrastructure has layers.<br><span class="gradient-text">Operations did not.</span> Until now.</h2>
+    </div>
+
+    <div class="cp-diagram reveal">
+      <div class="cp-layer">
+        <span class="cp-layer-label" style="color:var(--text-3)">Workloads</span>
+        <span class="cp-layer-desc">Applications and services running on your platform</span>
+      </div>
+      <div class="cp-connector"></div>
+      <div class="cp-layer">
+        <span class="cp-layer-label" style="color:var(--cyan)">Infrastructure</span>
+        <span class="cp-layer-desc">Cloud accounts, clusters, networks, compute, storage</span>
+      </div>
+      <div class="cp-connector"></div>
+      <div class="cp-layer">
+        <span class="cp-layer-label" style="color:var(--emerald)">Orchestration</span>
+        <span class="cp-layer-desc">Kubernetes, container orchestration, scheduling</span>
+      </div>
+      <div class="cp-connector"></div>
+      <div class="cp-layer cp-aegis">
+        <span class="cp-layer-label" style="color:var(--brand-light)">Operations Control Plane</span>
+        <span class="cp-layer-desc" style="color:var(--text-1)"><strong>AEGIS</strong> &mdash; visibility, governance, execution, intelligence</span>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:48px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto">
+      <p style="font-size:15px;color:var(--text-2);line-height:1.75">
+        AEGIS is not another tool in the stack. It is the <strong style="color:var(--text-1)">missing layer</strong> that connects your existing tools into one operational system.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S7 — THE PRE OPERATING MODEL
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="operating-model">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Operating Model</span>
+      <h2>The PRE <span class="gradient-text">operational loop</span></h2>
+      <p class="section-sub" style="max-width:560px">Not features. An operating model. AEGIS enables this continuous loop across your entire platform.</p>
+    </div>
+
+    <div class="loop-track reveal">
+      <div class="loop-step">
+        <h4>Discover</h4>
+        <p>Inventory &amp; baseline</p>
+      </div>
+      <div class="loop-arrow">&rarr;</div>
+      <div class="loop-step">
+        <h4>Understand</h4>
+        <p>Signals &amp; context</p>
+      </div>
+      <div class="loop-arrow">&rarr;</div>
+      <div class="loop-step">
+        <h4>Decide</h4>
+        <p>Policy evaluation</p>
+      </div>
+      <div class="loop-arrow">&rarr;</div>
+      <div class="loop-step">
+        <h4>Govern</h4>
+        <p>Approval &amp; control</p>
+      </div>
+      <div class="loop-arrow">&rarr;</div>
+      <div class="loop-step">
+        <h4>Execute</h4>
+        <p>Safe operations</p>
+      </div>
+      <div class="loop-arrow">&rarr;</div>
+      <div class="loop-step">
+        <h4>Improve</h4>
+        <p>Intelligence &amp; learning</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:40px;text-align:center">
+      <p style="font-size:13px;color:var(--text-3)">Every action through this loop produces an immutable audit record.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S8 — PRE CAPABILITY SYSTEM (4 domains)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="capability">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">PRE Capability System</span>
+      <h2>Four capability domains.<br><span class="gradient-text">One operating system.</span></h2>
+    </div>
+
+    <div class="grid g-2 reveal">
+      <div class="pillar p-indigo">
+        <span class="pillar-num">01</span>
+        <p class="pillar-label">Foundation</p>
+        <h3>Know your platform.</h3>
+        <p>Complete platform baseline visibility and continuous discovery.</p>
+        <ul class="pillar-features">
+          <li>Resource discovery &amp; cloud inventory</li>
+          <li>Drift detection &amp; structural diffing</li>
+          <li>Integration mapping &amp; graph edges</li>
+          <li>Platform baseline visibility</li>
+          <li>Canonical normalization &amp; hashing</li>
+        </ul>
+      </div>
+      <div class="pillar p-cyan">
+        <span class="pillar-num">02</span>
+        <p class="pillar-label">Operations</p>
+        <h3>Run your platform reliably.</h3>
+        <p>Operational workflows that keep the platform healthy.</p>
+        <ul class="pillar-features">
+          <li>Incident coordination &amp; unified triage</li>
+          <li>Reliability workflows &amp; SLO management</li>
+          <li>Service intelligence &amp; golden signals</li>
+          <li>Change correlation &amp; root cause analysis</li>
+          <li>Operational analytics &amp; war rooms</li>
+        </ul>
+      </div>
+      <div class="pillar p-emerald">
+        <span class="pillar-num">03</span>
+        <p class="pillar-label">Control</p>
+        <h3>Enforce governance safely.</h3>
+        <p>Policy-enforced execution with immutable audit trails.</p>
+        <ul class="pillar-features">
+          <li>Policy enforcement &amp; fail-safe decisions</li>
+          <li>Approval workflows with SLA deadlines</li>
+          <li>Risk visibility &amp; compliance pathways</li>
+          <li>Execution guardrails &amp; token validation</li>
+          <li>Immutable evidence bundles</li>
+        </ul>
+      </div>
+      <div class="pillar p-amber">
+        <span class="pillar-num">04</span>
+        <p class="pillar-label">Intelligence</p>
+        <h3>Continuously improve your platform.</h3>
+        <p>Data-backed decisions that turn insight into action.</p>
+        <ul class="pillar-features">
+          <li>Cost intelligence &amp; anomaly detection</li>
+          <li>Reliability insights &amp; predictive signals</li>
+          <li>Platform maturity scoring (PRE-100)</li>
+          <li>Architecture risk assessment</li>
+          <li>Executive intelligence &amp; decision support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S9 — PRE MATURITY MODEL
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="maturity">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">PRE-100 Maturity Model</span>
+      <h2>Five levels of <span class="gradient-text">platform maturity</span></h2>
+      <p class="section-sub" style="max-width:560px">AEGIS moves organizations up this curve &mdash; from reactive firefighting to autonomous platform operations.</p>
+    </div>
+
+    <div class="maturity-track reveal">
+      <div class="maturity-step">
+        <div class="maturity-dot">1</div>
+        <h4>Reactive</h4>
+        <p>Firefighting operations. Manual response. Limited visibility.</p>
+        <span class="maturity-badge badge-red">High Risk</span>
+      </div>
+      <div class="maturity-step">
+        <div class="maturity-dot">2</div>
+        <h4>Visible</h4>
+        <p>Basic monitoring. Centralized visibility. Still human-dependent.</p>
+        <span class="maturity-badge badge-amber">Moderate</span>
+      </div>
+      <div class="maturity-step">
+        <div class="maturity-dot">3</div>
+        <h4>Governed</h4>
+        <p>Policy enforcement. Automation introduced. Platform baselines defined.</p>
+        <span class="maturity-badge badge-cyan">Consistent</span>
+      </div>
+      <div class="maturity-step">
+        <div class="maturity-dot">4</div>
+        <h4>Predictive</h4>
+        <p>Risk anticipation. Cost intelligence. Reliability scoring. Proactive signals.</p>
+        <span class="maturity-badge badge-emerald">Preventive</span>
+      </div>
+      <div class="maturity-step active">
+        <div class="maturity-dot">5</div>
+        <h4>Autonomous</h4>
+        <p>Systems that continuously detect, prioritize, and drive corrective action.</p>
+        <span class="maturity-badge badge-indigo">PRE Evolution</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S10 — THE INEVITABLE FUTURE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="inevitable">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Convergence</span>
+      <h2>Every complex platform<br><span class="gradient-text">eventually needs this</span></h2>
+    </div>
+
+    <div class="grid g-5 reveal" style="margin-top:48px">
+      <div class="card card-indigo" style="text-align:center;padding:28px 20px">
+        <div class="card-icon ci-indigo" style="margin:0 auto 16px">&#128065;</div>
+        <h3 style="font-size:14px">Operational Visibility</h3>
+      </div>
+      <div class="card card-emerald" style="text-align:center;padding:28px 20px">
+        <div class="card-icon ci-emerald" style="margin:0 auto 16px">&#9878;</div>
+        <h3 style="font-size:14px">Governance Enforcement</h3>
+      </div>
+      <div class="card card-amber" style="text-align:center;padding:28px 20px">
+        <div class="card-icon ci-amber" style="margin:0 auto 16px">&#36;</div>
+        <h3 style="font-size:14px">Cost Discipline</h3>
+      </div>
+      <div class="card card-cyan" style="text-align:center;padding:28px 20px">
+        <div class="card-icon ci-cyan" style="margin:0 auto 16px">&#128170;</div>
+        <h3 style="font-size:14px">Reliability Coordination</h3>
+      </div>
+      <div class="card card-indigo" style="text-align:center;padding:28px 20px">
+        <div class="card-icon ci-violet" style="margin:0 auto 16px">&#128200;</div>
+        <h3 style="font-size:14px">Maturity Tracking</h3>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:48px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto">
+      <p style="font-size:16px;font-weight:600;color:var(--text-1);line-height:1.6">AEGIS brings these into one system.</p>
+      <p style="font-size:14px;color:var(--text-3);margin-top:8px">Not by replacing existing tools. By connecting them into an operations control plane.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S11 — WHAT AEGIS DOES NOT REPLACE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="clarity">
+  <div class="container">
+    <div class="split reveal">
+      <div class="split-text">
+        <span class="section-label">Clarity</span>
+        <h2>AEGIS does not replace <span class="gradient-text">your existing tools</span></h2>
+        <p class="section-sub" style="max-width:none">
+          AEGIS sits above your monitoring, security, cost, and incident tools as the operational layer that connects them. It does not compete with them. It makes your entire stack operate like a system.
+        </p>
+      </div>
+      <div>
+        <div style="padding:32px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border)">
+          <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px">Your tools keep running</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Monitoring &amp; observability tools
+            </div>
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Cloud security tools
+            </div>
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Cost management tools
+            </div>
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Incident management tools
+            </div>
+          </div>
+          <div style="margin-top:16px;padding:14px 16px;border-radius:var(--r-sm);background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(34,211,238,.05));border:1px solid var(--border-brand);font-size:13px;color:var(--text-1);font-weight:600;display:flex;align-items:center;gap:10px">
+            <span style="color:var(--brand-light)">&#9670;</span> AEGIS connects them into one operational control layer
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S12 — DESIGN PARTNER PROGRAM
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="partner">
+  <div class="container">
+    <div class="partner-callout reveal">
+      <div class="partner-grid">
+        <div>
+          <span class="section-label" style="margin-bottom:20px">Design Partner Program</span>
+          <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);max-width:none">Shape the future of <span class="gradient-text">Platform Reliability Engineering</span></h2>
+          <p style="font-size:15px;color:var(--text-2);margin:16px 0 28px;line-height:1.7;max-width:480px">
+            We are working with a limited number of platform teams to shape AEGIS. If you are building serious platform capabilities, we want to work with you.
+          </p>
+          <a href="#cta" class="btn btn-primary" style="padding:14px 28px;font-size:14px">
+            Become a Design Partner
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div>
+          <ul class="partner-benefits">
+            <li><span class="check">&#10003;</span> Early product access</li>
+            <li><span class="check">&#10003;</span> Direct roadmap influence</li>
+            <li><span class="check">&#10003;</span> Architecture collaboration</li>
+            <li><span class="check">&#10003;</span> Founder access</li>
+            <li><span class="check">&#10003;</span> Preferred pricing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S13 — AMBITION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto">
+      <span class="section-label" style="justify-content:center">Our Ambition</span>
+      <h2 style="margin:0 auto;max-width:600px">Become the operating system<br>for <span class="gradient-text">platform reliability.</span></h2>
+      <p class="section-sub" style="max-width:520px;margin:16px auto 0">
+        Just as Kubernetes became the control plane for containers, AEGIS is building the control plane for platform operations.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     S14 — CATEGORY LEADER ENDING
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="cta-section" id="cta">
+  <div class="container reveal">
+    <h2>Platform reliability is becoming<br>a <span class="gradient-text">discipline.</span></h2>
+    <p>PRE defines it. AEGIS enables it. Join the companies shaping this future.</p>
+    <div class="cta-buttons">
+      <a href="#partner" class="btn btn-primary" style="padding:16px 36px;font-size:15px">
+        Become a Design Partner
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+      <a href="pre-framework.html" class="btn btn-secondary" style="padding:16px 36px;font-size:15px">Read the PRE Framework</a>
+    </div>
+    <div style="margin-top:16px">
+      <a href="mailto:hello@brahmora.com" class="btn btn-ghost">Talk to Founder</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="logo-icon" style="width:48px;height:48px"><img src="universal-intelligence-logo.svg" alt="Brahmora Technologies"></div>
+          <span class="footer-brand-name">Brahmora Technologies</span>
+        </div>
+        <p class="footer-brand-desc">Building the operations control plane for modern cloud platforms. PRE defines the discipline. AEGIS enables it.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <a href="#capability">AEGIS Platform</a>
+        <a href="#control-plane">Control Plane</a>
+        <a href="pre-framework.html">PRE Framework</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#shift">Vision</a>
+        <a href="mailto:hello@brahmora.com">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="pre-framework.html">PRE-100 Standard</a>
+        <a href="#partner">Design Partners</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Brahmora Technologies Pvt Ltd. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Scripts
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+// ── Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 30);
+}, { passive: true });
+
+// ── Mobile toggle
+const toggle = document.getElementById('navToggle');
+const menu = document.getElementById('navMenu');
+toggle.addEventListener('click', () => menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+// ── Scroll reveal
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
