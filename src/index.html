@@ -3,17 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brahmora Technologies | Platform Reliability Engineering</title>
-<meta name="description" content="Cloud platforms became complex faster than operations evolved. Platform Reliability Engineering is the next discipline. AEGIS is the control plane that enables it.">
-<meta property="og:title" content="Brahmora Technologies | Platform Reliability Engineering">
-<meta property="og:description" content="PRE is the shift. AEGIS is the system enabling it. The operations control plane for modern cloud platforms.">
+<title>Brahmora Technologies | Platform Reliability Engineering & AEGIS</title>
+<meta name="description" content="Platform teams manage more infrastructure, risk, and cost than ever — but still rely on disconnected tools. Brahmora is building PRE, the next operations discipline, and AEGIS, the control plane that enables it.">
+<link rel="canonical" href="https://brahmora.co.uk/">
+<meta property="og:title" content="Brahmora — Platform Reliability Engineering & AEGIS">
+<meta property="og:description" content="Cloud platforms became complex faster than operations evolved. PRE is the next discipline. AEGIS is the control plane that enables it.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://brahmora.co.uk/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Brahmora — Platform Reliability Engineering & AEGIS">
+<meta name="twitter:description" content="Cloud platforms became complex faster than operations evolved. PRE is the next discipline. AEGIS is the control plane that enables it.">
 <meta name="theme-color" content="#6366f1">
+<meta name="robots" content="index, follow">
 <!-- Security Headers -->
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self' https://*.execute-api.eu-west-2.amazonaws.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -255,6 +261,21 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .cta-section p{font-size:1.05rem;color:var(--text-2);max-width:520px;margin:0 auto 40px}
 .cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
+/* ── Contact Form ────────────────────────────────────────────── */
+#contact .container{display:flex;flex-direction:column;align-items:center}
+.contact-form{width:100%;max-width:480px;text-align:left}
+.contact-form .form-group{margin-bottom:16px}
+.contact-form label{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.contact-form input,.contact-form textarea{width:100%;padding:12px 16px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-1);font-family:'Inter',sans-serif;font-size:14px;transition:border-color .2s}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--brand)}
+.contact-form textarea{resize:vertical;min-height:120px}
+.contact-form .btn-submit{width:100%;padding:14px;font-size:14px;font-weight:700;border:none;border-radius:var(--r-sm);background:var(--brand);color:#fff;cursor:pointer;transition:background .2s,transform .2s}
+.contact-form .btn-submit:hover{background:var(--brand-light);transform:translateY(-1px)}
+.contact-form .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-status{margin-top:12px;font-size:13px;text-align:center}
+.form-status.success{color:var(--emerald)}
+.form-status.error{color:#f87171}
+
 .footer{padding:80px 0 40px;border-top:1px solid var(--border)}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
 @media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
@@ -430,7 +451,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
      ═══════════════════════════════════════════════════════════════ -->
 <section class="section section-alt" id="disciplines">
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header section-center reveal">
       <span class="section-label">Why PRE</span>
       <h2>Existing disciplines solve parts of the problem.<br><span class="gradient-text">None own platform operations as a system.</span></h2>
     </div>
@@ -517,7 +538,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
      ═══════════════════════════════════════════════════════════════ -->
 <section class="section section-alt" id="control-plane">
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header section-center reveal">
       <span class="section-label">Architecture</span>
       <h2>Modern infrastructure has layers.<br><span class="gradient-text">Operations did not.</span> Until now.</h2>
     </div>
@@ -752,8 +773,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     </div>
 
     <div class="reveal" style="margin-top:48px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto">
-      <p style="font-size:16px;font-weight:600;color:var(--text-1);line-height:1.6">AEGIS brings these into one system.</p>
-      <p style="font-size:14px;color:var(--text-3);margin-top:8px">Not by replacing existing tools. By connecting them into an operations control plane.</p>
+      <p class="section-sub" style="max-width:600px">AEGIS brings reliability, governance, operations, and cost into one operational system. It works independently as a platform reliability control plane and integrates with existing tools to provide a unified operating layer.</p>
     </div>
   </div>
 </section>
@@ -862,9 +882,37 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       </a>
       <a href="pre-framework.html" class="btn btn-secondary" style="padding:16px 36px;font-size:15px">Read the PRE Framework</a>
     </div>
-    <div style="margin-top:16px">
-      <a href="mailto:hello@brahmora.com" class="btn btn-ghost">Talk to Founder</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT FORM
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:48px">
+      <span class="section-label" style="justify-content:center">Get in Touch</span>
+      <h2>Talk to the <span class="gradient-text">Founder</span></h2>
+      <p class="section-sub" style="max-width:480px;margin:12px auto 0">Have a question about PRE or AEGIS? Want to explore a partnership? Drop a message.</p>
     </div>
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <div class="form-group">
+        <label for="cf-name">Name</label>
+        <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="cf-email">Email</label>
+        <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="you@company.com">
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" required placeholder="How can we help?"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message</button>
+      <div class="form-status" id="formStatus"></div>
+    </form>
   </div>
 </section>
 
@@ -890,7 +938,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       <div class="footer-col">
         <h5>Company</h5>
         <a href="#shift">Vision</a>
-        <a href="mailto:hello@brahmora.com">Contact</a>
+        <a href="#contact">Contact</a>
       </div>
       <div class="footer-col">
         <h5>Resources</h5>
@@ -931,6 +979,44 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── Smooth scroll
+// ── Contact form
+const CONTACT_API = '%%CONTACT_API_URL%%'; // replaced after terraform apply
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-submit');
+  const status = document.getElementById('formStatus');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  status.textContent = '';
+  status.className = 'form-status';
+  try {
+    const res = await fetch(CONTACT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('cf-name').value,
+        email: document.getElementById('cf-email').value,
+        message: document.getElementById('cf-message').value
+      })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      status.textContent = 'Message sent! We\'ll get back to you soon.';
+      status.className = 'form-status success';
+      e.target.reset();
+    } else {
+      status.textContent = data.message || 'Something went wrong.';
+      status.className = 'form-status error';
+    }
+  } catch {
+    status.textContent = 'Network error. Please try again.';
+    status.className = 'form-status error';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Send Message';
+});
 
 // ── Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
