@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEGIS Platform Architecture | Brahmora Technologies</title>
+<meta name="description" content="AEGIS is the Operational Decision & Governance Layer for Cloud Platforms. Explore the architecture of the governed operational control plane that connects visibility, decision-making, execution safety, and continuous improvement.">
+<link rel="canonical" href="https://brahmora.co.uk/platform-architecture.html">
+<meta property="og:title" content="AEGIS Platform Architecture — Brahmora Technologies">
+<meta property="og:description" content="The Operational Control Plane for Modern Cloud Platforms. Explore how AEGIS connects visibility, decision-making, execution safety, and continuous improvement.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://brahmora.co.uk/platform-architecture.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AEGIS Platform Architecture — Brahmora Technologies">
+<meta name="twitter:description" content="The Operational Control Plane for Modern Cloud Platforms.">
+<link rel="icon" type="image/svg+xml" href="/universal-intelligence-logo.svg">
+<meta name="theme-color" content="#6366f1">
+<meta name="robots" content="index, follow">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   BRAHMORA TECHNOLOGIES — Design System
+   ═══════════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#05080e;color:#c3cad8;line-height:1.7;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+:root{
+  --brand:#6366f1;--brand-light:#818cf8;--brand-dark:#4f46e5;
+  --brand-glow:rgba(99,102,241,.12);--brand-glow-strong:rgba(99,102,241,.22);
+  --cyan:#22d3ee;--cyan-glow:rgba(34,211,238,.12);
+  --emerald:#34d399;--emerald-glow:rgba(52,211,153,.12);
+  --amber:#fbbf24;--amber-glow:rgba(251,191,36,.12);
+  --rose:#fb7185;--rose-glow:rgba(251,113,133,.12);
+  --violet:#a78bfa;
+  --bg:#05080e;--surface:#0a0f1a;--surface-2:#0f1629;--surface-3:#151d30;--surface-4:#1a2540;
+  --glass:rgba(10,15,26,.72);
+  --border:rgba(255,255,255,.06);--border-light:rgba(255,255,255,.1);--border-brand:rgba(99,102,241,.25);
+  --text-1:#f0f4fc;--text-2:#94a3b8;--text-3:#64748b;--text-muted:#475569;
+  --max-w:1160px;--nav-h:68px;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;
+}
+
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.gradient-text{background:linear-gradient(135deg,var(--brand-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mono{font-family:'JetBrains Mono',monospace}
+.divider{height:1px;background:var(--border);margin:0}
+
+/* ═══════════════════════════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════════════════════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:all .35s}
+.nav-bg{background:var(--glass);backdrop-filter:blur(24px) saturate(1.6);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:52px;height:52px;flex-shrink:0}
+.logo-icon img{width:100%;height:100%}
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-company{font-size:17px;font-weight:800;color:var(--text-1);letter-spacing:-.02em}
+.logo-product{font-size:11px;font-weight:600;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase}
+.nav-menu{display:flex;align-items:center;gap:4px}
+.nav-link{padding:8px 16px;font-size:13px;font-weight:500;color:var(--text-2);border-radius:var(--r-sm);transition:all .2s}
+.nav-link:hover{color:var(--text-1);background:rgba(255,255,255,.04)}
+.nav-cta{margin-left:8px;padding:8px 20px;font-size:13px;font-weight:700;color:#fff;background:var(--brand);border-radius:var(--r-sm);transition:all .25s}
+.nav-cta:hover{background:var(--brand-light);box-shadow:0 4px 20px rgba(99,102,241,.3)}
+.nav-toggle{display:none;padding:8px;color:var(--text-2)}
+@media(max-width:768px){
+  .nav-menu{display:none;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:4px}
+  .nav-menu.open{display:flex}
+  .nav-toggle{display:flex}
+  .nav-cta{margin:8px 0 0;width:100%;text-align:center}
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════════════════ */
+.hero{padding:200px 0 100px;position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;top:-300px;left:50%;transform:translateX(-50%);width:1100px;height:1100px;background:radial-gradient(ellipse,rgba(99,102,241,.07) 0%,rgba(34,211,238,.03) 40%,transparent 70%);pointer-events:none}
+.hero h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;color:var(--text-1);max-width:900px;margin:0 auto}
+.hero-sub{font-size:clamp(1rem,1.8vw,1.15rem);color:var(--text-2);max-width:720px;margin:24px auto 0;line-height:1.75}
+.hero-sub strong{color:var(--text-1);font-weight:600}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--r-md);font-size:14px;font-weight:700;transition:all .3s}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-light);transform:translateY(-1px);box-shadow:0 8px 30px rgba(99,102,241,.25)}
+.btn-secondary{background:transparent;color:var(--text-1);border:1px solid var(--border-light)}
+.btn-secondary:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.15)}
+.btn svg{width:16px;height:16px}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTIONS
+   ═══════════════════════════════════════════════════════════════════ */
+.section{padding:120px 0}
+.section-alt{background:var(--surface)}
+.section-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:16px}
+.section-label::before{content:'';width:16px;height:2px;background:var(--brand);border-radius:1px}
+.section h2{font-size:clamp(1.8rem,3.8vw,2.8rem);font-weight:800;letter-spacing:-.03em;color:var(--text-1);line-height:1.12;max-width:700px}
+.section-sub{font-size:1.05rem;color:var(--text-2);max-width:600px;margin-top:16px;line-height:1.75}
+.section-header{margin-bottom:56px}
+.section-center{text-align:center;margin-left:auto;margin-right:auto}
+.section-center h2,.section-center .section-sub{margin-left:auto;margin-right:auto}
+
+/* Grid */
+.grid{display:grid;gap:20px}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g-3,.g-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════════════════════════════════ */
+.card{padding:32px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border);transition:all .35s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--border-light);transform:translateY(-3px);box-shadow:0 12px 48px rgba(0,0,0,.35)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .35s}
+.card:hover::before{opacity:1}
+.card-indigo::before{background:linear-gradient(90deg,var(--brand),var(--brand-light))}
+.card-cyan::before{background:linear-gradient(90deg,var(--cyan),#67e8f9)}
+.card-emerald::before{background:linear-gradient(90deg,var(--emerald),#6ee7b7)}
+.card-amber::before{background:linear-gradient(90deg,var(--amber),#fde68a)}
+.card-rose::before{background:linear-gradient(90deg,var(--rose),#fda4af)}
+.card-violet::before{background:linear-gradient(90deg,var(--violet),#c4b5fd)}
+.card h3{font-size:17px;font-weight:700;color:var(--text-1);margin-bottom:8px;letter-spacing:-.01em}
+.card p{font-size:14px;color:var(--text-2);line-height:1.65}
+.card-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}
+.ci-indigo{background:var(--brand-glow);border:1px solid rgba(99,102,241,.18)}
+.ci-cyan{background:var(--cyan-glow);border:1px solid rgba(34,211,238,.18)}
+.ci-emerald{background:var(--emerald-glow);border:1px solid rgba(52,211,153,.18)}
+.ci-amber{background:var(--amber-glow);border:1px solid rgba(251,191,36,.18)}
+.ci-rose{background:var(--rose-glow);border:1px solid rgba(251,113,133,.18)}
+.ci-violet{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.18)}
+
+/* Statement block */
+.statement{padding:48px;border-radius:var(--r-2xl);background:var(--surface-2);border:1px solid var(--border);position:relative;overflow:hidden}
+.statement::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--cyan),var(--emerald))}
+.statement-bold{font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:700;color:var(--text-1);line-height:1.5;letter-spacing:-.015em}
+
+/* Split layout */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+@media(max-width:768px){.split{grid-template-columns:1fr;gap:40px}}
+.split-text h2{max-width:none}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FLOW DIAGRAM
+   ═══════════════════════════════════════════════════════════════════ */
+.flow-track{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center}
+.flow-step{padding:16px 24px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);text-align:center;min-width:120px;transition:all .3s}
+.flow-step:hover{border-color:var(--border-light);transform:translateY(-2px)}
+.flow-step h4{font-size:14px;font-weight:700;color:var(--text-1)}
+.flow-arrow{font-size:18px;color:var(--text-3);padding:0 6px}
+@media(max-width:600px){.flow-track{flex-direction:column;gap:8px}.flow-arrow{transform:rotate(90deg);padding:4px 0}}
+
+/* ═══════════════════════════════════════════════════════════════════
+   LAYER DIAGRAM
+   ═══════════════════════════════════════════════════════════════════ */
+.layer-stack{display:flex;flex-direction:column;gap:12px;max-width:700px;margin:48px auto 0}
+.layer-item{display:flex;align-items:center;gap:16px;padding:18px 24px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface-2);transition:all .3s}
+.layer-item:hover{border-color:var(--border-light);transform:translateX(4px)}
+.layer-item.layer-highlight{background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(34,211,238,.06));border-color:var(--border-brand);box-shadow:0 0 40px var(--brand-glow)}
+.layer-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-width:160px;flex-shrink:0;color:var(--text-1)}
+.layer-desc{font-size:14px;color:var(--text-2)}
+.layer-connector{width:2px;height:12px;background:var(--border);margin:0 auto}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PRINCIPLE CARDS
+   ═══════════════════════════════════════════════════════════════════ */
+.principle{padding:24px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border);transition:all .3s}
+.principle:hover{border-color:var(--border-light);transform:translateY(-2px)}
+.principle h4{font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:6px}
+.principle p{font-size:13px;color:var(--text-2);line-height:1.6}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BULLET LIST STYLED
+   ═══════════════════════════════════════════════════════════════════ */
+.check-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.check-list li{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-2);padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border)}
+.check-list .check{color:var(--emerald);font-size:16px;flex-shrink:0}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CTA / FOOTER
+   ═══════════════════════════════════════════════════════════════════ */
+.cta-section{padding:140px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(99,102,241,.08) 0%,transparent 60%);pointer-events:none}
+.cta-section h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;color:var(--text-1);letter-spacing:-.035em;max-width:700px;margin:0 auto 16px;line-height:1.1}
+.cta-section p{font-size:1.05rem;color:var(--text-2);max-width:560px;margin:0 auto 40px}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.footer{padding:80px 0 40px;border-top:1px solid var(--border)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{display:flex;flex-direction:column;gap:12px}
+.footer-brand-name{font-size:18px;font-weight:800;color:var(--text-1);letter-spacing:-.02em}
+.footer-brand-desc{font-size:13px;color:var(--text-3);max-width:320px;line-height:1.6}
+.footer-col h5{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px}
+.footer-col a{display:block;font-size:13px;color:var(--text-2);padding:4px 0;transition:color .2s}
+.footer-col a:hover{color:var(--text-1)}
+.footer-bottom{margin-top:56px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:12px;color:var(--text-muted)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal a{font-size:12px;color:var(--text-muted);transition:color .2s}
+.footer-legal a:hover{color:var(--text-2)}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-bg">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><img src="universal-intelligence-logo.svg" alt="Brahmora Technologies"></div>
+        <div class="logo-text">
+          <span class="logo-company">Brahmora</span>
+          <span class="logo-product">Technologies</span>
+        </div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="#what" class="nav-link">What AEGIS Is</a>
+        <a href="#pillars" class="nav-link">Pillars</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#governance" class="nav-link">Governance</a>
+        <a href="#security" class="nav-link">Security</a>
+        <a href="#demo" class="nav-cta">Become Design Partner</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="reveal">
+      <h1>
+        AEGIS <span class="gradient-text">Platform Architecture</span>
+      </h1>
+      <p class="hero-sub">
+        The Operational Control Plane for Modern Cloud Platforms
+      </p>
+      <p class="hero-sub" style="margin-top:20px;max-width:780px">
+        Modern platform teams operate across dozens of tools, thousands of resources, and constant change. AEGIS introduces a missing layer in cloud operations: a <strong>governed operational control plane</strong> that connects visibility, decision-making, execution safety, and continuous improvement.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     POSITIONING STATEMENT
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" style="padding:80px 0">
+  <div class="container">
+    <div class="statement reveal" style="text-align:center;max-width:700px;margin:0 auto">
+      <p class="statement-bold">AEGIS does not replace your tools.</p>
+      <p class="statement-bold" style="margin-top:8px">AEGIS makes them <span class="gradient-text">work together safely.</span></p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHAT AEGIS IS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="what">
+  <div class="container">
+    <div class="split reveal">
+      <div class="split-text">
+        <span class="section-label">Definition</span>
+        <h2>What <span class="gradient-text">AEGIS</span> Is</h2>
+        <p class="section-sub" style="max-width:none">
+          AEGIS is the <strong>Operational Decision &amp; Governance Layer</strong> for Cloud Platforms. It sits between:
+        </p>
+        <div class="flow-track" style="margin-top:28px;justify-content:flex-start">
+          <div class="flow-step"><h4>Intent</h4></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><h4>Policy</h4></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><h4>Decision</h4></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><h4>Execution</h4></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><h4>Evidence</h4></div>
+        </div>
+      </div>
+      <div>
+        <div style="padding:32px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border)">
+          <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px">Every operational action is</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Evaluated
+            </div>
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Governed
+            </div>
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Safe
+            </div>
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Accountable
+            </div>
+            <div style="padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:10px">
+              <span style="color:var(--emerald)">&#10003;</span> Measurable
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     THE FOUR PILLARS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="pillars">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Core Pillars</span>
+      <h2>The Four Pillars of <span class="gradient-text">AEGIS</span></h2>
+    </div>
+
+    <div class="grid g-4 reveal">
+      <div class="card card-indigo">
+        <div class="card-icon ci-indigo">&#128065;</div>
+        <h3>KNOW your platform</h3>
+        <p style="font-weight:600;color:var(--text-1);margin-bottom:6px">Understand what exists, what changed, and what matters.</p>
+        <p>AEGIS builds a continuously updated operational picture across infrastructure, services, cost, and reliability signals.</p>
+      </div>
+      <div class="card card-cyan">
+        <div class="card-icon ci-cyan">&#9878;</div>
+        <h3>RUN platform reliably</h3>
+        <p style="font-weight:600;color:var(--text-1);margin-bottom:6px">Detect problems early and respond safely.</p>
+        <p>AEGIS helps teams identify risk patterns, correlate incidents, and reduce operational noise.</p>
+      </div>
+      <div class="card card-emerald">
+        <div class="card-icon ci-emerald">&#128737;</div>
+        <h3>ENFORCE governance safely</h3>
+        <p style="font-weight:600;color:var(--text-1);margin-bottom:6px">Every action follows policy.</p>
+        <p>Changes are evaluated before execution, ensuring governance is built into operations instead of applied afterward.</p>
+      </div>
+      <div class="card card-amber">
+        <div class="card-icon ci-amber">&#128200;</div>
+        <h3>IMPROVE continuously</h3>
+        <p style="font-weight:600;color:var(--text-1);margin-bottom:6px">Turn operations into learning.</p>
+        <p>AEGIS helps organizations measure reliability trends, operational maturity, and improvement over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTROL PLANE PRINCIPLES
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="principles">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Principles</span>
+      <h2>Control Plane <span class="gradient-text">Principles</span></h2>
+      <p class="section-sub">AEGIS is built around principles proven in large-scale platform organizations.</p>
+    </div>
+
+    <div class="grid g-3 reveal">
+      <div class="principle">
+        <h4>Governance before automation</h4>
+        <p>Automation without governance creates risk. AEGIS ensures automation follows policy.</p>
+      </div>
+      <div class="principle">
+        <h4>Evidence before action</h4>
+        <p>Every operation produces verifiable records.</p>
+      </div>
+      <div class="principle">
+        <h4>Event-driven architecture</h4>
+        <p>AEGIS connects systems through operational events rather than fragile integrations.</p>
+      </div>
+      <div class="principle">
+        <h4>Fail-safe design</h4>
+        <p>Unknown states default to safe outcomes.</p>
+      </div>
+      <div class="principle">
+        <h4>Tenant isolation by design</h4>
+        <p>Multi-tenant environments remain securely separated.</p>
+      </div>
+      <div class="principle">
+        <h4>AI assists but never decides</h4>
+        <p>AI provides analysis and recommendations. Humans and policy make decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HIGH-LEVEL ARCHITECTURE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="architecture">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Architecture</span>
+      <h2>High-Level <span class="gradient-text">Architecture</span></h2>
+      <p class="section-sub">AEGIS is organized into six conceptual layers.</p>
+    </div>
+
+    <!-- Layer Stack Diagram -->
+    <div class="layer-stack reveal">
+      <div class="layer-item">
+        <span class="layer-label" style="color:var(--cyan)">Intake Layer</span>
+        <span class="layer-desc">Connects cloud providers and operational tools</span>
+      </div>
+      <div class="layer-connector"></div>
+      <div class="layer-item layer-highlight">
+        <span class="layer-label" style="color:var(--brand-light)">Core Decision Engine</span>
+        <span class="layer-desc">The governance brain of AEGIS</span>
+      </div>
+      <div class="layer-connector"></div>
+      <div class="layer-item">
+        <span class="layer-label" style="color:var(--emerald)">Platform Intelligence</span>
+        <span class="layer-desc">Transforms signals into insight</span>
+      </div>
+      <div class="layer-connector"></div>
+      <div class="layer-item">
+        <span class="layer-label" style="color:var(--amber)">Execution Safety</span>
+        <span class="layer-desc">Ensures safe change execution</span>
+      </div>
+      <div class="layer-connector"></div>
+      <div class="layer-item">
+        <span class="layer-label" style="color:var(--rose)">Control Boards</span>
+        <span class="layer-desc">Role-specific operational visibility</span>
+      </div>
+      <div class="layer-connector"></div>
+      <div class="layer-item">
+        <span class="layer-label" style="color:var(--violet)">Audit &amp; Evidence</span>
+        <span class="layer-desc">Creates operational accountability</span>
+      </div>
+    </div>
+
+    <!-- Detailed Layer Descriptions -->
+    <div style="margin-top:80px">
+      <!-- Intake Layer -->
+      <div class="split reveal" style="margin-bottom:80px">
+        <div class="split-text">
+          <span class="section-label">Layer 1</span>
+          <h2 style="font-size:clamp(1.4rem,3vw,2rem)"><span style="color:var(--cyan)">Intake</span> Layer</h2>
+          <p class="section-sub" style="max-width:none">Connects cloud providers and operational tools. Normalizes data into a unified operational model.</p>
+        </div>
+        <div>
+          <div style="padding:28px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border)">
+            <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px">Collects signals from</p>
+            <ul class="check-list">
+              <li><span class="check">&#10003;</span> Cloud platforms</li>
+              <li><span class="check">&#10003;</span> Observability tools</li>
+              <li><span class="check">&#10003;</span> CI/CD systems</li>
+              <li><span class="check">&#10003;</span> Security tools</li>
+              <li><span class="check">&#10003;</span> Cost systems</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Decision Engine -->
+      <div class="split reveal" style="margin-bottom:80px">
+        <div>
+          <div style="padding:28px;border-radius:var(--r-xl);background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(34,211,238,.04));border:1px solid var(--border-brand)">
+            <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px">Evaluates</p>
+            <ul class="check-list">
+              <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Policies</li>
+              <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Risks</li>
+              <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Changes</li>
+              <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Signals</li>
+              <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Approvals</li>
+            </ul>
+          </div>
+        </div>
+        <div class="split-text">
+          <span class="section-label">Layer 2</span>
+          <h2 style="font-size:clamp(1.4rem,3vw,2rem)">Core <span class="gradient-text">Decision Engine</span></h2>
+          <p class="section-sub" style="max-width:none">The governance brain of AEGIS. Ensures actions follow organizational standards.</p>
+        </div>
+      </div>
+
+      <!-- Platform Intelligence -->
+      <div class="split reveal" style="margin-bottom:80px">
+        <div class="split-text">
+          <span class="section-label">Layer 3</span>
+          <h2 style="font-size:clamp(1.4rem,3vw,2rem)"><span style="color:var(--emerald)">Platform</span> Intelligence</h2>
+          <p class="section-sub" style="max-width:none">Transforms signals into insight. This layer helps teams move from reactive operations to proactive operations.</p>
+        </div>
+        <div>
+          <div style="padding:28px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border)">
+            <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px">Capabilities</p>
+            <ul class="check-list">
+              <li><span class="check">&#10003;</span> Incident correlation</li>
+              <li><span class="check">&#10003;</span> Pattern detection</li>
+              <li><span class="check">&#10003;</span> Risk identification</li>
+              <li><span class="check">&#10003;</span> Change impact analysis</li>
+              <li><span class="check">&#10003;</span> Reliability trend analysis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Execution Safety -->
+      <div class="split reveal" style="margin-bottom:80px">
+        <div>
+          <div style="padding:28px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border)">
+            <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px">AEGIS helps teams</p>
+            <ul class="check-list">
+              <li><span class="check">&#10003;</span> Simulate operational changes</li>
+              <li><span class="check">&#10003;</span> Understand impact before execution</li>
+              <li><span class="check">&#10003;</span> Limit blast radius</li>
+              <li><span class="check">&#10003;</span> Enable rollback strategies</li>
+              <li><span class="check">&#10003;</span> Enforce approval workflows</li>
+            </ul>
+          </div>
+        </div>
+        <div class="split-text">
+          <span class="section-label">Layer 4</span>
+          <h2 style="font-size:clamp(1.4rem,3vw,2rem)"><span style="color:var(--amber)">Execution</span> Safety</h2>
+          <p class="section-sub" style="max-width:none">Ensures safe change execution. This reduces operational risk without slowing delivery.</p>
+        </div>
+      </div>
+
+      <!-- Control Boards -->
+      <div class="split reveal" style="margin-bottom:80px">
+        <div class="split-text">
+          <span class="section-label">Layer 5</span>
+          <h2 style="font-size:clamp(1.4rem,3vw,2rem)"><span style="color:var(--rose)">Control</span> Boards</h2>
+          <p class="section-sub" style="max-width:none">Role-specific operational visibility. AEGIS provides different operational views for every stakeholder.</p>
+        </div>
+        <div>
+          <div class="grid g-2">
+            <div style="padding:20px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border)">
+              <h4 style="font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:4px">Platform teams</h4>
+              <p style="font-size:12px;color:var(--text-3)">Operational health, incidents, reliability metrics</p>
+            </div>
+            <div style="padding:20px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border)">
+              <h4 style="font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:4px">Engineering teams</h4>
+              <p style="font-size:12px;color:var(--text-3)">Service health, deployments, error trends</p>
+            </div>
+            <div style="padding:20px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border)">
+              <h4 style="font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:4px">Leadership</h4>
+              <p style="font-size:12px;color:var(--text-3)">Platform health, risk posture, improvement trends</p>
+            </div>
+            <div style="padding:20px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border)">
+              <h4 style="font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:4px">Finance teams</h4>
+              <p style="font-size:12px;color:var(--text-3)">Cost efficiency, waste detection, trend visibility</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audit & Evidence -->
+      <div class="split reveal">
+        <div>
+          <div style="padding:28px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border)">
+            <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px">AEGIS maintains</p>
+            <ul class="check-list">
+              <li><span class="check">&#10003;</span> Operational decision history</li>
+              <li><span class="check">&#10003;</span> Governance records</li>
+              <li><span class="check">&#10003;</span> Execution evidence</li>
+              <li><span class="check">&#10003;</span> Compliance mapping</li>
+            </ul>
+          </div>
+        </div>
+        <div class="split-text">
+          <span class="section-label">Layer 6</span>
+          <h2 style="font-size:clamp(1.4rem,3vw,2rem)"><span style="color:var(--violet)">Audit &amp; Evidence</span> Layer</h2>
+          <p class="section-sub" style="max-width:none">Creates operational accountability. Supporting enterprise governance and regulatory requirements.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     GOVERNANCE EXECUTION MODEL
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="governance">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Governance Model</span>
+      <h2>Governance <span class="gradient-text">Execution Model</span></h2>
+      <p class="section-sub">AEGIS standardizes how operational decisions are executed.</p>
+    </div>
+
+    <div class="flow-track reveal" style="margin-bottom:48px">
+      <div class="flow-step"><h4>Intent</h4></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h4>Plan</h4></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h4>Policy Evaluation</h4></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h4>Approval</h4></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h4>Safety Validation</h4></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step"><h4>Execution</h4></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(34,211,238,.1));border-color:var(--brand)"><h4>Evidence</h4></div>
+    </div>
+
+    <div class="grid g-4 reveal">
+      <div style="padding:20px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border);text-align:center">
+        <div style="font-size:13px;font-weight:700;color:var(--text-1)">Controlled</div>
+      </div>
+      <div style="padding:20px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border);text-align:center">
+        <div style="font-size:13px;font-weight:700;color:var(--text-1)">Traceable</div>
+      </div>
+      <div style="padding:20px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border);text-align:center">
+        <div style="font-size:13px;font-weight:700;color:var(--text-1)">Repeatable</div>
+      </div>
+      <div style="padding:20px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border);text-align:center">
+        <div style="font-size:13px;font-weight:700;color:var(--text-1)">Safe</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PLATFORM INTELLIGENCE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="intelligence">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Intelligence</span>
+      <h2>Platform Intelligence <span class="gradient-text">Capabilities</span></h2>
+      <p class="section-sub">AEGIS helps teams understand what matters &mdash; using data instead of intuition.</p>
+    </div>
+
+    <div class="grid g-3 reveal" style="max-width:800px;margin:0 auto">
+      <div class="card card-indigo" style="text-align:center;padding:28px 20px">
+        <h3 style="font-size:14px">What usually causes incidents</h3>
+      </div>
+      <div class="card card-cyan" style="text-align:center;padding:28px 20px">
+        <h3 style="font-size:14px">What fixes them fastest</h3>
+      </div>
+      <div class="card card-amber" style="text-align:center;padding:28px 20px">
+        <h3 style="font-size:14px">What changes introduce risk</h3>
+      </div>
+      <div class="card card-emerald" style="text-align:center;padding:28px 20px">
+        <h3 style="font-size:14px">Where reliability is improving</h3>
+      </div>
+      <div class="card card-rose" style="text-align:center;padding:28px 20px">
+        <h3 style="font-size:14px">Where costs are drifting</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECURITY ARCHITECTURE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="security">
+  <div class="container">
+    <div class="split reveal">
+      <div class="split-text">
+        <span class="section-label">Security</span>
+        <h2>Security <span class="gradient-text">Architecture</span></h2>
+        <p class="section-sub" style="max-width:none">Security is foundational in AEGIS design. AEGIS is designed to support enterprise security programs and compliance initiatives.</p>
+      </div>
+      <div>
+        <div style="padding:28px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border)">
+          <ul class="check-list">
+            <li><span class="check">&#10003;</span> Strong tenant isolation</li>
+            <li><span class="check">&#10003;</span> Short-lived credentials</li>
+            <li><span class="check">&#10003;</span> Secure data handling</li>
+            <li><span class="check">&#10003;</span> Input validation controls</li>
+            <li><span class="check">&#10003;</span> Operational audit trails</li>
+            <li><span class="check">&#10003;</span> Governance enforcement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     EXTENSION MODEL
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="extension">
+  <div class="container">
+    <div class="split reveal">
+      <div>
+        <div style="padding:28px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border)">
+          <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px">Organizations can extend</p>
+          <ul class="check-list">
+            <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Policies</li>
+            <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Workflows</li>
+            <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Integrations</li>
+            <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Signals</li>
+            <li><span class="check" style="color:var(--brand-light)">&#9670;</span> Dashboards</li>
+          </ul>
+          <div style="margin-top:16px;padding:14px 16px;border-radius:var(--r-sm);background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(34,211,238,.05));border:1px solid var(--border-brand);font-size:13px;color:var(--text-1);font-weight:600">
+            While keeping the core platform stable
+          </div>
+        </div>
+      </div>
+      <div class="split-text">
+        <span class="section-label">Extensibility</span>
+        <h2>Extension <span class="gradient-text">Model</span></h2>
+        <p class="section-sub" style="max-width:none">AEGIS is designed to be extensible without customization risk. This allows organizations to adapt AEGIS to their operating model rather than changing their model to fit the tool.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DEPLOYMENT PHILOSOPHY
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="deployment">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Deployment</span>
+      <h2>Deployment <span class="gradient-text">Philosophy</span></h2>
+      <p class="section-sub">AEGIS is designed as a modern cloud control plane. The platform is designed to grow with organizational maturity.</p>
+    </div>
+
+    <div class="grid g-3 reveal" style="max-width:800px;margin:0 auto">
+      <div class="principle">
+        <h4>Stateless services</h4>
+      </div>
+      <div class="principle">
+        <h4>Horizontal scalability</h4>
+      </div>
+      <div class="principle">
+        <h4>Cloud-native architecture</h4>
+      </div>
+      <div class="principle">
+        <h4>Event-driven communication</h4>
+      </div>
+      <div class="principle">
+        <h4>Secure multi-tenant model</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHY ORGANIZATIONS ADOPT AEGIS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="why">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Adoption</span>
+      <h2>Why Organizations <span class="gradient-text">Adopt AEGIS</span></h2>
+    </div>
+
+    <div class="split reveal">
+      <div>
+        <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px">They experience</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.15);font-size:13px;color:var(--rose);font-weight:600">Tool sprawl</div>
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.15);font-size:13px;color:var(--rose);font-weight:600">Operational noise</div>
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.15);font-size:13px;color:var(--rose);font-weight:600">Manual governance</div>
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.15);font-size:13px;color:var(--rose);font-weight:600">Incident fatigue</div>
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.15);font-size:13px;color:var(--rose);font-weight:600">Cost visibility gaps</div>
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.15);font-size:13px;color:var(--rose);font-weight:600">Risk from uncontrolled automation</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px">They move toward</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.15);font-size:13px;color:var(--emerald);font-weight:600;display:flex;align-items:center;gap:10px"><span>&#10003;</span> Governed operations</div>
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.15);font-size:13px;color:var(--emerald);font-weight:600;display:flex;align-items:center;gap:10px"><span>&#10003;</span> Safer automation</div>
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.15);font-size:13px;color:var(--emerald);font-weight:600;display:flex;align-items:center;gap:10px"><span>&#10003;</span> Operational intelligence</div>
+          <div style="padding:12px 16px;border-radius:var(--r-sm);background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.15);font-size:13px;color:var(--emerald);font-weight:600;display:flex;align-items:center;gap:10px"><span>&#10003;</span> Continuous improvement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     THE AEGIS VISION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="vision">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto">
+      <span class="section-label" style="justify-content:center">Vision</span>
+      <h2 style="margin:0 auto">The <span class="gradient-text">AEGIS</span> Vision</h2>
+      <div style="margin-top:40px;display:flex;flex-direction:column;gap:12px">
+        <p style="font-size:15px;color:var(--text-2);line-height:1.75">Cloud platforms have monitoring.</p>
+        <p style="font-size:15px;color:var(--text-2);line-height:1.75">They have automation.</p>
+        <p style="font-size:15px;color:var(--text-2);line-height:1.75">They have CI/CD.</p>
+        <p style="font-size:15px;color:var(--text-2);line-height:1.75">They have security tools.</p>
+      </div>
+      <div class="statement" style="margin-top:40px;text-align:center">
+        <p class="statement-bold">What they lack is a decision layer.</p>
+        <p style="font-size:16px;color:var(--text-2);margin-top:12px;line-height:1.75">AEGIS provides that missing control plane.</p>
+        <p style="font-size:14px;color:var(--text-3);margin-top:16px">Not another tool.<br><strong style="color:var(--text-1)">A platform to make your platform work better.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CTA — SEE AEGIS IN ACTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="cta-section" id="demo">
+  <div class="container reveal">
+    <h2>See AEGIS <span class="gradient-text">in Action</span></h2>
+    <p>AEGIS helps platform teams reduce operational complexity while increasing reliability, governance, and efficiency. Request an architecture walkthrough or design partner discussion.</p>
+    <div class="cta-buttons">
+      <a href="index.html#contact" class="btn btn-primary" style="padding:16px 36px;font-size:15px">
+        Become Design Partner
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+      <a href="index.html" class="btn btn-secondary" style="padding:16px 36px;font-size:15px">Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="logo-icon" style="width:48px;height:48px"><img src="universal-intelligence-logo.svg" alt="Brahmora Technologies"></div>
+          <span class="footer-brand-name">Brahmora Technologies</span>
+        </div>
+        <p class="footer-brand-desc">Building the platform reliability control plane for modern cloud platforms. PRE defines the discipline. AEGIS enables it as an independent operational system and unified operating layer.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <a href="index.html#capability">AEGIS Platform</a>
+        <a href="index.html#control-plane">Control Plane</a>
+        <a href="pre-framework.html">PRE Framework</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="index.html#shift">Vision</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="pre-framework.html">PRE-100 Standard</a>
+        <a href="index.html#partner">Design Partners</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Brahmora Technologies Pvt Ltd. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Scripts
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 30);
+}, { passive: true });
+
+// Mobile toggle
+const toggle = document.getElementById('navToggle');
+const menu = document.getElementById('navMenu');
+toggle.addEventListener('click', () => menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+// Scroll reveal
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
