@@ -137,6 +137,10 @@
   }
 
   /* ── Smooth in-page scrolling ─────────────────────────────────── */
+  // Uses scrollIntoView so it stays accurate even when sections use
+  // content-visibility:auto (whose intrinsic-size placeholder would make a
+  // one-shot getBoundingClientRect() calculation land in the wrong place).
+  // scroll-margin-top on sections offsets for the fixed nav.
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var id = a.getAttribute('href');
@@ -144,10 +148,25 @@
       var target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      var y = target.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      // Keep the URL hash in sync without an extra jump
+      if (history.replaceState) history.replaceState(null, '', id);
     });
   });
+
+  /* ── Correct the landing spot for direct #hash visits ─────────── */
+  // Reveal animations and layout settle after load; re-align to the hash
+  // target so a pasted URL like /aegis-product#request-demo lands accurately.
+  if (window.location.hash && window.location.hash.length > 1) {
+    var hashTarget = document.querySelector(window.location.hash);
+    if (hashTarget) {
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          hashTarget.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }, 60);
+      });
+    }
+  }
 
   /* ── Active in-page nav highlighting ──────────────────────────── */
   // Only for links pointing at same-page sections.
