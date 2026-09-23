@@ -135,6 +135,22 @@
 .contact-form .btn-submit{width:100%;padding:14px;font-size:14px;font-weight:700;border:none;border-radius:var(--r-sm);background:var(--brand);color:#fff;cursor:pointer;transition:background .2s,transform .2s}
 .contact-form .btn-submit:hover{background:var(--brand-light);transform:translateY(-1px)}
 .contact-form .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+/* Two forms side by side (Founder + Demo) */
+.forms-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;margin:0 auto;width:100%;align-items:start}
+@media(max-width:840px){.forms-grid{grid-template-columns:1fr;max-width:480px}}
+.form-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-xl);padding:32px;position:relative;overflow:hidden}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--cyan))}
+.form-card h3{font-size:18px;font-weight:800;color:var(--text-1);letter-spacing:-.01em;margin-bottom:4px}
+.form-card .fc-sub{font-size:13px;color:var(--text-3);line-height:1.5;margin-bottom:20px}
+.contact-form,.demo-form{width:100%;text-align:left}
+.contact-form .form-group,.demo-form .form-group{margin-bottom:16px}
+.contact-form label,.demo-form label{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.contact-form input,.contact-form textarea,.demo-form input,.demo-form textarea{width:100%;padding:12px 16px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-1);font-family:'Inter',sans-serif;font-size:14px;transition:border-color .2s}
+.contact-form input:focus,.contact-form textarea:focus,.demo-form input:focus,.demo-form textarea:focus{outline:none;border-color:var(--brand)}
+.contact-form textarea,.demo-form textarea{resize:vertical;min-height:110px}
+.contact-form .btn-submit,.demo-form .btn-submit{width:100%;padding:14px;font-size:14px;font-weight:700;border:none;border-radius:var(--r-sm);background:var(--brand);color:#fff;cursor:pointer;transition:background .2s,transform .2s}
+.contact-form .btn-submit:hover,.demo-form .btn-submit:hover{background:var(--brand-light);transform:translateY(-1px)}
+.contact-form .btn-submit:disabled,.demo-form .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .form-status{margin-top:12px;font-size:13px;text-align:center}
 .form-status.success{color:var(--emerald)}
 .form-status.error{color:#f87171}
@@ -182,8 +198,8 @@
         </div>
 
         <a href="pre-framework" class="nav-link">PRE Framework</a>
-
         <a href="about-us" class="nav-link">About Us</a>
+        <a href="/#request-demo" class="nav-cta nav-cta-outline">Request a Demo</a>
         <a href="/#partner" class="nav-cta">Become a Design Partner</a>
       </div>
     </div>
@@ -771,25 +787,53 @@
   <div class="container">
     <div class="reveal" style="text-align:center;margin-bottom:48px">
       <span class="section-label" style="justify-content:center">Get in Touch</span>
-      <h2>Talk to the <span class="gradient-text">Founder</span></h2>
-      <p class="section-sub" style="max-width:520px;margin:12px auto 0">Have a question about PRE or AEGIS? Want to explore a design partnership? Drop a message.</p>
+      <h2>Talk to us, or <span class="gradient-text">see AEGIS in action</span></h2>
+      <p class="section-sub" style="max-width:560px;margin:12px auto 0">Ask a question, explore a design partnership, or request a live demo of the platform.</p>
     </div>
-    <form class="contact-form reveal" id="contactForm" novalidate>
-      <div class="form-group">
-        <label for="cf-name">Name</label>
-        <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Your name">
+    <div class="forms-grid reveal">
+      <!-- Talk to the Founder -->
+      <div class="form-card" id="talk">
+        <h3>Talk to the Founder</h3>
+        <p class="fc-sub">Have a question about PRE or AEGIS? Want to explore a design partnership? Drop a message.</p>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="you@company.com">
+          </div>
+          <div class="form-group">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" required placeholder="How can we help?"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message</button>
+          <div class="form-status" id="formStatus"></div>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="cf-email">Email</label>
-        <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="you@company.com">
+      <!-- Request a Demo -->
+      <div class="form-card" id="request-demo">
+        <h3>Request a Demo</h3>
+        <p class="fc-sub">Tell us about your platform and what you'd like to see. We'll arrange a walkthrough.</p>
+        <form class="demo-form" id="demoForm" novalidate>
+          <div class="form-group">
+            <label for="df-name">Name</label>
+            <input type="text" id="df-name" name="name" required autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="df-email">Work email</label>
+            <input type="email" id="df-email" name="email" required autocomplete="email" placeholder="you@company.com">
+          </div>
+          <div class="form-group">
+            <label for="df-message">What would you like to see?</label>
+            <textarea id="df-message" name="message" required placeholder="Your environment (cloud, Kubernetes, tools), team size, and demo focus."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Request Demo</button>
+          <div class="form-status" id="demoFormStatus"></div>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="cf-message">Message</label>
-        <textarea id="cf-message" name="message" required placeholder="How can we help?"></textarea>
-      </div>
-      <button type="submit" class="btn-submit">Send Message</button>
-      <div class="form-status" id="formStatus"></div>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -880,6 +924,45 @@ if (contactForm) {
     }
     btn.disabled = false;
     btn.textContent = 'Send Message';
+  });
+}
+
+// ── Request a Demo form (reuses CONTACT_API) ──────────────────────
+const demoForm = document.getElementById('demoForm');
+if (demoForm) {
+  demoForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    const status = document.getElementById('demoFormStatus');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    status.textContent = '';
+    status.className = 'form-status';
+    try {
+      const res = await fetch(CONTACT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('df-name').value,
+          email: document.getElementById('df-email').value,
+          message: '[Demo request] ' + document.getElementById('df-message').value
+        })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        status.textContent = 'Thanks! We\'ll be in touch to arrange your demo.';
+        status.className = 'form-status success';
+        e.target.reset();
+      } else {
+        status.textContent = data.message || 'Something went wrong.';
+        status.className = 'form-status error';
+      }
+    } catch {
+      status.textContent = 'Network error. Please try again.';
+      status.className = 'form-status error';
+    }
+    btn.disabled = false;
+    btn.textContent = 'Request Demo';
   });
 }
 </script>
