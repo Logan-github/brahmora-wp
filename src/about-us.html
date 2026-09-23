@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Brahmora Technologies | Intelligent Operational Decision &amp; Governance</title>
+<meta name="description" content="Brahmora Technologies builds intelligent platforms that help organisations operate complex digital infrastructure with greater reliability, visibility, governance and control. AEGIS is our flagship Operational Decision & Governance platform.">
+<link rel="canonical" href="https://brahmora.co.uk/about-us">
+<meta property="og:title" content="About Us — Brahmora Technologies">
+<meta property="og:description" content="Building intelligence, reliability and governance into modern infrastructure operations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://brahmora.co.uk/about-us">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="About Us — Brahmora Technologies">
+<meta name="twitter:description" content="Building intelligence, reliability and governance into modern infrastructure operations.">
+<link rel="icon" type="image/svg+xml" href="/universal-intelligence-logo.svg">
+<meta name="theme-color" content="#6366f1">
+<meta property="og:image" content="https://brahmora.co.uk/assets/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://brahmora.co.uk/assets/og-image.svg">
+<link rel="apple-touch-icon" href="/universal-intelligence-logo.svg">
+<meta name="robots" content="index, follow">
+<!-- Security Headers -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self' https://*.execute-api.eu-west-2.amazonaws.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}if(t==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   ABOUT US — page-unique components (shared system in assets/styles.css)
+   ═══════════════════════════════════════════════════════════════════ */
+.cap-card{padding:30px;border-radius:var(--r-2xl);background:var(--surface-2);border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .35s,box-shadow .35s}
+.cap-card:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.4)}
+.cap-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.cap-card::after{content:attr(data-step);position:absolute;top:14px;right:18px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;opacity:.4}
+.cap-card.c-indigo::before{background:linear-gradient(90deg,var(--brand),var(--brand-light))}
+.cap-card.c-cyan::before{background:linear-gradient(90deg,var(--cyan),#67e8f9)}
+.cap-card.c-amber::before{background:linear-gradient(90deg,var(--amber),#fde68a)}
+.cap-card.c-emerald::before{background:linear-gradient(90deg,var(--emerald),#6ee7b7)}
+.cap-card.c-indigo::after{color:var(--brand-light)}
+.cap-card.c-cyan::after{color:var(--cyan)}
+.cap-card.c-amber::after{color:var(--amber)}
+.cap-card.c-emerald::after{color:var(--emerald)}
+.cap-card:hover.c-indigo{border-color:rgba(99,102,241,.3)}
+.cap-card:hover.c-cyan{border-color:rgba(34,211,238,.3)}
+.cap-card:hover.c-amber{border-color:rgba(251,191,36,.3)}
+.cap-card:hover.c-emerald{border-color:rgba(52,211,153,.3)}
+.cap-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.cap-card:hover .cap-icon{transform:translateY(-2px) scale(1.06)}
+.cap-card.c-indigo .cap-icon{background:linear-gradient(135deg,rgba(99,102,241,.16),rgba(99,102,241,.04));border:1px solid rgba(99,102,241,.24)}
+.cap-card.c-cyan .cap-icon{background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(34,211,238,.04));border:1px solid rgba(34,211,238,.24)}
+.cap-card.c-amber .cap-icon{background:linear-gradient(135deg,rgba(251,191,36,.16),rgba(251,191,36,.04));border:1px solid rgba(251,191,36,.24)}
+.cap-card.c-emerald .cap-icon{background:linear-gradient(135deg,rgba(52,211,153,.16),rgba(52,211,153,.04));border:1px solid rgba(52,211,153,.24)}
+.cap-word{font-size:22px;font-weight:900;letter-spacing:.02em;margin-bottom:10px}
+.cap-card.c-indigo .cap-word{color:var(--brand-light)}
+.cap-card.c-cyan .cap-word{color:var(--cyan)}
+.cap-card.c-amber .cap-word{color:var(--amber)}
+.cap-card.c-emerald .cap-word{color:var(--emerald)}
+.cap-card p{font-size:14px;color:var(--text-2);line-height:1.65}
+.pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.pill{padding:9px 18px;border-radius:100px;font-size:13px;font-weight:600;border:1px solid var(--border-light);background:var(--surface-2);color:var(--text-1)}
+.pill-indigo{color:var(--brand-light);border-color:rgba(99,102,241,.3);background:rgba(99,102,241,.07)}
+.pill-cyan{color:var(--cyan);border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.07)}
+.pill-emerald{color:var(--emerald);border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.07)}
+.pill-amber{color:var(--amber);border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.07)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tag{padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;background:var(--surface-3);color:var(--text-2);border:1px solid var(--border-light)}
+.chain{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:24px;justify-content:center;counter-reset:chainstep}
+.chain span:not(.carrow){counter-increment:chainstep;position:relative;display:inline-flex;align-items:center;gap:8px;padding:10px 16px 10px 14px;border-radius:100px;background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(34,211,238,.05));border:1px solid var(--border-brand);font-size:13px;font-weight:600;color:var(--text-1);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .3s}
+.chain span:not(.carrow)::before{content:counter(chainstep,decimal-leading-zero);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--brand-light);background:rgba(99,102,241,.15);border-radius:100px;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.chain span:not(.carrow):hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(99,102,241,.2);border-color:var(--brand-light)}
+.chain .carrow{background:none;border:none;color:var(--brand);font-size:14px;padding:0;opacity:.6}
+.vision-box{padding:44px;border-radius:var(--r-2xl);background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(34,211,238,.05));border:1px solid var(--border-brand);position:relative;overflow:hidden}
+.vision-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--cyan),var(--emerald))}
+.cta-section{padding:120px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(99,102,241,.08) 0%,transparent 60%);pointer-events:none}
+.cta-section h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--text-1);letter-spacing:-.035em;max-width:720px;margin:0 auto 16px;line-height:1.14}
+.cta-section p{font-size:1.05rem;color:var(--text-2);max-width:560px;margin:0 auto 40px}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-bg">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Brahmora Technologies home">
+        <div class="logo-icon"><img src="universal-intelligence-logo.svg" alt=""></div>
+        <div class="logo-text">
+          <span class="logo-company">Brahmora</span>
+          <span class="logo-product">Technologies</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navMenu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      </div>
+      <div class="nav-menu" id="navMenu">
+
+        <!-- Product dropdown -->
+        <div class="nav-item has-dropdown">
+          <button class="nav-link nav-trigger" aria-haspopup="true" aria-expanded="false">
+            Product
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="aegis-product" class="dropdown-link">
+              <span class="dl-title">AEGIS Platform</span>
+              <span class="dl-desc">The reliability, decision, governance &amp; control platform</span>
+            </a>
+            <a href="platform-architecture" class="dropdown-link">
+              <span class="dl-title">Platform Architecture</span>
+              <span class="dl-desc">How the control plane is engineered</span>
+            </a>
+            <a href="/#capability" class="dropdown-link">
+              <span class="dl-title">Capabilities</span>
+              <span class="dl-desc">Four connected capability domains</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Why PRE dropdown -->
+        <div class="nav-item has-dropdown">
+          <button class="nav-link nav-trigger" aria-haspopup="true" aria-expanded="false">
+            Why PRE
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="/#shift" class="dropdown-link">
+              <span class="dl-title">The Operating Model Shift</span>
+              <span class="dl-desc">Why traditional operations no longer scale</span>
+            </a>
+            <a href="/#disciplines" class="dropdown-link">
+              <span class="dl-title">The Discipline</span>
+              <span class="dl-desc">What Platform Reliability Engineering defines</span>
+            </a>
+            <a href="pre-framework" class="dropdown-link">
+              <span class="dl-title">PRE Framework</span>
+              <span class="dl-desc">Read the full PRE-100 standard</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="about-us" class="nav-link" aria-current="page">About Us</a>
+        <a href="/#partner" class="nav-cta">Become a Design Partner</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="reveal">
+      <div class="hero-eyebrow"><span class="dot"></span> About Brahmora Technologies</div>
+      <h1>Building intelligence, reliability and governance into <span class="gradient-text">modern infrastructure operations.</span></h1>
+      <p class="hero-sub">
+        <strong>Brahmora Technologies Private Limited</strong> is a technology company focused on building intelligent platforms that help organisations operate complex digital infrastructure with greater <strong>reliability, visibility, governance and control</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHO WE ARE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="who">
+  <div class="container-narrow">
+    <div class="section-header reveal">
+      <span class="section-label">Who We Are</span>
+      <h2>The real challenge isn't more tools. It's turning signals into <span class="gradient-text">trustworthy decisions.</span></h2>
+    </div>
+    <div class="prose reveal">
+      <p>We believe modern technology teams have no shortage of tools or data. The real challenge is turning infrastructure, operational signals, changes, policies and business context into <strong>clear, trustworthy decisions and safe actions</strong>.</p>
+      <p>Our flagship product, <span class="highlight">AEGIS</span>, was created around that challenge.</p>
+      <p>AEGIS is an <strong>Operational Decision &amp; Governance platform for modern cloud environments</strong>, bringing together platform understanding, reliable operations, governed control and continuous intelligence within a unified operational system.</p>
+      <p>AEGIS connects information across cloud platforms, Kubernetes, OpenTelemetry, infrastructure-as-code, observability platforms and enterprise systems to build operational context around what exists, what changed, what is happening, why it matters and what action should follow.</p>
+    </div>
+
+    <div class="tags reveal">
+      <span class="tag">Cloud Platforms</span>
+      <span class="tag">Kubernetes</span>
+      <span class="tag">OpenTelemetry</span>
+      <span class="tag">Infrastructure-as-Code</span>
+      <span class="tag">Observability Platforms</span>
+      <span class="tag">Enterprise Systems</span>
+    </div>
+
+    <div class="reveal" style="margin-top:36px">
+      <div class="statement">
+        <p class="statement-bold">Rather than simply identifying problems, AEGIS is designed to support the complete operational decision lifecycle.</p>
+        <div class="chain">
+          <span>Visibility</span><span class="carrow">&rarr;</span>
+          <span>Detection</span><span class="carrow">&rarr;</span>
+          <span>Understanding</span><span class="carrow">&rarr;</span>
+          <span>Policy Evaluation</span><span class="carrow">&rarr;</span>
+          <span>Governed Execution</span><span class="carrow">&rarr;</span>
+          <span>Verification</span><span class="carrow">&rarr;</span>
+          <span>Recovery</span><span class="carrow">&rarr;</span>
+          <span>Evidence</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     OUR MISSION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="mission">
+  <div class="container-narrow">
+    <div class="section-header section-center reveal">
+      <span class="section-label" style="display:inline-flex">Our Mission</span>
+      <h2>From reactive operations to intelligent, reliable and <span class="gradient-text">governed operations.</span></h2>
+    </div>
+    <div class="prose reveal" style="text-align:center;max-width:720px;margin:0 auto">
+      <p>Our mission is to help organisations move from <strong>reactive infrastructure operations to intelligent, reliable and governed operations</strong> — where teams can make faster decisions and safely automate more of their operational workload without losing human oversight or organisational control.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHAT WE ARE BUILDING — KNOW / RUN / ENFORCE / IMPROVE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="building">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label" style="display:inline-flex">What We Are Building</span>
+      <h2>Technology around four fundamental <span class="gradient-text">capabilities.</span></h2>
+    </div>
+    <div class="grid g-4 reveal">
+      <div class="cap-card c-indigo" data-step="01">
+        <div class="cap-icon" aria-hidden="true">&#128269;</div>
+        <div class="cap-word">KNOW</div>
+        <p>Continuously understand infrastructure, services, dependencies, ownership, configuration and change.</p>
+      </div>
+      <div class="cap-card c-cyan" data-step="02">
+        <div class="cap-icon" aria-hidden="true">&#9881;</div>
+        <div class="cap-word">RUN</div>
+        <p>Help engineering teams investigate incidents, understand operational conditions and restore services reliably.</p>
+      </div>
+      <div class="cap-card c-amber" data-step="03">
+        <div class="cap-icon" aria-hidden="true">&#128737;</div>
+        <div class="cap-word">ENFORCE</div>
+        <p>Apply policy, authority, risk controls and governance before operational actions are executed.</p>
+      </div>
+      <div class="cap-card c-emerald" data-step="04">
+        <div class="cap-icon" aria-hidden="true">&#128200;</div>
+        <div class="cap-word">IMPROVE</div>
+        <p>Use operational history, reliability intelligence, cost insights and accumulated evidence to continuously improve the platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     OUR VISION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="vision">
+  <div class="container-narrow">
+    <div class="section-header reveal">
+      <span class="section-label">Our Vision</span>
+      <h2>Context-aware and autonomous — while critical decisions remain <span class="gradient-text">governed and accountable.</span></h2>
+    </div>
+    <div class="prose reveal">
+      <p>We envision a future where infrastructure operations become increasingly <strong>context-aware, policy-driven and autonomous</strong>, while critical decisions remain governed, explainable and accountable.</p>
+      <p>Our goal is not automation for automation's sake.</p>
+    </div>
+    <div class="reveal" style="margin-top:32px">
+      <div class="vision-box">
+        <p class="statement-bold">It is to build systems that can understand before acting, govern before executing, verify after execution and learn from every operational outcome.</p>
+        <div class="pills" style="justify-content:flex-start;margin-top:24px">
+          <span class="pill pill-indigo">Understand before acting</span>
+          <span class="pill pill-amber">Govern before executing</span>
+          <span class="pill pill-emerald">Verify after execution</span>
+          <span class="pill pill-cyan">Learn from every outcome</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CLOSING CTA
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="cta-section" id="cta">
+  <div class="container reveal">
+    <span class="section-label section-center" style="display:inline-flex">Brahmora Technologies</span>
+    <h2>Building intelligence, reliability and governance into <span class="gradient-text">modern infrastructure operations.</span></h2>
+    <p>Explore how AEGIS turns operational complexity into safe, accountable and progressively autonomous action.</p>
+    <div class="cta-buttons">
+      <a href="aegis-product" class="btn btn-primary">
+        Explore the AEGIS Platform
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+      <a href="/#partner" class="btn btn-secondary">Become a Design Partner</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="logo-icon" style="width:48px;height:48px"><img src="universal-intelligence-logo.svg" alt=""></div>
+          <span class="footer-brand-name">Brahmora Technologies</span>
+        </div>
+        <p class="footer-brand-desc">Building intelligence, reliability and governance into modern infrastructure operations. AEGIS is our Reliability, Operational Decision, Governance &amp; Control Platform for modern cloud environments.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <a href="aegis-product">AEGIS Platform</a>
+        <a href="platform-architecture">Platform Architecture</a>
+        <a href="/#capability">Capabilities</a>
+        <a href="pre-framework">PRE Framework</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="about-us">About Us</a>
+        <a href="/">Home</a>
+        <a href="/#partner">Design Partners</a>
+        <a href="/#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="pre-framework">PRE-100 Standard</a>
+        <a href="platform-architecture">Architecture Guide</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Brahmora Technologies Private Limited. All rights reserved. &middot; <a href="https://brahmora.co.uk" style="color:var(--brand-light)">brahmora.co.uk</a></span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Scripts
+     ═══════════════════════════════════════════════════════════════ -->
+<script src="assets/site.js"></script>
+</body>
+</html>

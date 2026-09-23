@@ -8,9 +8,14 @@
 <meta property="og:title" content="PRE Standard Framework | Brahmora Technologies">
 <meta property="og:description" content="Platform Reliability Engineering — A practical capability framework for modern cloud platforms by Brahmora Technologies">
 <meta property="og:type" content="website">
-<link rel="canonical" href="https://brahmora.co.uk/pre-framework.html">
+<link rel="canonical" href="https://brahmora.co.uk/pre-framework">
 <link rel="icon" type="image/svg+xml" href="/universal-intelligence-logo.svg">
 <meta name="theme-color" content="#6366f1">
+<meta property="og:image" content="https://brahmora.co.uk/assets/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://brahmora.co.uk/assets/og-image.svg">
+<link rel="apple-touch-icon" href="/universal-intelligence-logo.svg">
 <!-- Security Headers -->
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
@@ -21,14 +26,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}if(t==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/styles.css">
 <style>
 /* ── Reset & Base ──────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#05080e;color:#c3cad8;line-height:1.7;overflow-x:hidden}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text-2);line-height:1.7;overflow-x:hidden;transition:background .4s ease,color .4s ease}
 img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* ── Light theme overrides (page-inline, matches shared design system) ── */
+:root[data-theme="light"]{
+  --brand:#4f46e5;--brand-light:#6366f1;--brand-dark:#4338ca;
+  --brand-glow:rgba(99,102,241,.10);--brand-glow-strong:rgba(99,102,241,.16);
+  --accent:#4f46e5;--accent-light:#6366f1;--accent-glow:rgba(99,102,241,.12);
+  --cyan:#0891b2;--cyan-glow:rgba(8,145,178,.10);
+  --emerald:#059669;--emerald-glow:rgba(5,150,105,.10);
+  --amber:#d97706;--amber-glow:rgba(217,119,6,.10);
+  --red:#dc2626;--rose:#e11d48;--rose-glow:rgba(225,29,72,.10);
+  --violet:#7c3aed;
+  --bg:#f7f8fc;--surface:#eef1f8;--surface-2:#ffffff;--surface-3:#f0f3fa;--surface-4:#e6ebf5;
+  --glass:rgba(255,255,255,.78);
+  --border:rgba(15,23,42,.10);--border-light:rgba(15,23,42,.16);--border-brand:rgba(99,102,241,.30);
+  --text-1:#0f1729;--text-2:#38445c;--text-3:#5a6b83;--text-muted:#7c8aa0;
+  color-scheme:light;
+}
+:root{color-scheme:dark}
 
 /* ── Variables ─────────────────────────────────────────────────── */
 :root{
@@ -43,7 +68,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   --bg:#05080e;--surface:#0a0f1a;--surface-2:#0f1629;--surface-3:#151d30;--surface-4:#1a2540;
   --glass:rgba(10,15,26,.72);
   --border:rgba(255,255,255,.06);--border-light:rgba(255,255,255,.1);--border-brand:rgba(99,102,241,.25);
-  --text-1:#f0f4fc;--text-2:#94a3b8;--text-3:#64748b;--text-muted:#475569;
+  --text-1:#f0f4fc;--text-2:#a4b0c4;--text-3:#7c8aa0;--text-muted:#5a6b83;
   --max-w:1160px;--nav-h:68px;
   --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;
 }
@@ -55,27 +80,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .mono{font-family:'JetBrains Mono',monospace}
 
 /* ── Navigation ────────────────────────────────────────────────── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:all .35s}
-.nav-bg{background:var(--glass);backdrop-filter:blur(24px) saturate(1.6);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-icon{width:52px;height:52px;flex-shrink:0}
-.logo-icon img{width:100%;height:100%}
-.logo-text{display:flex;flex-direction:column;line-height:1.15}
-.logo-company{font-size:17px;font-weight:800;color:var(--text-1);letter-spacing:-.02em}
-.logo-product{font-size:11px;font-weight:600;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase}
-.nav-menu{display:flex;align-items:center;gap:4px}
-.nav-link{padding:8px 16px;font-size:13px;font-weight:500;color:var(--text-2);border-radius:var(--r-sm);transition:all .2s;text-decoration:none}
-.nav-link:hover{color:var(--text-1);background:rgba(255,255,255,.04)}
-.nav-cta{margin-left:8px;padding:8px 20px;font-size:13px;font-weight:700;color:#fff;background:var(--brand);border-radius:var(--r-sm);transition:all .25s;text-decoration:none}
-.nav-cta:hover{background:var(--brand-light);box-shadow:0 4px 20px rgba(99,102,241,.3)}
-.nav-toggle{display:none;padding:8px;color:var(--text-2)}
-@media(max-width:768px){
-  .nav-menu{display:none;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:4px}
-  .nav-menu.open{display:flex}
-  .nav-toggle{display:flex}
-  .nav-cta{margin:8px 0 0;width:100%;text-align:center}
-}
+/* Nav styles inherited from assets/styles.css (shared, with dropdown support) */
 
 /* ── Hero ──────────────────────────────────────────────────────── */
 .hero{padding:180px 0 100px;position:relative;overflow:hidden}
@@ -133,7 +138,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .domain-card.d2::before{background:linear-gradient(90deg,var(--cyan),#67e8f9)}
 .domain-card.d3::before{background:linear-gradient(90deg,var(--emerald),#6ee7b7)}
 .domain-card.d4::before{background:linear-gradient(90deg,var(--amber),#fde68a)}
-.domain-num{font-size:64px;font-weight:900;line-height:1;color:rgba(255,255,255,.04);position:absolute;top:20px;right:24px;letter-spacing:-.04em}
+.domain-num{font-size:64px;font-weight:900;line-height:1;color:var(--ghost-num);position:absolute;top:20px;right:24px;letter-spacing:-.04em}
 .domain-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
 .domain-card.d1 .domain-label{color:var(--accent-light)}
 .domain-card.d2 .domain-label{color:var(--cyan)}
@@ -280,36 +285,83 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Navigation -->
 <nav class="nav" id="nav">
   <div class="nav-bg">
     <div class="nav-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-icon"><img src="universal-intelligence-logo.svg" alt="Brahmora Technologies"></div>
+      <a href="/" class="logo" aria-label="Brahmora Technologies home">
+        <div class="logo-icon"><img src="universal-intelligence-logo.svg" alt=""></div>
         <div class="logo-text">
           <span class="logo-company">Brahmora</span>
           <span class="logo-product">Technologies</span>
         </div>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navMenu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      </div>
       <div class="nav-menu" id="navMenu">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="#definition" class="nav-link">Definition</a>
-        <a href="#how-pre-differs" class="nav-link">How PRE Differs</a>
-        <a href="#capabilities" class="nav-link">Capabilities</a>
-        <a href="#maturity" class="nav-link">Maturity</a>
-        <a href="#standards" class="nav-link">Standards</a>
-        <a href="#aegis" class="nav-cta">See How AEGIS Operationalizes PRE</a>
+
+        <!-- Product dropdown -->
+        <div class="nav-item has-dropdown">
+          <button class="nav-link nav-trigger" aria-haspopup="true" aria-expanded="false">
+            Product
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="aegis-product" class="dropdown-link">
+              <span class="dl-title">AEGIS Platform</span>
+              <span class="dl-desc">The reliability, decision, governance &amp; control platform</span>
+            </a>
+            <a href="platform-architecture" class="dropdown-link">
+              <span class="dl-title">Platform Architecture</span>
+              <span class="dl-desc">How the control plane is engineered</span>
+            </a>
+            <a href="/#capability" class="dropdown-link">
+              <span class="dl-title">Capabilities</span>
+              <span class="dl-desc">Four connected capability domains</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Why PRE dropdown -->
+        <div class="nav-item has-dropdown">
+          <button class="nav-link nav-trigger" aria-current="page" aria-haspopup="true" aria-expanded="false">
+            Why PRE
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="/#shift" class="dropdown-link">
+              <span class="dl-title">The Operating Model Shift</span>
+              <span class="dl-desc">Why traditional operations no longer scale</span>
+            </a>
+            <a href="/#disciplines" class="dropdown-link">
+              <span class="dl-title">The Discipline</span>
+              <span class="dl-desc">What Platform Reliability Engineering defines</span>
+            </a>
+            <a href="pre-framework" class="dropdown-link">
+              <span class="dl-title">PRE Framework</span>
+              <span class="dl-desc">Read the full PRE-100 standard</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="about-us" class="nav-link">About Us</a>
+        <a href="/#partner" class="nav-cta">Become a Design Partner</a>
       </div>
     </div>
   </div>
 </nav>
 
 <!-- TOC Sidebar -->
-<div class="toc" id="toc">
+<nav class="toc" id="toc" aria-label="On this page">
   <a href="#hero">Overview</a>
   <a href="#definition">Definition</a>
   <a href="#how-pre-differs">How PRE Differs</a>
@@ -320,7 +372,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <a href="#standards">Standards</a>
   <a href="#outcomes">Outcomes</a>
   <a href="#aegis">AEGIS</a>
-</div>
+</nav>
+
+<main id="main">
 
 <!-- ═══════════════════════════════════════════════════════════════
      HERO
@@ -957,7 +1011,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         Assess Your PRE Maturity
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
       </a>
-      <a href="index.html" class="cta-btn cta-ghost">See How AEGIS Works</a>
+      <a href="/" class="cta-btn cta-ghost">See How AEGIS Works</a>
     </div>
     <div style="margin-top:16px">
       <a href="#" class="cta-btn cta-secondary" style="font-size:13px;padding:10px 24px">
@@ -970,35 +1024,40 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <!-- ═══════════════════════════════════════════════════════════════
      FOOTER — Brahmora Technologies
      ═══════════════════════════════════════════════════════════════ -->
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
         <div style="display:flex;align-items:center;gap:10px">
-          <div class="logo-icon" style="width:48px;height:48px"><img src="universal-intelligence-logo.svg" alt="Brahmora Technologies"></div>
+          <div class="logo-icon" style="width:48px;height:48px"><img src="universal-intelligence-logo.svg" alt=""></div>
           <span class="footer-brand-name">Brahmora Technologies</span>
         </div>
-        <p class="footer-brand-desc">Building the Platform Reliability Engineering Control Plane. Helping platform teams operate cloud infrastructure with engineering discipline.</p>
+        <p class="footer-brand-desc">Building intelligence, reliability and governance into modern infrastructure operations. AEGIS is our Reliability, Operational Decision, Governance &amp; Control Platform for modern cloud environments.</p>
       </div>
       <div class="footer-col">
         <h5>Product</h5>
-        <a href="index.html">AEGIS Platform</a>
-        <a href="index.html#platform">Capabilities</a>
-        <a href="#">PRE Framework</a>
+        <a href="aegis-product">AEGIS Platform</a>
+        <a href="platform-architecture">Platform Architecture</a>
+        <a href="/#capability">Capabilities</a>
+        <a href="pre-framework">PRE Framework</a>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
-        <a href="index.html">About</a>
-        <a href="mailto:hello@brahmora.com">Contact</a>
+        <a href="about-us">About Us</a>
+        <a href="/">Home</a>
+        <a href="/#partner">Design Partners</a>
+        <a href="/#contact">Contact</a>
       </div>
       <div class="footer-col">
         <h5>Resources</h5>
-        <a href="#">PRE-100 Standard</a>
-        <a href="#">Architecture Guide</a>
+        <a href="pre-framework">PRE-100 Standard</a>
+        <a href="platform-architecture">Architecture Guide</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">&copy; 2026 Brahmora Technologies Pvt Ltd. All rights reserved.</span>
+      <span class="footer-copy">&copy; 2026 Brahmora Technologies Private Limited. All rights reserved. &middot; <a href="https://brahmora.co.uk" style="color:var(--brand-light)">brahmora.co.uk</a></span>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -1020,8 +1079,41 @@ window.addEventListener('scroll', () => {
 // ── Mobile toggle
 const toggle = document.getElementById('navToggle');
 const menu = document.getElementById('navMenu');
-toggle.addEventListener('click', () => menu.classList.toggle('open'));
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+toggle.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  menu.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+}));
+
+// ── Theme toggle (light / dark)
+(function(){
+  var root = document.documentElement;
+  var tbtn = document.getElementById('themeToggle');
+  var cur = function(){ return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark'; };
+  var sync = function(){ if(tbtn){ var l = cur()==='light'; tbtn.setAttribute('aria-pressed', String(l)); tbtn.setAttribute('title', l?'Switch to dark theme':'Switch to light theme'); } };
+  var apply = function(t, persist){ if(t==='light') root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme'); if(persist){ try{ localStorage.setItem('theme', t); }catch(e){} } sync(); };
+  sync();
+  if(tbtn){ tbtn.addEventListener('click', function(){ apply(cur()==='light'?'dark':'light', true); }); }
+  if(window.matchMedia){ var mq = matchMedia('(prefers-color-scheme: light)'); var oc=function(e){ var s; try{ s=localStorage.getItem('theme'); }catch(err){} if(!s) apply(e.matches?'light':'dark', false); }; if(mq.addEventListener) mq.addEventListener('change',oc); else if(mq.addListener) mq.addListener(oc); }
+})();
+
+// ── Accessible dropdowns (aria-expanded + click toggle + Escape)
+menu.querySelectorAll('.nav-trigger').forEach(btn => {
+  const item = btn.closest('.nav-item');
+  const set = s => btn.setAttribute('aria-expanded', s ? 'true' : 'false');
+  if (item) {
+    item.addEventListener('focusin', () => set(true));
+    item.addEventListener('focusout', e => { if (!item.contains(e.relatedTarget)) set(false); });
+    item.addEventListener('keydown', e => { if (e.key === 'Escape') { set(false); btn.focus(); } });
+  }
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    set(btn.getAttribute('aria-expanded') !== 'true');
+  });
+});
 
 // ── Scroll reveal (fade-up animations)
 const revealObserver = new IntersectionObserver((entries) => {

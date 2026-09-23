@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEGIS — Reliability, Operational Decision, Governance &amp; Control Platform | Brahmora Technologies</title>
+<meta name="description" content="AEGIS is a Reliability, Operational Decision, Governance & Control Platform for modern cloud environments. It brings platform visibility, operational intelligence, decision-making, governance, controlled execution, verification, recovery and continuous learning into one operational system.">
+<link rel="canonical" href="https://brahmora.co.uk/aegis-product">
+<meta property="og:title" content="AEGIS — Reliability, Operational Decision, Governance & Control Platform">
+<meta property="og:description" content="Turn operational complexity into controlled action. AEGIS provides the operational control layer for modern cloud and cloud-native environments.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://brahmora.co.uk/aegis-product">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AEGIS — Reliability, Operational Decision, Governance & Control Platform">
+<meta name="twitter:description" content="Turn operational complexity into controlled action. AEGIS provides the operational control layer for modern cloud environments.">
+<link rel="icon" type="image/svg+xml" href="/universal-intelligence-logo.svg">
+<meta name="theme-color" content="#6366f1">
+<meta property="og:image" content="https://brahmora.co.uk/assets/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://brahmora.co.uk/assets/og-image.svg">
+<link rel="apple-touch-icon" href="/universal-intelligence-logo.svg">
+<meta name="robots" content="index, follow">
+<!-- Security Headers -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self' https://*.execute-api.eu-west-2.amazonaws.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}if(t==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   AEGIS PRODUCT — page-unique components (shared system in assets/styles.css)
+   ═══════════════════════════════════════════════════════════════════ */
+.hero-actions{display:flex;gap:12px;margin-top:40px;flex-wrap:wrap;justify-content:center}
+.qchain{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:24px;counter-reset:qstep}
+.qchain span:not(.qarrow){counter-increment:qstep;display:inline-flex;align-items:center;gap:8px;padding:10px 16px 10px 14px;border-radius:100px;background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(34,211,238,.05));border:1px solid var(--border-brand);font-size:13px;font-weight:600;color:var(--text-1);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .3s}
+.qchain span:not(.qarrow)::before{content:counter(qstep,decimal-leading-zero);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--brand-light);background:rgba(99,102,241,.15);border-radius:100px;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.qchain span:not(.qarrow):hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(99,102,241,.2);border-color:var(--brand-light)}
+.qchain .qarrow{background:none;border:none;color:var(--brand);font-size:14px;padding:0 2px;opacity:.6}
+.blist{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.blist li{font-size:14px;color:var(--text-2);padding-left:22px;position:relative;line-height:1.6}
+.blist li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--brand-light)}
+.outcome{margin-top:24px;padding:18px 22px;border-radius:var(--r-md);background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(34,211,238,.05));border:1px solid var(--border-brand)}
+.outcome strong{color:var(--brand-light);font-weight:700}
+.outcome span{color:var(--text-2);font-size:14px}
+.pillar{padding:36px;border-radius:var(--r-2xl);background:var(--surface-2);border:1px solid var(--border);position:relative;overflow:hidden}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.pillar.p-indigo::before{background:linear-gradient(90deg,var(--brand),var(--brand-light))}
+.pillar.p-cyan::before{background:linear-gradient(90deg,var(--cyan),#67e8f9)}
+.pillar.p-emerald::before{background:linear-gradient(90deg,var(--emerald),#6ee7b7)}
+.pillar.p-amber::before{background:linear-gradient(90deg,var(--amber),#fde68a)}
+.pillar-num{font-size:52px;font-weight:900;line-height:1;color:var(--ghost-num);position:absolute;top:16px;right:20px}
+.pillar-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.pillar.p-indigo .pillar-label{color:var(--brand-light)}
+.pillar.p-cyan .pillar-label{color:var(--cyan)}
+.pillar.p-emerald .pillar-label{color:var(--emerald)}
+.pillar.p-amber .pillar-label{color:var(--amber)}
+.pillar h3{font-size:21px;font-weight:800;color:var(--text-1);letter-spacing:-.02em;margin-bottom:6px}
+.pillar>p{font-size:15px;color:var(--text-2);margin-bottom:20px;font-style:italic}
+.pillar-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.pillar-features li{font-size:13px;color:var(--text-2);padding:6px 0 6px 20px;position:relative}
+.pillar-features li::before{content:'';position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%}
+.pillar.p-indigo .pillar-features li::before{background:var(--brand-light)}
+.pillar.p-cyan .pillar-features li::before{background:var(--cyan)}
+.pillar.p-emerald .pillar-features li::before{background:var(--emerald)}
+.pillar.p-amber .pillar-features li::before{background:var(--amber)}
+.pillar-outcome{font-size:13px;color:var(--text-1);font-weight:600;padding-top:16px;border-top:1px solid var(--border)}
+/* Operating model loop — enhanced step cards */
+.loop-track{display:grid;grid-template-columns:repeat(7,1fr);gap:14px;margin-top:56px;position:relative}
+.loop-track::before{content:'';position:absolute;top:38px;left:7%;right:7%;height:2px;background:linear-gradient(90deg,var(--brand),var(--cyan),var(--emerald),var(--amber));opacity:.35;z-index:0}
+.loop-step{position:relative;z-index:1;padding:24px 12px 20px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-lg);text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s;overflow:hidden}
+.loop-step::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ls-accent,var(--brand));opacity:.9}
+.loop-step:hover{transform:translateY(-4px);border-color:var(--ls-accent,var(--border-light));box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.loop-icon{width:44px;height:44px;margin:0 auto 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:color-mix(in srgb,var(--ls-accent,var(--brand)) 14%,transparent);border:1px solid color-mix(in srgb,var(--ls-accent,var(--brand)) 30%,transparent);transition:transform .3s}
+.loop-step:hover .loop-icon{transform:scale(1.08)}
+.loop-num{position:absolute;top:10px;right:12px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--ls-accent,var(--brand-light));opacity:.6}
+.loop-step h4{font-size:13px;font-weight:800;color:var(--text-1);letter-spacing:.04em}
+.loop-back{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:8px 18px;border-radius:100px;font-size:12px;font-weight:600;color:var(--brand-light);background:rgba(99,102,241,.08);border:1px dashed var(--border-brand)}
+@media(max-width:900px){.loop-track{grid-template-columns:repeat(2,1fr)}.loop-track::before{display:none}}
+@media(max-width:480px){.loop-track{grid-template-columns:1fr}}
+.cp-diagram{display:flex;flex-direction:column;gap:12px;margin-top:44px;max-width:720px;margin-left:auto;margin-right:auto}
+.cp-layer{display:flex;align-items:center;gap:16px;padding:18px 24px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface-2);transition:all .3s}
+.cp-layer:hover{border-color:var(--border-light);transform:translateX(4px)}
+.cp-layer.cp-aegis{background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(34,211,238,.06));border-color:var(--border-brand);box-shadow:0 0 40px var(--brand-glow)}
+.cp-layer-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-width:120px;flex-shrink:0;color:var(--text-1)}
+.cp-layer-desc{font-size:14px;color:var(--text-2)}
+.tag-group{margin-top:8px}
+.tag-group h5{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;background:var(--surface-3);color:var(--text-2);border:1px solid var(--border-light)}
+.chain-flow{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.chain-flow .cf-item{position:relative;display:flex;align-items:center;gap:12px;padding:13px 16px 13px 20px;border-radius:var(--r-md);background:linear-gradient(135deg,rgba(99,102,241,.06),transparent);border:1px solid var(--border);font-size:14px;color:var(--text-2);overflow:hidden;transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s,background .3s}
+.chain-flow .cf-item::before{content:'';position:absolute;top:0;bottom:0;left:0;width:3px;background:linear-gradient(var(--brand),var(--cyan));opacity:.7;transition:opacity .3s}
+.chain-flow .cf-item:hover{transform:translateX(4px);border-color:var(--border-brand);background:linear-gradient(135deg,rgba(99,102,241,.1),transparent)}
+.chain-flow .cf-item:hover::before{opacity:1}
+.chain-flow .cf-item .cf-arrow{color:var(--brand);font-weight:700}
+.chain-flow .cf-item strong{color:var(--text-1)}
+.team-q{margin-top:6px;font-size:13px;color:var(--brand-light);font-style:italic}
+.cta-section{padding:130px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(99,102,241,.08) 0%,transparent 60%);pointer-events:none}
+.cta-section h2{font-size:clamp(1.9rem,4.2vw,3rem);font-weight:900;color:var(--text-1);letter-spacing:-.035em;max-width:760px;margin:0 auto 16px;line-height:1.14}
+.cta-section p{font-size:1.05rem;color:var(--text-2);max-width:560px;margin:0 auto 40px}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-bg">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Brahmora Technologies home">
+        <div class="logo-icon"><img src="universal-intelligence-logo.svg" alt=""></div>
+        <div class="logo-text">
+          <span class="logo-company">Brahmora</span>
+          <span class="logo-product">Technologies</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navMenu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      </div>
+      <div class="nav-menu" id="navMenu">
+
+        <!-- Product dropdown -->
+        <div class="nav-item has-dropdown">
+          <button class="nav-link nav-trigger" aria-current="page" aria-haspopup="true" aria-expanded="false">
+            Product
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="aegis-product" class="dropdown-link">
+              <span class="dl-title">AEGIS Platform</span>
+              <span class="dl-desc">The reliability, decision, governance &amp; control platform</span>
+            </a>
+            <a href="platform-architecture" class="dropdown-link">
+              <span class="dl-title">Platform Architecture</span>
+              <span class="dl-desc">How the control plane is engineered</span>
+            </a>
+            <a href="/#capability" class="dropdown-link">
+              <span class="dl-title">Capabilities</span>
+              <span class="dl-desc">Four connected capability domains</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Why PRE dropdown -->
+        <div class="nav-item has-dropdown">
+          <button class="nav-link nav-trigger" aria-haspopup="true" aria-expanded="false">
+            Why PRE
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="/#shift" class="dropdown-link">
+              <span class="dl-title">The Operating Model Shift</span>
+              <span class="dl-desc">Why traditional operations no longer scale</span>
+            </a>
+            <a href="/#disciplines" class="dropdown-link">
+              <span class="dl-title">The Discipline</span>
+              <span class="dl-desc">What Platform Reliability Engineering defines</span>
+            </a>
+            <a href="pre-framework" class="dropdown-link">
+              <span class="dl-title">PRE Framework</span>
+              <span class="dl-desc">Read the full PRE-100 standard</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="about-us" class="nav-link">About Us</a>
+        <a href="/#partner" class="nav-cta">Become a Design Partner</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="reveal">
+      <img src="aegis-logo.svg" alt="AEGIS" class="hero-logo">
+      <div class="hero-eyebrow"><span class="dot"></span> Reliability · Decision · Governance · Control</div>
+      <h1>Turn operational complexity into <span class="gradient-text">controlled action.</span></h1>
+      <p class="hero-category">Reliability, Operational Decision, Governance &amp; Control Platform</p>
+      <p class="hero-sub">
+        AEGIS is an intelligent <strong>Reliability, Operational Decision, Governance &amp; Control Platform</strong> for modern cloud and cloud-native environments. It brings together platform visibility, operational intelligence, decision-making, governance, controlled execution, verification, recovery and continuous learning within a single operational system.
+      </p>
+      <div class="hero-actions">
+        <a href="/#partner" class="btn btn-primary">
+          Become a Design Partner
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+        <a href="#model" class="btn btn-secondary">See how AEGIS works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     THE CHALLENGE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="challenge">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Why AEGIS Exists</span>
+      <h2>The challenge is no longer collecting <span class="gradient-text">more data.</span></h2>
+      <p class="section-sub">
+        Modern operations teams already have cloud platforms, monitoring systems, observability tools, security platforms, automation, Infrastructure-as-Code, CI/CD and service management systems.
+      </p>
+    </div>
+    <div class="reveal">
+      <p class="lead" style="margin-bottom:8px">The challenge is determining:</p>
+      <div class="qchain">
+        <span>What is happening?</span><span class="qarrow">&rarr;</span>
+        <span>Why does it matter?</span><span class="qarrow">&rarr;</span>
+        <span>What should happen?</span><span class="qarrow">&rarr;</span>
+        <span>Is the action safe and authorised?</span><span class="qarrow">&rarr;</span>
+        <span>Did it work?</span><span class="qarrow">&rarr;</span>
+        <span>What can we learn from it?</span>
+      </div>
+      <div class="statement" style="margin-top:32px">
+        <p class="statement-bold">AEGIS provides the operational control layer for answering those questions consistently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     THE OPERATIONAL MODEL
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="model">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">The AEGIS Operational Model</span>
+      <h2>From visibility to decision. From decision to <span class="gradient-text">governed action.</span></h2>
+      <p class="section-sub">From every action to continuous improvement. AEGIS operates through one continuous operational loop.</p>
+    </div>
+
+    <div class="loop-track reveal">
+      <div class="loop-step" style="--ls-accent:var(--brand-light)">
+        <span class="loop-num">01</span>
+        <div class="loop-icon" aria-hidden="true">&#128269;</div>
+        <h4>KNOW</h4>
+      </div>
+      <div class="loop-step" style="--ls-accent:var(--cyan)">
+        <span class="loop-num">02</span>
+        <div class="loop-icon" aria-hidden="true">&#128225;</div>
+        <h4>OBSERVE</h4>
+      </div>
+      <div class="loop-step" style="--ls-accent:var(--violet)">
+        <span class="loop-num">03</span>
+        <div class="loop-icon" aria-hidden="true">&#129504;</div>
+        <h4>DECIDE</h4>
+      </div>
+      <div class="loop-step" style="--ls-accent:var(--amber)">
+        <span class="loop-num">04</span>
+        <div class="loop-icon" aria-hidden="true">&#128737;</div>
+        <h4>CONTROL</h4>
+      </div>
+      <div class="loop-step" style="--ls-accent:var(--rose)">
+        <span class="loop-num">05</span>
+        <div class="loop-icon" aria-hidden="true">&#9889;</div>
+        <h4>EXECUTE</h4>
+      </div>
+      <div class="loop-step" style="--ls-accent:var(--emerald)">
+        <span class="loop-num">06</span>
+        <div class="loop-icon" aria-hidden="true">&#9989;</div>
+        <h4>VERIFY</h4>
+      </div>
+      <div class="loop-step" style="--ls-accent:var(--brand)">
+        <span class="loop-num">07</span>
+        <div class="loop-icon" aria-hidden="true">&#128218;</div>
+        <h4>LEARN</h4>
+      </div>
+    </div>
+    <div class="reveal" style="text-align:center">
+      <span class="loop-back">&#8635; Continuous loop — Learn feeds back into Know</span>
+    </div>
+
+    <div class="reveal" style="max-width:820px;margin:40px auto 0;text-align:center">
+      <p class="lead" style="margin:0 auto">
+        AEGIS continuously understands the platform, observes operational signals, evaluates evidence, determines appropriate actions, applies governance and safety controls, executes authorised operations, verifies outcomes and learns from the results. This creates a controlled operational lifecycle rather than disconnected monitoring, automation and governance processes.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOUR CAPABILITY DOMAINS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="domains">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Four Capability Domains. One Operational System.</span>
+      <h2>Foundation &rarr; Operations &rarr; Control &rarr; <span class="gradient-text">Intelligence</span></h2>
+      <p class="section-sub">Together, they create the operational context required to understand, operate, govern and continuously improve modern technology platforms.</p>
+    </div>
+
+    <div class="grid g-2 reveal">
+      <!-- 01 FOUNDATION -->
+      <div class="pillar p-indigo">
+        <span class="pillar-num">01</span>
+        <div class="pillar-label">Foundation</div>
+        <h3>Know your platform.</h3>
+        <p>Build a continuously updated understanding of your infrastructure, services, dependencies, ownership and changes.</p>
+        <ul class="pillar-features">
+          <li>Multi-cloud &amp; Kubernetes discovery</li>
+          <li>Resource inventory &amp; service catalogue</li>
+          <li>Dependency &amp; infrastructure graphs</li>
+          <li>Configuration drift &amp; structural diffing</li>
+          <li>Terraform intent, managed state &amp; runtime correlation</li>
+          <li>Platform identity &amp; ownership</li>
+          <li>Continuous platform baselining</li>
+        </ul>
+        <p class="pillar-outcome">Know what exists, how it connects, what changed and what should be true.</p>
+      </div>
+
+      <!-- 02 OPERATIONS -->
+      <div class="pillar p-cyan">
+        <span class="pillar-num">02</span>
+        <div class="pillar-label">Operations</div>
+        <h3>Run your platform reliably.</h3>
+        <p>Turn signals, changes and operational context into faster understanding, coordinated response and safer recovery.</p>
+        <ul class="pillar-features">
+          <li>Unified signals &amp; Situation Fusion</li>
+          <li>Incident coordination &amp; intelligent triage</li>
+          <li>SLO &amp; reliability management</li>
+          <li>Service health &amp; golden signals</li>
+          <li>Change correlation &amp; root-cause context</li>
+          <li>Governed runbooks &amp; remediation</li>
+          <li>Recovery &amp; rollback-aware operations</li>
+        </ul>
+        <p class="pillar-outcome">Understand what is happening, why it matters and what action should follow.</p>
+      </div>
+
+      <!-- 03 CONTROL -->
+      <div class="pillar p-amber">
+        <span class="pillar-num">03</span>
+        <div class="pillar-label">Control</div>
+        <h3>Govern every decision and action.</h3>
+        <p>Apply policy, authority, risk and safety controls before operational actions execute.</p>
+        <ul class="pillar-features">
+          <li>Pre-execution assurance</li>
+          <li>Policy-as-code &amp; reliability gates</li>
+          <li>Authority &amp; approval workflows</li>
+          <li>Blast-radius &amp; risk assessment</li>
+          <li>Governed remediation &amp; execution</li>
+          <li>Autonomy safety controls</li>
+          <li>Recovery &amp; rollback requirements</li>
+          <li>Post-execution verification</li>
+          <li>Immutable evidence bundles</li>
+        </ul>
+        <p class="pillar-outcome">Ensure every critical action is authorised, constrained, executed safely, verified and evidenced.</p>
+      </div>
+
+      <!-- 04 INTELLIGENCE -->
+      <div class="pillar p-emerald">
+        <span class="pillar-num">04</span>
+        <div class="pillar-label">Intelligence</div>
+        <h3>Continuously improve your platform.</h3>
+        <p>Learn from operational history, platform behaviour, decisions and execution outcomes.</p>
+        <ul class="pillar-features">
+          <li>Operational Memory</li>
+          <li>Cost &amp; FinOps intelligence</li>
+          <li>Predictive reliability signals</li>
+          <li>Anomaly &amp; emerging-risk detection</li>
+          <li>PRE-100 platform maturity</li>
+          <li>Architecture risk intelligence</li>
+          <li>Recurring failure-pattern analysis</li>
+          <li>Decision &amp; remediation effectiveness</li>
+          <li>Executive decision intelligence</li>
+        </ul>
+        <p class="pillar-outcome">Turn operational evidence into better decisions, lower risk and continuous improvement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BEYOND DETECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="beyond">
+  <div class="container">
+    <div class="split reveal">
+      <div class="split-text">
+        <span class="section-label">Beyond Detection</span>
+        <h2>Most systems detect. AEGIS <span class="gradient-text">acts, verifies and recovers.</span></h2>
+        <p class="section-sub" style="max-width:none">
+          Many operational systems identify conditions requiring attention. AEGIS extends the lifecycle beyond detection.
+        </p>
+      </div>
+      <div>
+        <div class="statement">
+          <div class="pillar-label" style="color:var(--brand-light)">Extended Lifecycle</div>
+          <p class="statement-bold" style="font-size:1.05rem;margin-bottom:20px">Detect &rarr; Understand &rarr; Decide &rarr; Govern &rarr; Act &rarr; Verify &rarr; Learn</p>
+          <div class="pillar-label" style="color:var(--emerald)">When appropriate, extending into recovery</div>
+          <p class="statement-bold" style="font-size:1.05rem">Observe &rarr; Understand &rarr; Decide &rarr; Govern &rarr; Control &rarr; Execute &rarr; Verify &rarr; Recover &rarr; Learn</p>
+        </div>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.7;margin-top:20px">
+          AEGIS can determine whether remediation is appropriate, establish whether it is permitted, execute within defined boundaries, verify the resulting state and preserve evidence explaining the complete operational decision.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     GOVERNANCE — PRE-EXECUTION ASSURANCE + GOVERNED AUTONOMY
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="governance">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Governance &amp; Control</span>
+      <h2>Automate progressively — without removing <span class="gradient-text">operational control.</span></h2>
+    </div>
+
+    <div class="grid g-2 reveal">
+      <!-- Pre-execution assurance -->
+      <div class="card card-indigo">
+        <div class="card-icon ci-indigo">🛡️</div>
+        <h3>Pre-Execution Assurance</h3>
+        <p style="margin-bottom:16px">Before an unattended operational action can execute, AEGIS can evaluate whether the required safety conditions have been established:</p>
+        <ul class="blist">
+          <li>Target identity</li>
+          <li>Required operational evidence</li>
+          <li>Applicable policy</li>
+          <li>Delegated authority</li>
+          <li>Current blast radius</li>
+          <li>Executable operation contract</li>
+          <li>Verification capability</li>
+          <li>Recovery readiness</li>
+          <li>Failure and escalation path</li>
+        </ul>
+        <div class="outcome">
+          <strong>Governing principle:</strong>
+          <span> Failure to establish a required condition can only maintain or reduce autonomy. It can never increase it.</span>
+        </div>
+      </div>
+
+      <!-- Governed autonomy -->
+      <div class="card card-cyan">
+        <div class="card-icon ci-cyan">⚙️</div>
+        <h3>Governed Autonomy</h3>
+        <p style="margin-bottom:16px">AEGIS does not treat autonomy as simply automation on or automation off. Organisations can define:</p>
+        <ul class="blist">
+          <li>Which actions AEGIS may perform</li>
+          <li>Which environments those actions are permitted in</li>
+          <li>What evidence is required</li>
+          <li>What authority is required</li>
+          <li>Acceptable blast-radius boundaries</li>
+          <li>When human approval is mandatory</li>
+          <li>What verification must follow execution</li>
+          <li>What recovery capability must exist</li>
+          <li>When execution must stop or escalate</li>
+        </ul>
+        <div class="outcome">
+          <span>Autonomy can increase as operational evidence, policy coverage, verification and recovery confidence improve.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verified remediation -->
+    <div class="reveal" style="margin-top:24px">
+      <div class="card card-emerald">
+        <div class="card-icon ci-emerald">✅</div>
+        <h3>Verified Remediation</h3>
+        <p style="margin-bottom:16px">AEGIS does not treat a successful API response as proof that remediation succeeded. After execution, AEGIS can verify the resulting platform state against the intended outcome. This creates a closed operational loop:</p>
+        <div class="chain-flow">
+          <div class="cf-item"><strong>Problem</strong> <span class="cf-arrow">&rarr;</span> <strong>Decision</strong> <span class="cf-arrow">&rarr;</span> <strong>Permission</strong> <span class="cf-arrow">&rarr;</span> <strong>Execution</strong> <span class="cf-arrow">&rarr;</span> <strong>Verification</strong> <span class="cf-arrow">&rarr;</span> <strong>Outcome</strong></div>
+          <div class="cf-item">Where required, unsuccessful verification can lead to: <strong>Recovery</strong> <span class="cf-arrow">&rarr;</span> <strong>Rollback</strong> <span class="cf-arrow">&rarr;</span> <strong>Escalation</strong></div>
+        </div>
+        <div class="outcome">
+          <span>Operational success is measured by <strong style="color:var(--emerald)">actual resulting state</strong>, rather than whether an automation command completed.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     OPERATIONAL MEMORY + SITUATION FUSION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="memory">
+  <div class="container">
+    <div class="grid g-2 reveal">
+      <div class="card card-violet">
+        <div class="card-icon ci-violet">🧠</div>
+        <h3>Operational Memory</h3>
+        <p style="margin-bottom:16px">AEGIS builds institutional operational knowledge from signals, incidents, changes, decisions, evidence, approvals, actions, verification, recovery attempts, outcomes and recurring failure patterns.</p>
+        <p>Instead of each incident starting from zero, AEGIS can retain the history of <strong style="color:var(--text-1)">what happened, what was attempted, what succeeded, what failed and under which conditions</strong>.</p>
+      </div>
+      <div class="card card-cyan">
+        <div class="card-icon ci-cyan">🔗</div>
+        <h3>Situation Fusion</h3>
+        <p style="margin-bottom:16px">AEGIS brings fragmented operational signals together into coherent operational situations by correlating:</p>
+        <p style="color:var(--text-1);font-size:13px;line-height:1.7">Signals + Resources + Dependencies + Changes + Deployments + Errors + Drift + SLOs + Incidents + Operational History</p>
+        <div class="outcome">
+          <span>This helps teams determine: what is happening &rarr; what is affected &rarr; what changed &rarr; what may have caused it &rarr; what should happen next.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INTEGRATIONS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="integrations">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Works Independently. Integrates Across Your Ecosystem.</span>
+      <h2>One common operational <span class="gradient-text">model.</span></h2>
+      <p class="section-sub">
+        AEGIS can operate as an independent operational platform, directly discovering, analysing, governing and controlling cloud and infrastructure environments. It can also integrate with your existing operational tools, bringing telemetry, signals, infrastructure state, changes, workflows and execution capabilities into a common operational decision and control framework.
+      </p>
+    </div>
+
+    <div class="grid g-2 reveal">
+      <div class="card">
+        <div class="tag-group">
+          <h5>Cloud &amp; Orchestration</h5>
+          <div class="tags">
+            <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">GCP</span><span class="tag">Kubernetes</span>
+          </div>
+        </div>
+        <div class="tag-group" style="margin-top:24px">
+          <h5>Observability</h5>
+          <div class="tags">
+            <span class="tag">OpenTelemetry</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Datadog</span><span class="tag">New Relic</span>
+          </div>
+        </div>
+        <div class="tag-group" style="margin-top:24px">
+          <h5>ITSM · IaC · Delivery</h5>
+          <div class="tags">
+            <span class="tag">ServiceNow</span><span class="tag">Jira</span><span class="tag">Terraform</span><span class="tag">CI/CD platforms</span>
+          </div>
+        </div>
+        <div class="tag-group" style="margin-top:24px">
+          <h5>Signals &amp; Sources</h5>
+          <div class="tags">
+            <span class="tag">Email</span><span class="tag">Webhooks</span><span class="tag">Application signals</span><span class="tag">Infrastructure state</span><span class="tag">Security findings</span><span class="tag">Cost signals</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-indigo">
+        <div class="card-icon ci-indigo">🏗️</div>
+        <h3>Infrastructure &amp; Architecture Intelligence</h3>
+        <p style="margin-bottom:20px">AEGIS connects multiple representations of infrastructure rather than viewing runtime resources in isolation. For Infrastructure-as-Code environments, this can include:</p>
+        <div class="cp-diagram" style="margin-top:0">
+          <div class="cp-layer">
+            <span class="cp-layer-label" style="color:var(--brand-light)">Intent</span>
+            <span class="cp-layer-desc">What the Terraform configuration says should exist.</span>
+          </div>
+          <div class="cp-layer">
+            <span class="cp-layer-label" style="color:var(--amber)">Managed State</span>
+            <span class="cp-layer-desc">What Terraform currently believes it manages.</span>
+          </div>
+          <div class="cp-layer">
+            <span class="cp-layer-label" style="color:var(--emerald)">Runtime Reality</span>
+            <span class="cp-layer-desc">What actually exists in the cloud environment.</span>
+          </div>
+        </div>
+        <div class="outcome">
+          <span>AEGIS correlates these views to identify divergence between <strong>Intent &rarr; Managed State &rarr; Runtime State</strong> — providing deeper context for drift, changes and operational decisions.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     EVIDENCE & ACCOUNTABILITY
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="evidence">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Evidence &amp; Accountability</span>
+      <h2>Every governed operation produces an <span class="gradient-text">evidence chain.</span></h2>
+      <p class="section-sub">This provides operational accountability for both human-assisted and autonomous operations.</p>
+    </div>
+    <div class="reveal" style="max-width:820px;margin:0 auto">
+      <div class="chain-flow">
+        <div class="cf-item"><strong>What happened</strong></div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> What AEGIS knew</div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> What it decided</div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> Why the action was permitted</div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> Who or what had authority</div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> What action was executed</div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> What changed</div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> How the result was verified</div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> Whether recovery was required</div>
+        <div class="cf-item"><span class="cf-arrow">&rarr;</span> What the final outcome was</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BENEFITS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="benefits">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Benefits of AEGIS</span>
+      <h2>From reactive cloud operations to <span class="gradient-text">governed, evidence-driven operations.</span></h2>
+    </div>
+
+    <div class="grid g-3 reveal">
+      <div class="card card-rose"><div class="card-icon ci-rose">⚠️</div><h3>Reduce Operational Risk</h3><p>Evaluate policy, authority, dependencies, blast radius and recovery readiness before operational changes execute.</p></div>
+      <div class="card card-cyan"><div class="card-icon ci-cyan">⚡</div><h3>Resolve Incidents Faster</h3><p>Correlate infrastructure, Kubernetes, application, security, deployment, drift and operational signals into actionable situations.</p></div>
+      <div class="card card-emerald"><div class="card-icon ci-emerald">🤖</div><h3>Automate with Control</h3><p>Enable operational automation within explicit policies, authority and safety boundaries.</p></div>
+      <div class="card card-indigo"><div class="card-icon ci-indigo">🚫</div><h3>Prevent Unsafe Actions</h3><p>Use pre-execution assurance to identify unauthorised, unsafe or high-risk operations before they affect production.</p></div>
+      <div class="card card-violet"><div class="card-icon ci-violet">🧩</div><h3>Unified Operational Context</h3><p>Bring cloud APIs, Kubernetes, OpenTelemetry, observability platforms, ITSM, CI/CD, IaC and other sources together.</p></div>
+      <div class="card card-cyan"><div class="card-icon ci-cyan">🕸️</div><h3>Understand Relationships</h3><p>Connect resources, workloads, services, dependencies, configurations, changes and operational history.</p></div>
+      <div class="card card-amber"><div class="card-icon ci-amber">🎯</div><h3>Control Infrastructure Drift</h3><p>Compare intended, managed, previous and current states to identify meaningful divergence.</p></div>
+      <div class="card card-indigo"><div class="card-icon ci-indigo">🔐</div><h3>Strengthen Security &amp; Governance</h3><p>Evaluate cloud configuration, identity, network exposure, policies, operational authority and compliance conditions.</p></div>
+      <div class="card card-emerald"><div class="card-icon ci-emerald">⏱️</div><h3>Reduce Manual Effort</h3><p>Automate repetitive investigation, evidence gathering, validation, remediation, verification and recovery workflows.</p></div>
+      <div class="card card-violet"><div class="card-icon ci-violet">📋</div><h3>Make Automation Accountable</h3><p>Preserve the evidence explaining why an action was permitted, what was executed and what outcome was achieved.</p></div>
+      <div class="card card-cyan"><div class="card-icon ci-cyan">📈</div><h3>Improve Reliability</h3><p>Combine SLOs, incidents, dependencies, changes, signals and operational history to support safer decisions.</p></div>
+      <div class="card card-amber"><div class="card-icon ci-amber">💰</div><h3>Improve FinOps Decisions</h3><p>Connect optimisation opportunities with workload importance, utilisation, policy and operational risk before execution.</p></div>
+      <div class="card card-indigo"><div class="card-icon ci-indigo">📚</div><h3>Preserve Operational Knowledge</h3><p>Build Operational Memory from incidents, decisions, actions, recovery attempts and outcomes.</p></div>
+      <div class="card card-emerald"><div class="card-icon ci-emerald">🚀</div><h3>Confidence in Autonomy</h3><p>Progressively grant autonomy based on policy, evidence, authority, blast radius, verification and proven recovery capability.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ADVANTAGES OVER CLOUD-NATIVE TOOLS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="advantages">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Advantages Over Cloud-Native Tools</span>
+      <h2>A cross-platform operational decision, governance and <span class="gradient-text">control layer.</span></h2>
+      <p class="section-sub">Cloud-native tools provide powerful capabilities within their respective platforms. AEGIS adds a layer across environments, operational domains, tools and teams.</p>
+    </div>
+
+    <div class="reveal">
+      <table class="disc-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Typical Cloud-Native Tooling</th>
+            <th class="col-aegis">AEGIS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="disc-name">Cloud scope</td><td>Primarily provider-specific</td><td class="aegis-cell">Cross-cloud &amp; platform</td></tr>
+          <tr><td class="disc-name">Operational signals</td><td>Primarily native ecosystem</td><td class="aegis-cell">Multi-source unified context</td></tr>
+          <tr><td class="disc-name">Detection</td><td>Supported</td><td class="aegis-cell">Supported</td></tr>
+          <tr><td class="disc-name">Situation correlation</td><td>Varies by service</td><td class="aegis-cell">Cross-domain Situation Fusion</td></tr>
+          <tr><td class="disc-name">Decision layer</td><td>Service-specific</td><td class="aegis-cell">Unified operational decisions</td></tr>
+          <tr><td class="disc-name">Pre-execution assurance</td><td>Service/control-specific</td><td class="aegis-cell">Integrated assurance pipeline</td></tr>
+          <tr><td class="disc-name">Policy governance</td><td>Provider-specific</td><td class="aegis-cell">Cross-platform governance</td></tr>
+          <tr><td class="disc-name">Automation</td><td>Native workflows</td><td class="aegis-cell">Governed cross-domain execution</td></tr>
+          <tr><td class="disc-name">Autonomy boundaries</td><td>Tool-specific</td><td class="aegis-cell">Explicit authority &amp; safety boundaries</td></tr>
+          <tr><td class="disc-name">Post-action verification</td><td>Workflow-dependent</td><td class="aegis-cell">Closed-loop verification</td></tr>
+          <tr><td class="disc-name">Operational memory</td><td>Distributed</td><td class="aegis-cell">Unified decision &amp; outcome history</td></tr>
+          <tr><td class="disc-name">Evidence</td><td>Distributed</td><td class="aegis-cell">Decision-to-outcome evidence chain</td></tr>
+          <tr><td class="disc-name">Integration</td><td>Ecosystem-focused</td><td class="aegis-cell">Cloud + observability + ITSM + IaC</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BUILT FOR TEAMS
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section section-alt" id="teams">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">Built for the Teams That Design, Run, Secure and Govern the Cloud</span>
+      <h2>One platform. <span class="gradient-text">Different decisions.</span></h2>
+      <p class="section-sub">AEGIS gives different teams purpose-built perspectives on the same operational truth.</p>
+    </div>
+
+    <div class="grid g-3 reveal">
+      <div class="card card-indigo"><div class="card-icon ci-indigo">🛠️</div><h3>Platform Engineers</h3><p class="team-q">Is the platform healthy and operating as designed?</p><p style="margin-top:8px">Maintain healthy shared platforms, Kubernetes environments, dependencies, capacity and platform services. Detect divergence early and safely automate repetitive operations without giving up engineering control.</p></div>
+      <div class="card card-cyan"><div class="card-icon ci-cyan">🔄</div><h3>DevOps Engineers</h3><p class="team-q">Can we deliver this change safely?</p><p style="margin-top:8px">Connect CI/CD, deployments, infrastructure changes, runtime behaviour and failures. Understand whether a change contributed to an issue, enforce delivery guardrails and accelerate recovery.</p></div>
+      <div class="card card-emerald"><div class="card-icon ci-emerald">🛡️</div><h3>Site Reliability Engineers</h3><p class="team-q">Can we maintain reliability and recover quickly?</p><p style="margin-top:8px">Focus on service health, SLOs, error budgets, dependencies, failure patterns and recovery. Distinguish individual symptoms from wider operational situations, with post-action verification.</p></div>
+      <div class="card card-amber"><div class="card-icon ci-amber">☁️</div><h3>Cloud &amp; Infrastructure Engineers</h3><p class="team-q">Is the infrastructure in the correct state?</p><p style="margin-top:8px">Understand what resources exist, how they are configured, what depends on them and what changed. Detect configuration and Terraform divergence and execute operations through governed workflows.</p></div>
+      <div class="card card-rose"><div class="card-icon ci-rose">🔐</div><h3>Cloud Security Engineers</h3><p class="team-q">Is this risk controlled and safely remediated?</p><p style="margin-top:8px">Move from detecting vulnerabilities and misconfigurations to safely correcting them. Evaluate policy, authority, exposure, blast radius and remediation safety before execution, then verify the fix.</p></div>
+      <div class="card card-violet"><div class="card-icon ci-violet">🔥</div><h3>Incident Management Teams</h3><p class="team-q">What is happening, who is affected and how do we recover?</p><p style="margin-top:8px">Transform disconnected alerts, changes, errors and infrastructure events into coherent operational situations. Track impact, evidence, ownership, actions, recovery and escalation.</p></div>
+      <div class="card card-emerald"><div class="card-icon ci-emerald">💰</div><h3>FinOps Teams</h3><p class="team-q">Where can we reduce cost without creating operational risk?</p><p style="margin-top:8px">Evaluate optimisation opportunities alongside workload importance, utilisation, operational risk and policy. Govern optimisation actions and measure whether expected savings were actually realised.</p></div>
+      <div class="card card-cyan"><div class="card-icon ci-cyan">🏛️</div><h3>Cloud Architects</h3><p class="team-q">Does runtime reality still match architectural intent?</p><p style="margin-top:8px">Compare architectural and Infrastructure-as-Code intent with managed state and runtime reality. Identify topology, dependency, configuration, policy and architectural divergence.</p></div>
+      <div class="card card-indigo"><div class="card-icon ci-indigo">🧭</div><h3>Infrastructure &amp; Platform Leaders</h3><p class="team-q">Are our operations controlled, scalable and becoming more autonomous safely?</p><p style="margin-top:8px">Understand platform reliability, operational load, governance effectiveness, automation safety and maturity. Define where autonomous operation is appropriate and where human authority must remain.</p></div>
+      <div class="card card-amber"><div class="card-icon ci-amber">📊</div><h3>Engineering &amp; Programme Leaders</h3><p class="team-q">Are we operationally ready to proceed?</p><p style="margin-top:8px">Evaluate readiness, unresolved risks, dependencies, reliability conditions, governance requirements and blockers before major releases — using operational evidence rather than manual status reports.</p></div>
+      <div class="card card-violet"><div class="card-icon ci-violet">👔</div><h3>Executives &amp; Technology Leadership</h3><p class="team-q">What is our technology risk and operational posture?</p><p style="margin-top:8px">Gain a business-level perspective of technology reliability, operational risk, governance, resilience, cost and improvement trends without navigating infrastructure-level telemetry.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BUSINESS VALUE
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="value">
+  <div class="container">
+    <div class="split reveal">
+      <div class="split-text">
+        <span class="section-label">Business Value</span>
+        <h2>For technology leaders, AEGIS <span class="gradient-text">means:</span></h2>
+        <p class="section-sub" style="max-width:none">Fewer operational blind spots. Faster decisions. Lower operational risk. Stronger governance. Safer automation. Improved reliability. Greater accountability.</p>
+      </div>
+      <div>
+        <div class="statement">
+          <p style="font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:16px">For engineering teams, it means spending less time:</p>
+          <div class="qchain" style="margin-top:0">
+            <span>Finding</span><span class="qarrow">&rarr;</span>
+            <span>Correlating</span><span class="qarrow">&rarr;</span>
+            <span>Investigating</span><span class="qarrow">&rarr;</span>
+            <span>Validating</span><span class="qarrow">&rarr;</span>
+            <span>Coordinating</span><span class="qarrow">&rarr;</span>
+            <span>Manually fixing</span>
+          </div>
+          <p style="font-size:14px;color:var(--text-2);line-height:1.7;margin-top:16px">and more time improving the platforms and services they own.</p>
+        </div>
+        <p style="font-size:15px;color:var(--text-1);font-weight:600;line-height:1.65;margin-top:20px">
+          A shift from fragmented and reactive operations toward reliable, governed, evidence-driven, controlled and progressively autonomous operations.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     THE AEGIS PROMISE / CTA
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="cta-section" id="promise">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label section-center" style="display:inline-flex">The AEGIS Promise</span>
+      <h2>From operational visibility to <span class="gradient-text">governed action.</span></h2>
+      <p>Know what is happening. Understand why it matters. Decide what should happen. Govern what is allowed. Act safely. Verify the outcome. Recover when necessary. Learn from every operation.</p>
+      <div class="cta-buttons">
+        <a href="/#partner" class="btn btn-primary">
+          Become a Design Partner
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        </a>
+        <a href="#teams" class="btn btn-secondary">Built for Every Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="logo-icon" style="width:48px;height:48px"><img src="universal-intelligence-logo.svg" alt=""></div>
+          <span class="footer-brand-name">Brahmora Technologies</span>
+        </div>
+        <p class="footer-brand-desc">Building intelligence, reliability and governance into modern infrastructure operations. AEGIS is our Reliability, Operational Decision, Governance &amp; Control Platform for modern cloud environments.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <a href="aegis-product">AEGIS Platform</a>
+        <a href="platform-architecture">Platform Architecture</a>
+        <a href="/#capability">Capabilities</a>
+        <a href="pre-framework">PRE Framework</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="about-us">About Us</a>
+        <a href="/">Home</a>
+        <a href="/#partner">Design Partners</a>
+        <a href="/#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="pre-framework">PRE-100 Standard</a>
+        <a href="platform-architecture">Architecture Guide</a>
+        <a href="aegis-sales-page">Why AEGIS — Overview</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Brahmora Technologies Private Limited. All rights reserved. &middot; <a href="https://brahmora.co.uk" style="color:var(--brand-light)">brahmora.co.uk</a></span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     Scripts
+     ═══════════════════════════════════════════════════════════════ -->
+<script src="assets/site.js"></script>
+</body>
+</html>

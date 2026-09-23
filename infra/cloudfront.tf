@@ -5,6 +5,15 @@ resource "aws_cloudfront_origin_access_control" "site" {
   signing_protocol                  = "sigv4"
 }
 
+# Clean-URL rewriting: /about-us -> /about-us.html at the edge.
+resource "aws_cloudfront_function" "rewrite_urls" {
+  name    = "${var.site_bucket_name}-rewrite-urls"
+  runtime = "cloudfront-js-2.0"
+  comment = "Rewrite extensionless URLs to their .html object"
+  publish = true
+  code    = file("${path.module}/functions/rewrite-urls.js")
+}
+
 resource "aws_cloudfront_distribution" "site" {
   enabled             = true
   default_root_object = "index.html"
@@ -24,6 +33,11 @@ resource "aws_cloudfront_distribution" "site" {
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     compress               = true
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.rewrite_urls.arn
+    }
 
     forwarded_values {
       query_string = false

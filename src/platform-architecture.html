@@ -5,16 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AEGIS Platform Architecture | Brahmora Technologies</title>
 <meta name="description" content="AEGIS is the Operational Decision & Governance Layer for Cloud Platforms. Explore the architecture of the governed operational control plane that connects visibility, decision-making, execution safety, and continuous improvement.">
-<link rel="canonical" href="https://brahmora.co.uk/platform-architecture.html">
+<link rel="canonical" href="https://brahmora.co.uk/platform-architecture">
 <meta property="og:title" content="AEGIS Platform Architecture — Brahmora Technologies">
 <meta property="og:description" content="The Operational Control Plane for Modern Cloud Platforms. Explore how AEGIS connects visibility, decision-making, execution safety, and continuous improvement.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://brahmora.co.uk/platform-architecture.html">
+<meta property="og:url" content="https://brahmora.co.uk/platform-architecture">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AEGIS Platform Architecture — Brahmora Technologies">
 <meta name="twitter:description" content="The Operational Control Plane for Modern Cloud Platforms.">
 <link rel="icon" type="image/svg+xml" href="/universal-intelligence-logo.svg">
 <meta name="theme-color" content="#6366f1">
+<meta property="og:image" content="https://brahmora.co.uk/assets/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://brahmora.co.uk/assets/og-image.svg">
+<link rel="apple-touch-icon" href="/universal-intelligence-logo.svg">
 <meta name="robots" content="index, follow">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
@@ -25,150 +30,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>(function(){try{var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}if(t==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/styles.css">
 <style>
 /* ═══════════════════════════════════════════════════════════════════
-   BRAHMORA TECHNOLOGIES — Design System
+   PLATFORM ARCHITECTURE — page-unique components (shared in styles.css)
    ═══════════════════════════════════════════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#05080e;color:#c3cad8;line-height:1.7;overflow-x:hidden}
-img{max-width:100%;display:block}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer;border:none;background:none}
-
-:root{
-  --brand:#6366f1;--brand-light:#818cf8;--brand-dark:#4f46e5;
-  --brand-glow:rgba(99,102,241,.12);--brand-glow-strong:rgba(99,102,241,.22);
-  --cyan:#22d3ee;--cyan-glow:rgba(34,211,238,.12);
-  --emerald:#34d399;--emerald-glow:rgba(52,211,153,.12);
-  --amber:#fbbf24;--amber-glow:rgba(251,191,36,.12);
-  --rose:#fb7185;--rose-glow:rgba(251,113,133,.12);
-  --violet:#a78bfa;
-  --bg:#05080e;--surface:#0a0f1a;--surface-2:#0f1629;--surface-3:#151d30;--surface-4:#1a2540;
-  --glass:rgba(10,15,26,.72);
-  --border:rgba(255,255,255,.06);--border-light:rgba(255,255,255,.1);--border-brand:rgba(99,102,241,.25);
-  --text-1:#f0f4fc;--text-2:#94a3b8;--text-3:#64748b;--text-muted:#475569;
-  --max-w:1160px;--nav-h:68px;
-  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;
-}
-
-.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-.gradient-text{background:linear-gradient(135deg,var(--brand-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.mono{font-family:'JetBrains Mono',monospace}
-.divider{height:1px;background:var(--border);margin:0}
-
-/* ═══════════════════════════════════════════════════════════════════
-   NAVIGATION
-   ═══════════════════════════════════════════════════════════════════ */
-.nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:all .35s}
-.nav-bg{background:var(--glass);backdrop-filter:blur(24px) saturate(1.6);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-icon{width:52px;height:52px;flex-shrink:0}
-.logo-icon img{width:100%;height:100%}
-.logo-text{display:flex;flex-direction:column;line-height:1.15}
-.logo-company{font-size:17px;font-weight:800;color:var(--text-1);letter-spacing:-.02em}
-.logo-product{font-size:11px;font-weight:600;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase}
-.nav-menu{display:flex;align-items:center;gap:4px}
-.nav-link{padding:8px 16px;font-size:13px;font-weight:500;color:var(--text-2);border-radius:var(--r-sm);transition:all .2s}
-.nav-link:hover{color:var(--text-1);background:rgba(255,255,255,.04)}
-.nav-cta{margin-left:8px;padding:8px 20px;font-size:13px;font-weight:700;color:#fff;background:var(--brand);border-radius:var(--r-sm);transition:all .25s}
-.nav-cta:hover{background:var(--brand-light);box-shadow:0 4px 20px rgba(99,102,241,.3)}
-.nav-toggle{display:none;padding:8px;color:var(--text-2)}
-@media(max-width:768px){
-  .nav-menu{display:none;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;padding:16px 24px;gap:4px}
-  .nav-menu.open{display:flex}
-  .nav-toggle{display:flex}
-  .nav-cta{margin:8px 0 0;width:100%;text-align:center}
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   HERO
-   ═══════════════════════════════════════════════════════════════════ */
-.hero{padding:200px 0 100px;position:relative;overflow:hidden;text-align:center}
-.hero::before{content:'';position:absolute;top:-300px;left:50%;transform:translateX(-50%);width:1100px;height:1100px;background:radial-gradient(ellipse,rgba(99,102,241,.07) 0%,rgba(34,211,238,.03) 40%,transparent 70%);pointer-events:none}
-.hero h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;color:var(--text-1);max-width:900px;margin:0 auto}
-.hero-sub{font-size:clamp(1rem,1.8vw,1.15rem);color:var(--text-2);max-width:720px;margin:24px auto 0;line-height:1.75}
-.hero-sub strong{color:var(--text-1);font-weight:600}
-
-/* ═══════════════════════════════════════════════════════════════════
-   BUTTONS
-   ═══════════════════════════════════════════════════════════════════ */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--r-md);font-size:14px;font-weight:700;transition:all .3s}
-.btn-primary{background:var(--brand);color:#fff}
-.btn-primary:hover{background:var(--brand-light);transform:translateY(-1px);box-shadow:0 8px 30px rgba(99,102,241,.25)}
-.btn-secondary{background:transparent;color:var(--text-1);border:1px solid var(--border-light)}
-.btn-secondary:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.15)}
-.btn svg{width:16px;height:16px}
-
-/* ═══════════════════════════════════════════════════════════════════
-   SECTIONS
-   ═══════════════════════════════════════════════════════════════════ */
-.section{padding:120px 0}
-.section-alt{background:var(--surface)}
-.section-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:16px}
-.section-label::before{content:'';width:16px;height:2px;background:var(--brand);border-radius:1px}
-.section h2{font-size:clamp(1.8rem,3.8vw,2.8rem);font-weight:800;letter-spacing:-.03em;color:var(--text-1);line-height:1.12;max-width:700px}
-.section-sub{font-size:1.05rem;color:var(--text-2);max-width:600px;margin-top:16px;line-height:1.75}
-.section-header{margin-bottom:56px}
-.section-center{text-align:center;margin-left:auto;margin-right:auto}
-.section-center h2,.section-center .section-sub{margin-left:auto;margin-right:auto}
-
-/* Grid */
-.grid{display:grid;gap:20px}
-.g-2{grid-template-columns:repeat(2,1fr)}
-.g-3{grid-template-columns:repeat(3,1fr)}
-.g-4{grid-template-columns:repeat(4,1fr)}
-@media(max-width:900px){.g-3,.g-4{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
-
-/* ═══════════════════════════════════════════════════════════════════
-   CARDS
-   ═══════════════════════════════════════════════════════════════════ */
-.card{padding:32px;border-radius:var(--r-xl);background:var(--surface-2);border:1px solid var(--border);transition:all .35s;position:relative;overflow:hidden}
-.card:hover{border-color:var(--border-light);transform:translateY(-3px);box-shadow:0 12px 48px rgba(0,0,0,.35)}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .35s}
-.card:hover::before{opacity:1}
-.card-indigo::before{background:linear-gradient(90deg,var(--brand),var(--brand-light))}
-.card-cyan::before{background:linear-gradient(90deg,var(--cyan),#67e8f9)}
-.card-emerald::before{background:linear-gradient(90deg,var(--emerald),#6ee7b7)}
-.card-amber::before{background:linear-gradient(90deg,var(--amber),#fde68a)}
-.card-rose::before{background:linear-gradient(90deg,var(--rose),#fda4af)}
-.card-violet::before{background:linear-gradient(90deg,var(--violet),#c4b5fd)}
-.card h3{font-size:17px;font-weight:700;color:var(--text-1);margin-bottom:8px;letter-spacing:-.01em}
-.card p{font-size:14px;color:var(--text-2);line-height:1.65}
-.card-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}
-.ci-indigo{background:var(--brand-glow);border:1px solid rgba(99,102,241,.18)}
-.ci-cyan{background:var(--cyan-glow);border:1px solid rgba(34,211,238,.18)}
-.ci-emerald{background:var(--emerald-glow);border:1px solid rgba(52,211,153,.18)}
-.ci-amber{background:var(--amber-glow);border:1px solid rgba(251,191,36,.18)}
-.ci-rose{background:var(--rose-glow);border:1px solid rgba(251,113,133,.18)}
-.ci-violet{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.18)}
-
-/* Statement block */
-.statement{padding:48px;border-radius:var(--r-2xl);background:var(--surface-2);border:1px solid var(--border);position:relative;overflow:hidden}
-.statement::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--cyan),var(--emerald))}
-.statement-bold{font-size:clamp(1.1rem,2.5vw,1.4rem);font-weight:700;color:var(--text-1);line-height:1.5;letter-spacing:-.015em}
-
-/* Split layout */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-@media(max-width:768px){.split{grid-template-columns:1fr;gap:40px}}
-.split-text h2{max-width:none}
-
-/* ═══════════════════════════════════════════════════════════════════
-   FLOW DIAGRAM
-   ═══════════════════════════════════════════════════════════════════ */
-.flow-track{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center}
-.flow-step{padding:16px 24px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);text-align:center;min-width:120px;transition:all .3s}
-.flow-step:hover{border-color:var(--border-light);transform:translateY(-2px)}
-.flow-step h4{font-size:14px;font-weight:700;color:var(--text-1)}
-.flow-arrow{font-size:18px;color:var(--text-3);padding:0 6px}
-@media(max-width:600px){.flow-track{flex-direction:column;gap:8px}.flow-arrow{transform:rotate(90deg);padding:4px 0}}
-
-/* ═══════════════════════════════════════════════════════════════════
-   LAYER DIAGRAM
-   ═══════════════════════════════════════════════════════════════════ */
+.flow-track{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap;justify-content:center}
+.flow-step{position:relative;flex:1;min-width:120px;padding:20px 18px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-lg);text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s;overflow:hidden}
+.flow-step::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--fs-accent,var(--brand));opacity:.85}
+.flow-step:hover{transform:translateY(-3px);border-color:var(--fs-accent,var(--border-light));box-shadow:0 10px 28px rgba(0,0,0,.3)}
+.flow-step .flow-num{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--fs-accent,var(--brand-light));opacity:.7;margin-bottom:6px}
+.flow-step h4{font-size:14px;font-weight:800;color:var(--text-1);letter-spacing:.01em}
+.flow-arrow{display:flex;align-items:center;font-size:18px;color:var(--brand);opacity:.5;padding:0 2px}
+@media(max-width:600px){.flow-track{flex-direction:column;gap:8px}.flow-step{width:100%}.flow-arrow{transform:rotate(90deg);padding:2px 0;justify-content:center}}
 .layer-stack{display:flex;flex-direction:column;gap:12px;max-width:700px;margin:48px auto 0}
 .layer-item{display:flex;align-items:center;gap:16px;padding:18px 24px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface-2);transition:all .3s}
 .layer-item:hover{border-color:var(--border-light);transform:translateX(4px)}
@@ -176,58 +51,22 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .layer-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-width:160px;flex-shrink:0;color:var(--text-1)}
 .layer-desc{font-size:14px;color:var(--text-2)}
 .layer-connector{width:2px;height:12px;background:var(--border);margin:0 auto}
-
-/* ═══════════════════════════════════════════════════════════════════
-   PRINCIPLE CARDS
-   ═══════════════════════════════════════════════════════════════════ */
 .principle{padding:24px;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--border);transition:all .3s}
 .principle:hover{border-color:var(--border-light);transform:translateY(-2px)}
 .principle h4{font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:6px}
 .principle p{font-size:13px;color:var(--text-2);line-height:1.6}
-
-/* ═══════════════════════════════════════════════════════════════════
-   BULLET LIST STYLED
-   ═══════════════════════════════════════════════════════════════════ */
 .check-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:16px}
 .check-list li{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-2);padding:10px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.02);border:1px solid var(--border)}
 .check-list .check{color:var(--emerald);font-size:16px;flex-shrink:0}
-
-/* ═══════════════════════════════════════════════════════════════════
-   CTA / FOOTER
-   ═══════════════════════════════════════════════════════════════════ */
 .cta-section{padding:140px 0;text-align:center;position:relative;overflow:hidden}
 .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(99,102,241,.08) 0%,transparent 60%);pointer-events:none}
 .cta-section h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;color:var(--text-1);letter-spacing:-.035em;max-width:700px;margin:0 auto 16px;line-height:1.1}
 .cta-section p{font-size:1.05rem;color:var(--text-2);max-width:560px;margin:0 auto 40px}
 .cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-
-.footer{padding:80px 0 40px;border-top:1px solid var(--border)}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
-@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
-@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
-.footer-brand{display:flex;flex-direction:column;gap:12px}
-.footer-brand-name{font-size:18px;font-weight:800;color:var(--text-1);letter-spacing:-.02em}
-.footer-brand-desc{font-size:13px;color:var(--text-3);max-width:320px;line-height:1.6}
-.footer-col h5{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px}
-.footer-col a{display:block;font-size:13px;color:var(--text-2);padding:4px 0;transition:color .2s}
-.footer-col a:hover{color:var(--text-1)}
-.footer-bottom{margin-top:56px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-copy{font-size:12px;color:var(--text-muted)}
-.footer-legal{display:flex;gap:20px}
-.footer-legal a{font-size:12px;color:var(--text-muted);transition:color .2s}
-.footer-legal a:hover{color:var(--text-2)}
-
-/* ═══════════════════════════════════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════════════════════════════════ */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- ═══════════════════════════════════════════════════════════════
      NAVIGATION
@@ -235,27 +74,76 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <nav class="nav" id="nav">
   <div class="nav-bg">
     <div class="nav-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-icon"><img src="universal-intelligence-logo.svg" alt="Brahmora Technologies"></div>
+      <a href="/" class="logo" aria-label="Brahmora Technologies home">
+        <div class="logo-icon"><img src="universal-intelligence-logo.svg" alt=""></div>
         <div class="logo-text">
           <span class="logo-company">Brahmora</span>
           <span class="logo-product">Technologies</span>
         </div>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch light / dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navMenu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      </div>
       <div class="nav-menu" id="navMenu">
-        <a href="#what" class="nav-link">What AEGIS Is</a>
-        <a href="#pillars" class="nav-link">Pillars</a>
-        <a href="#architecture" class="nav-link">Architecture</a>
-        <a href="#governance" class="nav-link">Governance</a>
-        <a href="#security" class="nav-link">Security</a>
-        <a href="#demo" class="nav-cta">Become Design Partner</a>
+
+        <!-- Product dropdown -->
+        <div class="nav-item has-dropdown">
+          <button class="nav-link nav-trigger" aria-current="page" aria-haspopup="true" aria-expanded="false">
+            Product
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="aegis-product" class="dropdown-link">
+              <span class="dl-title">AEGIS Platform</span>
+              <span class="dl-desc">The reliability, decision, governance &amp; control platform</span>
+            </a>
+            <a href="platform-architecture" class="dropdown-link">
+              <span class="dl-title">Platform Architecture</span>
+              <span class="dl-desc">How the control plane is engineered</span>
+            </a>
+            <a href="/#capability" class="dropdown-link">
+              <span class="dl-title">Capabilities</span>
+              <span class="dl-desc">Four connected capability domains</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Why PRE dropdown -->
+        <div class="nav-item has-dropdown">
+          <button class="nav-link nav-trigger" aria-haspopup="true" aria-expanded="false">
+            Why PRE
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="/#shift" class="dropdown-link">
+              <span class="dl-title">The Operating Model Shift</span>
+              <span class="dl-desc">Why traditional operations no longer scale</span>
+            </a>
+            <a href="/#disciplines" class="dropdown-link">
+              <span class="dl-title">The Discipline</span>
+              <span class="dl-desc">What Platform Reliability Engineering defines</span>
+            </a>
+            <a href="pre-framework" class="dropdown-link">
+              <span class="dl-title">PRE Framework</span>
+              <span class="dl-desc">Read the full PRE-100 standard</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="about-us" class="nav-link">About Us</a>
+        <a href="/#partner" class="nav-cta">Become a Design Partner</a>
       </div>
     </div>
   </div>
 </nav>
+
+<main id="main">
 
 <!-- ═══════════════════════════════════════════════════════════════
      HERO
@@ -305,16 +193,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <p class="section-sub" style="max-width:none">
           AEGIS is the <strong>Operational Decision &amp; Governance Layer</strong> for Cloud Platforms. It sits between:
         </p>
-        <div class="flow-track" style="margin-top:28px;justify-content:flex-start">
-          <div class="flow-step"><h4>Intent</h4></div>
+        <div class="flow-track" style="margin-top:28px">
+          <div class="flow-step" style="--fs-accent:var(--brand-light)"><span class="flow-num">01</span><h4>Intent</h4></div>
           <div class="flow-arrow">&rarr;</div>
-          <div class="flow-step"><h4>Policy</h4></div>
+          <div class="flow-step" style="--fs-accent:var(--amber)"><span class="flow-num">02</span><h4>Policy</h4></div>
           <div class="flow-arrow">&rarr;</div>
-          <div class="flow-step"><h4>Decision</h4></div>
+          <div class="flow-step" style="--fs-accent:var(--violet)"><span class="flow-num">03</span><h4>Decision</h4></div>
           <div class="flow-arrow">&rarr;</div>
-          <div class="flow-step"><h4>Execution</h4></div>
+          <div class="flow-step" style="--fs-accent:var(--rose)"><span class="flow-num">04</span><h4>Execution</h4></div>
           <div class="flow-arrow">&rarr;</div>
-          <div class="flow-step"><h4>Evidence</h4></div>
+          <div class="flow-step" style="--fs-accent:var(--emerald)"><span class="flow-num">05</span><h4>Evidence</h4></div>
         </div>
       </div>
       <div>
@@ -624,19 +512,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     </div>
 
     <div class="flow-track reveal" style="margin-bottom:48px">
-      <div class="flow-step"><h4>Intent</h4></div>
+      <div class="flow-step" style="--fs-accent:var(--brand-light)"><span class="flow-num">01</span><h4>Intent</h4></div>
       <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step"><h4>Plan</h4></div>
+      <div class="flow-step" style="--fs-accent:var(--cyan)"><span class="flow-num">02</span><h4>Plan</h4></div>
       <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step"><h4>Policy Evaluation</h4></div>
+      <div class="flow-step" style="--fs-accent:var(--amber)"><span class="flow-num">03</span><h4>Policy Evaluation</h4></div>
       <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step"><h4>Approval</h4></div>
+      <div class="flow-step" style="--fs-accent:var(--violet)"><span class="flow-num">04</span><h4>Approval</h4></div>
       <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step"><h4>Safety Validation</h4></div>
+      <div class="flow-step" style="--fs-accent:var(--rose)"><span class="flow-num">05</span><h4>Safety Validation</h4></div>
       <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step"><h4>Execution</h4></div>
+      <div class="flow-step" style="--fs-accent:var(--cyan)"><span class="flow-num">06</span><h4>Execution</h4></div>
       <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(34,211,238,.1));border-color:var(--brand)"><h4>Evidence</h4></div>
+      <div class="flow-step" style="--fs-accent:var(--emerald)"><span class="flow-num">07</span><h4>Evidence</h4></div>
     </div>
 
     <div class="grid g-4 reveal">
@@ -855,11 +743,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     <h2>See AEGIS <span class="gradient-text">in Action</span></h2>
     <p>AEGIS helps platform teams reduce operational complexity while increasing reliability, governance, and efficiency. Request an architecture walkthrough or design partner discussion.</p>
     <div class="cta-buttons">
-      <a href="index.html#contact" class="btn btn-primary" style="padding:16px 36px;font-size:15px">
+      <a href="/#contact" class="btn btn-primary" style="padding:16px 36px;font-size:15px">
         Become Design Partner
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
       </a>
-      <a href="index.html" class="btn btn-secondary" style="padding:16px 36px;font-size:15px">Back to Home</a>
+      <a href="/" class="btn btn-secondary" style="padding:16px 36px;font-size:15px">Back to Home</a>
     </div>
   </div>
 </section>
@@ -869,35 +757,40 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <!-- ═══════════════════════════════════════════════════════════════
      FOOTER
      ═══════════════════════════════════════════════════════════════ -->
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
         <div style="display:flex;align-items:center;gap:10px">
-          <div class="logo-icon" style="width:48px;height:48px"><img src="universal-intelligence-logo.svg" alt="Brahmora Technologies"></div>
+          <div class="logo-icon" style="width:48px;height:48px"><img src="universal-intelligence-logo.svg" alt=""></div>
           <span class="footer-brand-name">Brahmora Technologies</span>
         </div>
-        <p class="footer-brand-desc">Building the platform reliability control plane for modern cloud platforms. PRE defines the discipline. AEGIS enables it as an independent operational system and unified operating layer.</p>
+        <p class="footer-brand-desc">Building intelligence, reliability and governance into modern infrastructure operations. AEGIS is our Reliability, Operational Decision, Governance &amp; Control Platform for modern cloud environments.</p>
       </div>
       <div class="footer-col">
         <h5>Product</h5>
-        <a href="index.html#capability">AEGIS Platform</a>
-        <a href="index.html#control-plane">Control Plane</a>
-        <a href="pre-framework.html">PRE Framework</a>
+        <a href="aegis-product">AEGIS Platform</a>
+        <a href="platform-architecture">Platform Architecture</a>
+        <a href="/#capability">Capabilities</a>
+        <a href="pre-framework">PRE Framework</a>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
-        <a href="index.html#shift">Vision</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="about-us">About Us</a>
+        <a href="/">Home</a>
+        <a href="/#partner">Design Partners</a>
+        <a href="/#contact">Contact</a>
       </div>
       <div class="footer-col">
         <h5>Resources</h5>
-        <a href="pre-framework.html">PRE-100 Standard</a>
-        <a href="index.html#partner">Design Partners</a>
+        <a href="pre-framework">PRE-100 Standard</a>
+        <a href="platform-architecture">Architecture Guide</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">&copy; 2026 Brahmora Technologies Pvt Ltd. All rights reserved.</span>
+      <span class="footer-copy">&copy; 2026 Brahmora Technologies Private Limited. All rights reserved. &middot; <a href="https://brahmora.co.uk" style="color:var(--brand-light)">brahmora.co.uk</a></span>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
@@ -909,41 +802,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <!-- ═══════════════════════════════════════════════════════════════
      Scripts
      ═══════════════════════════════════════════════════════════════ -->
-<script>
-// Nav scroll effect
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 30);
-}, { passive: true });
-
-// Mobile toggle
-const toggle = document.getElementById('navToggle');
-const menu = document.getElementById('navMenu');
-toggle.addEventListener('click', () => menu.classList.toggle('open'));
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
-
-// Scroll reveal
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
-  });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    if (id === '#') return;
-    const target = document.querySelector(id);
-    if (target) {
-      e.preventDefault();
-      const offset = 80;
-      const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  });
-});
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>

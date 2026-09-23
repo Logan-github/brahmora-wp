@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="AEGIS by Brahmora Technologies">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05080e"/>
+      <stop offset="55%" stop-color="#0a0f1a"/>
+      <stop offset="100%" stop-color="#0f1629"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.22"/>
+      <stop offset="45%" stop-color="#22d3ee" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brandText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0f4fc"/>
+      <stop offset="55%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#6366f1" stroke-opacity="0.05">
+    <path d="M0 158 H1200 M0 316 H1200 M0 474 H1200"/>
+    <path d="M300 0 V630 M600 0 V630 M900 0 V630"/>
+  </g>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="6" fill="url(#brandText)"/>
+
+  <!-- Shield mark -->
+  <g transform="translate(120,210)">
+    <path d="M105,0 L200,40 C210,44 216,54 216,64 L216,150 C216,205 175,250 140,270 L110,288 C107,290 103,290 100,288 L70,270 C35,250 -6,205 -6,150 L-6,64 C-6,54 0,44 10,40 Z"
+          transform="translate(0,10) scale(0.62)" fill="#0f1629" stroke="url(#shield)" stroke-width="3"/>
+    <circle cx="66" cy="118" r="14" fill="#818cf8"/>
+    <circle cx="66" cy="118" r="6" fill="#ffffff" opacity="0.95"/>
+  </g>
+
+  <!-- Wordmark + tagline -->
+  <text x="300" y="300" font-family="Inter, system-ui, sans-serif" font-size="140" font-weight="900" letter-spacing="-4" fill="url(#brandText)">AEGIS</text>
+  <text x="304" y="360" font-family="Inter, system-ui, sans-serif" font-size="30" font-weight="600" fill="#a4b0c4">Reliability · Operational Decision · Governance · Control</text>
+
+  <!-- Footer line -->
+  <text x="120" y="560" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="700" fill="#818cf8">Brahmora Technologies</text>
+  <text x="120" y="596" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="500" fill="#7c8aa0">brahmora.co.uk</text>
+</svg>

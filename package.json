@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "preview": "node scripts/preview.mjs",
+    "start": "node scripts/preview.mjs"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.11.0"
+  }
+}
