@@ -155,16 +155,25 @@
   });
 
   /* ── Correct the landing spot for direct #hash visits ─────────── */
-  // Reveal animations and layout settle after load; re-align to the hash
-  // target so a pasted URL like /aegis-product#request-demo lands accurately.
+  // A hash link that arrives from another page (e.g. /#request-demo clicked on
+  // pre-framework) triggers the browser's native jump before reveal animations,
+  // fonts and images settle, so it lands short. Re-align to the target several
+  // times as the layout stabilises, and reveal its section immediately.
   if (window.location.hash && window.location.hash.length > 1) {
-    var hashTarget = document.querySelector(window.location.hash);
-    if (hashTarget) {
-      window.addEventListener('load', function () {
-        setTimeout(function () {
-          hashTarget.scrollIntoView({ behavior: 'auto', block: 'start' });
-        }, 60);
-      });
+    var alignId = window.location.hash;
+    var alignTarget;
+    try { alignTarget = document.querySelector(alignId); } catch (e) { alignTarget = null; }
+    if (alignTarget) {
+      var realign = function () {
+        // Make sure the target (and its reveal wrappers) are visible first
+        alignTarget.classList.add('visible');
+        var el = alignTarget.closest('.reveal');
+        if (el) el.classList.add('visible');
+        alignTarget.scrollIntoView({ behavior: 'auto', block: 'start' });
+      };
+      // Align at several checkpoints as content settles
+      [0, 120, 350, 700].forEach(function (ms) { setTimeout(realign, ms); });
+      window.addEventListener('load', function () { setTimeout(realign, 60); });
     }
   }
 
