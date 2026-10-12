@@ -123,6 +123,20 @@
 .form-status{margin-top:12px;font-size:13px;text-align:center}
 .form-status.success{color:var(--emerald)}
 .form-status.error{color:#f87171}
+/* Product screenshots — "See AEGIS in action" gallery */
+.shots{display:grid;grid-template-columns:repeat(12,1fr);gap:20px;margin-top:12px}
+.shot{grid-column:span 6;border-radius:var(--r-xl,16px);overflow:hidden;background:var(--surface-2);border:1px solid var(--border);position:relative;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .3s}
+.shot.shot-wide{grid-column:span 12}
+.shot:hover{transform:translateY(-4px);border-color:var(--border-light);box-shadow:0 18px 44px rgba(0,0,0,.4)}
+.shot::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--shot-accent,var(--brand));opacity:.9;z-index:2}
+.shot a{display:block;position:relative}
+.shot img{display:block;width:100%;height:auto;background:#0a0e1a}
+.shot-cap{padding:16px 20px 18px;border-top:1px solid var(--border)}
+.shot-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--shot-accent,var(--brand-light))}
+.shot-cap h3{font-size:16px;font-weight:800;color:var(--text-1);letter-spacing:-.01em;margin:6px 0 5px}
+.shot-cap p{font-size:13px;color:var(--text-2);line-height:1.55}
+.shots-note{margin-top:22px;text-align:center;font-size:12px;color:var(--text-3)}
+@media(max-width:860px){.shot,.shot.shot-wide{grid-column:span 12}}
 </style>
 </head>
 <body>
@@ -378,6 +392,83 @@
         <p class="pillar-outcome">Turn operational evidence into better decisions, lower risk and continuous improvement.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PRODUCT SCREENSHOTS — SEE AEGIS IN ACTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="section" id="screens">
+  <div class="container">
+    <div class="section-header section-center reveal">
+      <span class="section-label">See AEGIS in Action</span>
+      <h2>One operational truth, seen through <span class="gradient-text">purpose-built views.</span></h2>
+      <p class="section-sub">From platform posture and live inventory to incidents, cost and intelligence — every surface works from the same governed operational model.</p>
+    </div>
+
+    <div class="shots reveal">
+      <!-- Platform Posture — wide hero -->
+      <figure class="shot shot-wide" style="--shot-accent:var(--brand-light)">
+        <a href="Anonymised Dark Platform Posture Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Platform Posture dashboard full size">
+          <img src="Anonymised Dark Platform Posture Dashboard.png" alt="AEGIS Platform Posture dashboard — maturity-by-domain scores, security posture by IAM, encryption, network and TLS/CDN, compliance benchmarks, and policy, maturity, service-health and cost-efficiency cards." loading="lazy" decoding="async" width="1512" height="1058">
+        </a>
+        <figcaption class="shot-cap">
+          <span class="shot-tag">Platform Posture · Control</span>
+          <h3>Is the platform healthy — reliability, security, governance, cost?</h3>
+          <p>Maturity by domain, security posture, compliance benchmarks and the pillar cards that turn raw signals into an honest, severity-weighted view of operational posture.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Platform Inventory -->
+      <figure class="shot" style="--shot-accent:var(--cyan)">
+        <a href="Platform Inventory Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Platform Inventory dashboard full size">
+          <img src="Platform Inventory Dashboard.png" alt="AEGIS Platform Inventory dashboard — an Observe → Act → Verify flow and category cards for compute, application, security, identity, network, database, storage, economic, governance, edge/CDN and more." loading="lazy" decoding="async" width="1512" height="1083">
+        </a>
+        <figcaption class="shot-cap">
+          <span class="shot-tag">Platform Inventory · Foundation</span>
+          <h3>Know what exists and how it connects.</h3>
+          <p>Continuously discovered infrastructure across compute, networking, security, storage and more — organised around the Observe → Act → Verify operating loop.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Service Management / Incidents -->
+      <figure class="shot" style="--shot-accent:var(--rose)">
+        <a href="Service Management Incident Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Service Management incidents dashboard full size">
+          <img src="Service Management Incident Dashboard.png" alt="AEGIS Service Management incidents dashboard — severity KPI cards, SLA state chips, 'who decides' routing, on-call, and a filterable incident list with acknowledge and resolve actions." loading="lazy" decoding="async" width="1512" height="1101">
+        </a>
+        <figcaption class="shot-cap">
+          <span class="shot-tag">Service Management · Operations</span>
+          <h3>What is happening, who is affected, how do we recover?</h3>
+          <p>Unified incidents, problems, changes and deployments with severity, SLA state, routing authority and governed acknowledge-and-resolve — the operations console in one place.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Cost & Efficiency -->
+      <figure class="shot" style="--shot-accent:var(--emerald)">
+        <a href="Neon Cost &amp; Efficiency Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Cost and Efficiency dashboard full size">
+          <img src="Neon Cost &amp; Efficiency Dashboard.png" alt="AEGIS Cost and Efficiency dashboard — today's cost, 30-day and projected spend, open anomalies, idle waste and efficiency score, with cost-trend, fleet cost distribution and top-services-by-spend charts." loading="lazy" decoding="async" width="1512" height="1083">
+        </a>
+        <figcaption class="shot-cap">
+          <span class="shot-tag">Cost &amp; Efficiency · Intelligence</span>
+          <h3>Where can we reduce cost without creating risk?</h3>
+          <p>Spend trends, anomaly detection, idle waste and efficiency scoring — connecting optimisation opportunities to workload importance and operational risk before any action.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Knowledge & Intelligence -->
+      <figure class="shot" style="--shot-accent:var(--violet)">
+        <a href="Knowledge &amp; Intelligence Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Knowledge and Intelligence dashboard full size">
+          <img src="Knowledge &amp; Intelligence Dashboard.png" alt="AEGIS Knowledge and Intelligence dashboard — the Platform Brain with total decisions, graph nodes, average confidence and architecture risks, a per-service deep-analysis table and an architecture-scores detail panel." loading="lazy" decoding="async" width="1512" height="1101">
+        </a>
+        <figcaption class="shot-cap">
+          <span class="shot-tag">Knowledge &amp; Intelligence · Intelligence</span>
+          <h3>Learn from every decision and outcome.</h3>
+          <p>The Platform Brain — predictions, operational memory, recommendations and per-service architecture scoring — turning operational evidence into continuous improvement.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="shots-note reveal">Representative product views. Account identifiers and customer data are anonymised.</p>
   </div>
 </section>
 
