@@ -129,8 +129,18 @@
 .shot.shot-wide{grid-column:span 12}
 .shot:hover{transform:translateY(-4px);border-color:var(--border-light);box-shadow:0 18px 44px rgba(0,0,0,.4)}
 .shot::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--shot-accent,var(--brand));opacity:.9;z-index:2}
-.shot a{display:block;position:relative}
+.shot a,.shot-trigger{display:block;position:relative}
+.shot-trigger{width:100%;padding:0;border:0;background:none;cursor:zoom-in;font:inherit;color:inherit;text-align:left}
+.shot-trigger:focus-visible{outline:2px solid var(--brand-light);outline-offset:-2px}
 .shot img{display:block;width:100%;height:auto;background:#0a0e1a}
+/* Lightbox overlay */
+.lightbox{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:32px;background:rgba(6,8,15,.85);backdrop-filter:blur(6px)}
+.lightbox[aria-hidden="false"]{display:flex}
+.lightbox-img{max-width:min(1400px,96vw);max-height:92vh;width:auto;height:auto;border-radius:12px;border:1px solid var(--border-light);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lightbox-close{position:absolute;top:20px;right:24px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--border-light);background:var(--surface-2);color:var(--text-1);cursor:pointer;transition:background .2s,transform .2s}
+.lightbox-close:hover{background:var(--surface-3);transform:scale(1.05)}
+.lightbox-close:focus-visible{outline:2px solid var(--brand-light);outline-offset:2px}
+.lightbox-cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;font-size:12px;color:var(--text-3);padding:0 24px}
 .shot-cap{padding:16px 20px 18px;border-top:1px solid var(--border)}
 .shot-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--shot-accent,var(--brand-light))}
 .shot-cap h3{font-size:16px;font-weight:800;color:var(--text-1);letter-spacing:-.01em;margin:6px 0 5px}
@@ -409,9 +419,9 @@
     <div class="shots reveal">
       <!-- Platform Posture — wide hero -->
       <figure class="shot shot-wide" style="--shot-accent:var(--brand-light)">
-        <a href="Anonymised Dark Platform Posture Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Platform Posture dashboard full size">
+        <button type="button" class="shot-trigger" data-lightbox="Anonymised Dark Platform Posture Dashboard.png" aria-label="Enlarge the Platform Posture dashboard">
           <img src="Anonymised Dark Platform Posture Dashboard.png" alt="AEGIS Platform Posture dashboard — maturity-by-domain scores, security posture by IAM, encryption, network and TLS/CDN, compliance benchmarks, and policy, maturity, service-health and cost-efficiency cards." loading="lazy" decoding="async" width="1512" height="1058">
-        </a>
+        </button>
         <figcaption class="shot-cap">
           <span class="shot-tag">Platform Posture · Control</span>
           <h3>Is the platform healthy — reliability, security, governance, cost?</h3>
@@ -421,9 +431,9 @@
 
       <!-- Platform Inventory -->
       <figure class="shot" style="--shot-accent:var(--cyan)">
-        <a href="Platform Inventory Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Platform Inventory dashboard full size">
+        <button type="button" class="shot-trigger" data-lightbox="Platform Inventory Dashboard.png" aria-label="Enlarge the Platform Inventory dashboard">
           <img src="Platform Inventory Dashboard.png" alt="AEGIS Platform Inventory dashboard — an Observe → Act → Verify flow and category cards for compute, application, security, identity, network, database, storage, economic, governance, edge/CDN and more." loading="lazy" decoding="async" width="1512" height="1083">
-        </a>
+        </button>
         <figcaption class="shot-cap">
           <span class="shot-tag">Platform Inventory · Foundation</span>
           <h3>Know what exists and how it connects.</h3>
@@ -433,9 +443,9 @@
 
       <!-- Service Management / Incidents -->
       <figure class="shot" style="--shot-accent:var(--rose)">
-        <a href="Service Management Incident Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Service Management incidents dashboard full size">
+        <button type="button" class="shot-trigger" data-lightbox="Service Management Incident Dashboard.png" aria-label="Enlarge the Service Management incidents dashboard">
           <img src="Service Management Incident Dashboard.png" alt="AEGIS Service Management incidents dashboard — severity KPI cards, SLA state chips, 'who decides' routing, on-call, and a filterable incident list with acknowledge and resolve actions." loading="lazy" decoding="async" width="1512" height="1101">
-        </a>
+        </button>
         <figcaption class="shot-cap">
           <span class="shot-tag">Service Management · Operations</span>
           <h3>What is happening, who is affected, how do we recover?</h3>
@@ -445,9 +455,9 @@
 
       <!-- Cost & Efficiency -->
       <figure class="shot" style="--shot-accent:var(--emerald)">
-        <a href="Neon Cost &amp; Efficiency Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Cost and Efficiency dashboard full size">
+        <button type="button" class="shot-trigger" data-lightbox="Neon Cost &amp; Efficiency Dashboard.png" aria-label="Enlarge the Cost and Efficiency dashboard">
           <img src="Neon Cost &amp; Efficiency Dashboard.png" alt="AEGIS Cost and Efficiency dashboard — today's cost, 30-day and projected spend, open anomalies, idle waste and efficiency score, with cost-trend, fleet cost distribution and top-services-by-spend charts." loading="lazy" decoding="async" width="1512" height="1083">
-        </a>
+        </button>
         <figcaption class="shot-cap">
           <span class="shot-tag">Cost &amp; Efficiency · Intelligence</span>
           <h3>Where can we reduce cost without creating risk?</h3>
@@ -457,9 +467,9 @@
 
       <!-- Knowledge & Intelligence -->
       <figure class="shot" style="--shot-accent:var(--violet)">
-        <a href="Knowledge &amp; Intelligence Dashboard.png" target="_blank" rel="noopener" aria-label="Open the Knowledge and Intelligence dashboard full size">
+        <button type="button" class="shot-trigger" data-lightbox="Knowledge &amp; Intelligence Dashboard.png" aria-label="Enlarge the Knowledge and Intelligence dashboard">
           <img src="Knowledge &amp; Intelligence Dashboard.png" alt="AEGIS Knowledge and Intelligence dashboard — the Platform Brain with total decisions, graph nodes, average confidence and architecture risks, a per-service deep-analysis table and an architecture-scores detail panel." loading="lazy" decoding="async" width="1512" height="1101">
-        </a>
+        </button>
         <figcaption class="shot-cap">
           <span class="shot-tag">Knowledge &amp; Intelligence · Intelligence</span>
           <h3>Learn from every decision and outcome.</h3>
@@ -876,6 +886,15 @@
      ═══════════════════════════════════════════════════════════════ -->
 </main>
 
+<!-- Lightbox overlay for product screenshots -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Dashboard screenshot">
+  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <p class="lightbox-cap">Click outside or press Esc to close</p>
+</div>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -956,6 +975,45 @@ if (demoForm) {
     btn.textContent = 'Request Demo';
   });
 }
+
+// ── Product screenshot lightbox (opens on the same page) ───────────
+(function () {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbClose = document.getElementById('lightboxClose');
+  if (!lb || !lbImg || !lbClose) return;
+  let lastTrigger = null;
+
+  function open(src, alt, trigger) {
+    lbImg.setAttribute('src', src);
+    lbImg.setAttribute('alt', alt || '');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lastTrigger = trigger || null;
+    lbClose.focus();
+  }
+  function close() {
+    lb.setAttribute('aria-hidden', 'true');
+    lbImg.setAttribute('src', '');
+    document.body.style.overflow = '';
+    if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
+  }
+
+  document.querySelectorAll('.shot-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const src = btn.getAttribute('data-lightbox');
+      const img = btn.querySelector('img');
+      open(src, img ? img.getAttribute('alt') : '', btn);
+    });
+  });
+
+  lbClose.addEventListener('click', close);
+  // Click outside the image (on the backdrop) closes it.
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lb.getAttribute('aria-hidden') === 'false') close();
+  });
+})();
 </script>
 </body>
 </html>
